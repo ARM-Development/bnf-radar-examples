@@ -1,11 +1,10 @@
-name: arm-cookbook-dev
+name: amf3-radar-examples-dev
 channels:
   - conda-forge
   - defaults
   - pyviz
 dependencies:
   - python=3.9
-  - arm_pyart
   - matplotlib
   - jupyterlab
   - cartopy
@@ -18,3 +17,4 @@ dependencies:
   - pip
   - pip:
     - -r doc-requirements.txt
+    - arm_pyart

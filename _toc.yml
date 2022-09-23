@@ -3,4 +3,4 @@ root: README
 parts:
 - caption: Notebooks
   chapters:
-    - glob: Notebooks/*
+    - glob: notebooks/*
