@@ -53,6 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="genindex.html" />
     <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ARMOR Data Plots" href="notebooks/armor-sample-plots.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -112,7 +113,24 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Site Exploration
+ </span>
+</p>
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="notebooks/armor-sample-plots.html">
+   ARMOR Data Plots
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="notebooks/notebook-template.html">
+   ARM Notebook Template
+  </a>
+ </li>
+</ul>
+
     </div>
 </nav></div>
         <div class="bd-sidebar__bottom">
@@ -221,12 +239,77 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#authors">
+   Authors
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#contributors">
+     Contributors
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#structure">
+   Structure
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#site-exploration">
+     Site Exploration
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#running-the-notebooks">
+   Running the Notebooks
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#running-on-binder">
+     Running on Binder
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#running-on-your-own-machine">
+     Running on Your Own Machine
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -238,6 +321,60 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#motivation">
+   Motivation
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#authors">
+   Authors
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#contributors">
+     Contributors
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#structure">
+   Structure
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#site-exploration">
+     Site Exploration
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#running-the-notebooks">
+   Running the Notebooks
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#running-on-binder">
+     Running on Binder
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#running-on-your-own-machine">
+     Running on Your Own Machine
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -248,6 +385,76 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="arm-cookbook-template">
 <h1>ARM Cookbook Template<a class="headerlink" href="#arm-cookbook-template" title="Permalink to this headline">#</a></h1>
 <p>This is a Github repository template for creating cookbooks related to working with ARM data</p>
+<section id="motivation">
+<h2>Motivation<a class="headerlink" href="#motivation" title="Permalink to this headline">#</a></h2>
+<p>This material will be used to provide an overview of how to use Python for the atmospheric and climate sciences.</p>
+</section>
+<section id="authors">
+<h2>Authors<a class="headerlink" href="#authors" title="Permalink to this headline">#</a></h2>
+<p><span class="xref myst">Max Grover</span></p>
+<section id="contributors">
+<h3>Contributors<a class="headerlink" href="#contributors" title="Permalink to this headline">#</a></h3>
+<a href="https://github.com/ARM-Development/amf3-radar-examples/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=ARM-Development/amf3-radar-examples" />
+</a>
+</section>
+</section>
+<section id="structure">
+<h2>Structure<a class="headerlink" href="#structure" title="Permalink to this headline">#</a></h2>
+<section id="site-exploration">
+<h3>Site Exploration<a class="headerlink" href="#site-exploration" title="Permalink to this headline">#</a></h3>
+<p>Initial data exploration, looking at sample cases and associated datasets such as the University of Alabama Huntsville operated ARMOR radar.</p>
+</section>
+</section>
+<section id="running-the-notebooks">
+<h2>Running the Notebooks<a class="headerlink" href="#running-the-notebooks" title="Permalink to this headline">#</a></h2>
+<p>You can either run the notebook using <a class="reference external" href="https://mybinder.org/">Binder</a> or on your local machine.</p>
+<section id="running-on-binder">
+<h3>Running on Binder<a class="headerlink" href="#running-on-binder" title="Permalink to this headline">#</a></h3>
+<p>The simplest way to interact with a Jupyter Notebook is through
+<a class="reference external" href="https://mybinder.org/">Binder</a>, which enables the execution of a
+<a class="reference external" href="https://jupyterbook.org">Jupyter Book</a> in the cloud. The details of how this works are not
+important for now. All you need to know is how to launch a Pythia
+Cookbooks chapter via Binder. Simply navigate your mouse to
+the top right corner of the book chapter you are viewing and click
+on the rocket ship icon, (see figure below), and be sure to select
+“launch Binder”. After a moment you should be presented with a
+notebook that you can interact with. I.e. you’ll be able to execute
+and even change the example programs. You’ll see that the code cells
+have no output at first, until you execute them by pressing
+<kbd class="kbd docutils literal notranslate">Shift</kbd>+<kbd class="kbd docutils literal notranslate">Enter</kbd>. Complete details on how to interact with
+a live Jupyter notebook are described in <a class="reference external" href="https://foundations.projectpythia.org/foundations/getting-started-jupyter.html">Getting Started with
+Jupyter</a>.</p>
+</section>
+<section id="running-on-your-own-machine">
+<h3>Running on Your Own Machine<a class="headerlink" href="#running-on-your-own-machine" title="Permalink to this headline">#</a></h3>
+<p>If you are interested in running this material locally on your computer, you will need to follow this workflow:</p>
+<ol>
+<li><p>Clone the <code class="docutils literal notranslate"><span class="pre">https://github.com/ARM-Development/amf3-radar-examples</span></code> repository:</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span> git clone https://github.com/ARM-Development/amf3-radar-examples.git
+</pre></div>
+</div>
+</li>
+<li><p>Move into the <code class="docutils literal notranslate"><span class="pre">cookbook-example</span></code> directory</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> amf3-radar-examples
+</pre></div>
+</div>
+</li>
+<li><p>Create and activate your conda environment from the <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code> file</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda env create -f environment.yml
+conda activate amf3-radar-examples-dev
+</pre></div>
+</div>
+</li>
+<li><p>Move into the <code class="docutils literal notranslate"><span class="pre">notebooks</span></code> directory and start up Jupyterlab</p>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span><span class="nb">cd</span> notebooks/
+jupyter lab
+</pre></div>
+</div>
+</li>
+</ol>
+</section>
+</section>
 <div class="toctree-wrapper compound">
 </div>
 </section>
@@ -279,6 +486,13 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='right-next' id="next-link" href="notebooks/armor-sample-plots.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">ARMOR Data Plots</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             </footer>
         </div>

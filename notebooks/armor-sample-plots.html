@@ -1,0 +1,1065 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>ARMOR Data Plots &#8212; Cookbook Template</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="ARM Notebook Template" href="notebook-template.html" />
+    <link rel="prev" title="ARM Cookbook Template" href="../README.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/arm_logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">Cookbook Template</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    ARM Cookbook Template
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading">
+ <span class="caption-text">
+  Site Exploration
+ </span>
+</p>
+<ul class="current nav bd-sidenav">
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   ARMOR Data Plots
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="notebook-template.html">
+   ARM Notebook Template
+  </a>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/ARM-Development/amf3-radar-examples/main?urlpath=lab/tree/notebooks/notebooks/armor-sample-plots.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://jupyterhub.arm.gov/hub/user-redirect/git-pull?repo=https%3A//github.com/ARM-Development/amf3-radar-examples&urlpath=lab/tree/amf3-radar-examples/notebooks/notebooks/armor-sample-plots.ipynb&branch=main"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on JupyterHub"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_jupyterhub.svg">
+  </span>
+<span class="headerbtn__text-container">JupyterHub</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/notebooks/armor-sample-plots.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#read-the-site-information">
+   Read the Site Information
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-the-armor-data">
+   Plot the ARMOR Data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#configure-the-domain-of-the-plots">
+     Configure the domain of the plots
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#loop-through-each-file-plot-the-reflectivity-and-save-the-image">
+     Loop through each file, plot the reflectivity, and save the image
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-the-nexrad-data">
+   Plot the NEXRAD Data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#search-and-find-the-nexrad-data">
+     Search and find the NEXRAD Data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Loop through each file, plot the reflectivity, and save the image
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>ARMOR Data Plots</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#read-the-site-information">
+   Read the Site Information
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-the-armor-data">
+   Plot the ARMOR Data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#configure-the-domain-of-the-plots">
+     Configure the domain of the plots
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#loop-through-each-file-plot-the-reflectivity-and-save-the-image">
+     Loop through each file, plot the reflectivity, and save the image
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#plot-the-nexrad-data">
+   Plot the NEXRAD Data
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#search-and-find-the-nexrad-data">
+     Search and find the NEXRAD Data
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Loop through each file, plot the reflectivity, and save the image
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <section class="tex2jax_ignore mathjax_ignore" id="armor-data-plots">
+<h1>ARMOR Data Plots<a class="headerlink" href="#armor-data-plots" title="Permalink to this headline">#</a></h1>
+<p>This notebook walks through plotting data from the ARMOR radar in northern Alabama and the local NWS radar in Huntsville, Alabama.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pyart</span>
+<span class="kn">import</span> <span class="nn">glob</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+<span class="kn">import</span> <span class="nn">matplotlib.patheffects</span> <span class="k">as</span> <span class="nn">pe</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">fsspec</span>
+<span class="kn">from</span> <span class="nn">pathlib</span> <span class="kn">import</span> <span class="n">Path</span>
+<span class="kn">import</span> <span class="nn">geopandas</span> <span class="k">as</span> <span class="nn">gpd</span>
+<span class="kn">import</span> <span class="nn">fiona</span>
+<span class="kn">import</span> <span class="nn">cartopy.crs</span> <span class="k">as</span> <span class="nn">ccrs</span>
+
+<span class="n">fiona</span><span class="o">.</span><span class="n">drvsupport</span><span class="o">.</span><span class="n">supported_drivers</span><span class="p">[</span><span class="s1">&#39;libkml&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;rw&#39;</span> <span class="c1"># enable KML support which is disabled by default</span>
+<span class="n">fiona</span><span class="o">.</span><span class="n">drvsupport</span><span class="o">.</span><span class="n">supported_drivers</span><span class="p">[</span><span class="s1">&#39;LIBKML&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="s1">&#39;rw&#39;</span> <span class="c1"># enable KML support which is disabled by default</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="read-the-site-information">
+<h2>Read the Site Information<a class="headerlink" href="#read-the-site-information" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">site_locations</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;locations/ARM-SE.kmz&quot;</span><span class="p">)</span>
+<span class="n">site_locations</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Name</th>
+      <th>description</th>
+      <th>timestamp</th>
+      <th>begin</th>
+      <th>end</th>
+      <th>altitudeMode</th>
+      <th>tessellate</th>
+      <th>extrude</th>
+      <th>visibility</th>
+      <th>drawOrder</th>
+      <th>icon</th>
+      <th>geometry</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>SurfRad Station</td>
+      <td>None</td>
+      <td>NaT</td>
+      <td>NaT</td>
+      <td>NaT</td>
+      <td>None</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>-1</td>
+      <td>None</td>
+      <td>None</td>
+      <td>POINT Z (-89.87363 34.25499 0.00000)</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>USCRN Gadsden, AL</td>
+      <td>None</td>
+      <td>NaT</td>
+      <td>NaT</td>
+      <td>NaT</td>
+      <td>None</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>-1</td>
+      <td>None</td>
+      <td>None</td>
+      <td>POINT Z (-85.96000 34.28500 0.00000)</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>USCRN Holly Springs, MS</td>
+      <td>None</td>
+      <td>NaT</td>
+      <td>NaT</td>
+      <td>NaT</td>
+      <td>None</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>-1</td>
+      <td>None</td>
+      <td>None</td>
+      <td>POINT Z (-89.42998 34.82192 0.00000)</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>USCRN Selma, AL</td>
+      <td>None</td>
+      <td>NaT</td>
+      <td>NaT</td>
+      <td>NaT</td>
+      <td>None</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>-1</td>
+      <td>None</td>
+      <td>None</td>
+      <td>POINT Z (-87.23889 32.45711 0.00000)</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>USCRN Newton, MS</td>
+      <td>None</td>
+      <td>NaT</td>
+      <td>NaT</td>
+      <td>NaT</td>
+      <td>None</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>-1</td>
+      <td>None</td>
+      <td>None</td>
+      <td>POINT Z (-89.07000 32.33699 0.00000)</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>NEON Tall Tower</td>
+      <td>None</td>
+      <td>NaT</td>
+      <td>NaT</td>
+      <td>NaT</td>
+      <td>None</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>-1</td>
+      <td>None</td>
+      <td>None</td>
+      <td>POINT Z (-87.39326 32.95047 0.00000)</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>UAH-ARMOR Radar</td>
+      <td>None</td>
+      <td>NaT</td>
+      <td>NaT</td>
+      <td>NaT</td>
+      <td>None</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>-1</td>
+      <td>None</td>
+      <td>None</td>
+      <td>POINT Z (-86.77154 34.64614 0.00000)</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>Courtland Airport RWP</td>
+      <td>None</td>
+      <td>NaT</td>
+      <td>NaT</td>
+      <td>NaT</td>
+      <td>None</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>-1</td>
+      <td>None</td>
+      <td>None</td>
+      <td>POINT Z (-87.34417 34.65876 0.00000)</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>Black Warrior Site</td>
+      <td>None</td>
+      <td>NaT</td>
+      <td>NaT</td>
+      <td>NaT</td>
+      <td>None</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>-1</td>
+      <td>None</td>
+      <td>None</td>
+      <td>POINT Z (-87.33853 34.34511 0.00000)</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>Bill Pugh Airfield</td>
+      <td>None</td>
+      <td>NaT</td>
+      <td>NaT</td>
+      <td>NaT</td>
+      <td>None</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>-1</td>
+      <td>None</td>
+      <td>None</td>
+      <td>POINT Z (-87.70960 34.45318 0.00000)</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>Cullman Airport</td>
+      <td>None</td>
+      <td>NaT</td>
+      <td>NaT</td>
+      <td>NaT</td>
+      <td>None</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>-1</td>
+      <td>None</td>
+      <td>None</td>
+      <td>POINT Z (-86.85871 34.26744 0.00000)</td>
+    </tr>
+    <tr>
+      <th>11</th>
+      <td>Tower Area</td>
+      <td>None</td>
+      <td>NaT</td>
+      <td>NaT</td>
+      <td>NaT</td>
+      <td>None</td>
+      <td>-1</td>
+      <td>0</td>
+      <td>-1</td>
+      <td>None</td>
+      <td>None</td>
+      <td>POINT Z (-87.35028 34.34361 0.00000)</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+<section id="plot-the-armor-data">
+<h2>Plot the ARMOR Data<a class="headerlink" href="#plot-the-armor-data" title="Permalink to this headline">#</a></h2>
+<p>Prior to running this notebook, the datasets were downloaded from this <a class="reference external" href="https://urldefense.com/v3/__https://drive.google.com/drive/folders/1wz2qq3XS6p3Q-t5rKJEhleueHGSc-Hbx?usp=sharing__%3B%21%21P4SdNyxKAPE%21BEGz2W6ktv4pepnbzcbhzpdFlek50FMdQlRuU9qys8uSB2r9zQaV3qezNLfpXLBcN3Cr_ZAe7hJAjRo%24">shared Google drive</a> and placed in a <code class="docutils literal notranslate"><span class="pre">/data</span></code> directory.</p>
+<p>This case is from a cool-season event that resulted in a Quasi-Linear Convective System forming within the AMF3/ARM-SE domain. We are using data from the UAH ARMOR radar.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">armor_files</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;data/*&quot;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="configure-the-domain-of-the-plots">
+<h3>Configure the domain of the plots<a class="headerlink" href="#configure-the-domain-of-the-plots" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lon_min</span> <span class="o">=</span> <span class="o">-</span><span class="mi">89</span>
+<span class="n">lon_max</span> <span class="o">=</span> <span class="o">-</span><span class="mi">85</span>
+<span class="n">lat_min</span> <span class="o">=</span> <span class="mf">33.5</span>
+<span class="n">lat_max</span> <span class="o">=</span> <span class="mi">36</span>
+<span class="n">grid_line_spacing</span> <span class="o">=</span> <span class="mf">.5</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="loop-through-each-file-plot-the-reflectivity-and-save-the-image">
+<h3>Loop through each file, plot the reflectivity, and save the image<a class="headerlink" href="#loop-through-each-file-plot-the-reflectivity-and-save-the-image" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">armor_files</span><span class="p">:</span>
+    <span class="n">radar</span> <span class="o">=</span> <span class="n">pyart</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+    <span class="n">fields</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">radar</span><span class="o">.</span><span class="n">fields</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s2">&quot;REF&quot;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span> 
+        <span class="n">display</span> <span class="o">=</span> <span class="n">pyart</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">RadarMapDisplay</span><span class="p">(</span><span class="n">radar</span><span class="p">)</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+        <span class="n">display</span><span class="o">.</span><span class="n">plot_ppi_map</span><span class="p">(</span><span class="s2">&quot;REF&quot;</span><span class="p">,</span>
+                             <span class="n">fig</span><span class="o">=</span><span class="n">fig</span><span class="p">,</span>
+                             <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+                             <span class="n">vmin</span><span class="o">=-</span><span class="mi">20</span><span class="p">,</span>
+                             <span class="n">vmax</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>
+                             <span class="n">lat_lines</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">lat_min</span><span class="p">,</span> <span class="n">lat_max</span><span class="p">,</span> <span class="n">grid_line_spacing</span><span class="p">),</span>
+                             <span class="n">lon_lines</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">lon_min</span><span class="p">,</span> <span class="n">lon_max</span><span class="p">,</span> <span class="n">grid_line_spacing</span><span class="p">),</span>
+                             <span class="n">min_lat</span> <span class="o">=</span> <span class="n">lat_min</span><span class="p">,</span>
+                             <span class="n">max_lat</span> <span class="o">=</span> <span class="n">lat_max</span><span class="p">,</span>
+                             <span class="n">min_lon</span> <span class="o">=</span> <span class="n">lon_min</span><span class="p">,</span>
+                             <span class="n">max_lon</span> <span class="o">=</span> <span class="n">lon_max</span><span class="p">,</span>
+                             <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;pyart_HomeyerRainbow&#39;</span><span class="p">)</span>
+        <span class="n">site_locations</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="s1">&#39;Name&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">site_locations</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">site_locations</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">site_locations</span><span class="o">.</span><span class="n">Name</span><span class="p">):</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">textcoords</span><span class="o">=</span><span class="s2">&quot;offset points&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">path_effects</span><span class="o">=</span><span class="p">[</span><span class="n">pe</span><span class="o">.</span><span class="n">withStroke</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">foreground</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">)])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;images/</span><span class="si">{</span><span class="n">Path</span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="o">.</span><span class="n">stem</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">transparent</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
+  warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/matplotlib/colors.py:621: RuntimeWarning: overflow encountered in multiply
+  xa *= self.N
+</pre></div>
+</div>
+<img alt="../_images/armor-sample-plots_9_1.png" src="../_images/armor-sample-plots_9_1.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
+  warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/matplotlib/colors.py:621: RuntimeWarning: overflow encountered in multiply
+  xa *= self.N
+</pre></div>
+</div>
+<img alt="../_images/armor-sample-plots_9_3.png" src="../_images/armor-sample-plots_9_3.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
+  warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/matplotlib/colors.py:621: RuntimeWarning: overflow encountered in multiply
+  xa *= self.N
+</pre></div>
+</div>
+<img alt="../_images/armor-sample-plots_9_5.png" src="../_images/armor-sample-plots_9_5.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
+  warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/matplotlib/colors.py:621: RuntimeWarning: overflow encountered in multiply
+  xa *= self.N
+</pre></div>
+</div>
+<img alt="../_images/armor-sample-plots_9_7.png" src="../_images/armor-sample-plots_9_7.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
+  warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/matplotlib/colors.py:621: RuntimeWarning: overflow encountered in multiply
+  xa *= self.N
+</pre></div>
+</div>
+<img alt="../_images/armor-sample-plots_9_9.png" src="../_images/armor-sample-plots_9_9.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
+  warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/matplotlib/colors.py:621: RuntimeWarning: overflow encountered in multiply
+  xa *= self.N
+</pre></div>
+</div>
+<img alt="../_images/armor-sample-plots_9_11.png" src="../_images/armor-sample-plots_9_11.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
+  warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/matplotlib/colors.py:621: RuntimeWarning: overflow encountered in multiply
+  xa *= self.N
+</pre></div>
+</div>
+<img alt="../_images/armor-sample-plots_9_13.png" src="../_images/armor-sample-plots_9_13.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
+  warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/matplotlib/colors.py:621: RuntimeWarning: overflow encountered in multiply
+  xa *= self.N
+</pre></div>
+</div>
+<img alt="../_images/armor-sample-plots_9_15.png" src="../_images/armor-sample-plots_9_15.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
+  warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/matplotlib/colors.py:621: RuntimeWarning: overflow encountered in multiply
+  xa *= self.N
+</pre></div>
+</div>
+<img alt="../_images/armor-sample-plots_9_17.png" src="../_images/armor-sample-plots_9_17.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
+  warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/matplotlib/colors.py:621: RuntimeWarning: overflow encountered in multiply
+  xa *= self.N
+</pre></div>
+</div>
+<img alt="../_images/armor-sample-plots_9_19.png" src="../_images/armor-sample-plots_9_19.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
+  warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/matplotlib/colors.py:621: RuntimeWarning: overflow encountered in multiply
+  xa *= self.N
+</pre></div>
+</div>
+<img alt="../_images/armor-sample-plots_9_21.png" src="../_images/armor-sample-plots_9_21.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
+  warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/matplotlib/colors.py:621: RuntimeWarning: overflow encountered in multiply
+  xa *= self.N
+</pre></div>
+</div>
+<img alt="../_images/armor-sample-plots_9_23.png" src="../_images/armor-sample-plots_9_23.png" />
+</div>
+</div>
+</section>
+</section>
+<hr class="docutils" />
+<section id="plot-the-nexrad-data">
+<h2>Plot the NEXRAD Data<a class="headerlink" href="#plot-the-nexrad-data" title="Permalink to this headline">#</a></h2>
+<section id="search-and-find-the-nexrad-data">
+<h3>Search and find the NEXRAD Data<a class="headerlink" href="#search-and-find-the-nexrad-data" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fs</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">filesystem</span><span class="p">(</span><span class="s2">&quot;s3&quot;</span><span class="p">,</span> <span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">year</span> <span class="o">=</span> <span class="s2">&quot;2021&quot;</span>
+<span class="n">month</span> <span class="o">=</span> <span class="s2">&quot;12&quot;</span>
+<span class="n">day</span> <span class="o">=</span> <span class="s2">&quot;11&quot;</span>
+<span class="n">hour</span> <span class="o">=</span> <span class="s2">&quot;11&quot;</span>
+<span class="n">nexrad_files</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">fs</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;s3://noaa-nexrad-level2/</span><span class="si">{</span><span class="n">year</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">month</span><span class="si">}</span><span class="s2">/</span><span class="si">{</span><span class="n">day</span><span class="si">}</span><span class="s2">/KHTX/KHTX</span><span class="si">{</span><span class="n">year</span><span class="si">}{</span><span class="n">month</span><span class="si">}{</span><span class="n">day</span><span class="si">}</span><span class="s2">_</span><span class="si">{</span><span class="n">hour</span><span class="si">}</span><span class="s2">*&quot;</span><span class="p">))</span>
+<span class="n">nexrad_files</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;noaa-nexrad-level2/2021/12/11/KHTX/KHTX20211211_110352_V06&#39;,
+ &#39;noaa-nexrad-level2/2021/12/11/KHTX/KHTX20211211_110854_V06&#39;,
+ &#39;noaa-nexrad-level2/2021/12/11/KHTX/KHTX20211211_111400_V06&#39;,
+ &#39;noaa-nexrad-level2/2021/12/11/KHTX/KHTX20211211_111923_V06&#39;,
+ &#39;noaa-nexrad-level2/2021/12/11/KHTX/KHTX20211211_112446_V06&#39;,
+ &#39;noaa-nexrad-level2/2021/12/11/KHTX/KHTX20211211_113009_V06&#39;,
+ &#39;noaa-nexrad-level2/2021/12/11/KHTX/KHTX20211211_113504_V06&#39;,
+ &#39;noaa-nexrad-level2/2021/12/11/KHTX/KHTX20211211_114018_V06&#39;,
+ &#39;noaa-nexrad-level2/2021/12/11/KHTX/KHTX20211211_114532_V06&#39;,
+ &#39;noaa-nexrad-level2/2021/12/11/KHTX/KHTX20211211_115031_V06&#39;,
+ &#39;noaa-nexrad-level2/2021/12/11/KHTX/KHTX20211211_115545_V06&#39;,
+ &#39;noaa-nexrad-level2/2021/12/11/KHTX/KHTX20211211_115545_V06_MDM&#39;]
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id1">
+<h3>Loop through each file, plot the reflectivity, and save the image<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">nexrad_files</span><span class="p">:</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">radar</span> <span class="o">=</span> <span class="n">pyart</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read_nexrad_archive</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;s3://</span><span class="si">{</span><span class="n">file</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">continue</span>
+    <span class="n">fields</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">radar</span><span class="o">.</span><span class="n">fields</span><span class="p">)</span>
+    <span class="k">if</span> <span class="s2">&quot;reflectivity&quot;</span> <span class="ow">in</span> <span class="n">fields</span><span class="p">:</span> 
+        <span class="n">display</span> <span class="o">=</span> <span class="n">pyart</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">RadarMapDisplay</span><span class="p">(</span><span class="n">radar</span><span class="p">)</span>
+        <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+        <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">111</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+        <span class="n">display</span><span class="o">.</span><span class="n">plot_ppi_map</span><span class="p">(</span><span class="s2">&quot;reflectivity&quot;</span><span class="p">,</span>
+                             <span class="n">fig</span><span class="o">=</span><span class="n">fig</span><span class="p">,</span>
+                             <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+                             <span class="n">vmin</span><span class="o">=-</span><span class="mi">20</span><span class="p">,</span>
+                             <span class="n">vmax</span><span class="o">=</span><span class="mi">60</span><span class="p">,</span>
+                             <span class="n">lat_lines</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">lat_min</span><span class="p">,</span> <span class="n">lat_max</span><span class="p">,</span> <span class="n">grid_line_spacing</span><span class="p">),</span>
+                             <span class="n">lon_lines</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">lon_min</span><span class="p">,</span> <span class="n">lon_max</span><span class="p">,</span> <span class="n">grid_line_spacing</span><span class="p">),</span>
+                             <span class="n">min_lat</span> <span class="o">=</span> <span class="n">lat_min</span><span class="p">,</span>
+                             <span class="n">max_lat</span> <span class="o">=</span> <span class="n">lat_max</span><span class="p">,</span>
+                             <span class="n">min_lon</span> <span class="o">=</span> <span class="n">lon_min</span><span class="p">,</span>
+                             <span class="n">max_lon</span> <span class="o">=</span> <span class="n">lon_max</span><span class="p">,</span>
+                             <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;pyart_HomeyerRainbow&#39;</span><span class="p">)</span>
+        <span class="n">site_locations</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">column</span><span class="o">=</span><span class="s1">&#39;Name&#39;</span><span class="p">)</span>
+        <span class="k">for</span> <span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">label</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">site_locations</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">x</span><span class="p">,</span> <span class="n">site_locations</span><span class="o">.</span><span class="n">geometry</span><span class="o">.</span><span class="n">y</span><span class="p">,</span> <span class="n">site_locations</span><span class="o">.</span><span class="n">Name</span><span class="p">):</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">label</span><span class="p">,</span> <span class="n">xy</span><span class="o">=</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">),</span> <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">textcoords</span><span class="o">=</span><span class="s2">&quot;offset points&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">path_effects</span><span class="o">=</span><span class="p">[</span><span class="n">pe</span><span class="o">.</span><span class="n">withStroke</span><span class="p">(</span><span class="n">linewidth</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">foreground</span><span class="o">=</span><span class="s2">&quot;k&quot;</span><span class="p">)])</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;images/</span><span class="si">{</span><span class="n">Path</span><span class="p">(</span><span class="n">file</span><span class="p">)</span><span class="o">.</span><span class="n">stem</span><span class="si">}</span><span class="s2">.png&quot;</span><span class="p">,</span> <span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;white&#39;</span><span class="p">,</span> <span class="n">transparent</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
+  warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
+</pre></div>
+</div>
+<img alt="../_images/armor-sample-plots_16_1.png" src="../_images/armor-sample-plots_16_1.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
+  warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
+</pre></div>
+</div>
+<img alt="../_images/armor-sample-plots_16_3.png" src="../_images/armor-sample-plots_16_3.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
+  warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
+</pre></div>
+</div>
+<img alt="../_images/armor-sample-plots_16_5.png" src="../_images/armor-sample-plots_16_5.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
+  warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
+</pre></div>
+</div>
+<img alt="../_images/armor-sample-plots_16_7.png" src="../_images/armor-sample-plots_16_7.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
+  warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
+</pre></div>
+</div>
+<img alt="../_images/armor-sample-plots_16_9.png" src="../_images/armor-sample-plots_16_9.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
+  warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
+</pre></div>
+</div>
+<img alt="../_images/armor-sample-plots_16_11.png" src="../_images/armor-sample-plots_16_11.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
+  warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
+</pre></div>
+</div>
+<img alt="../_images/armor-sample-plots_16_13.png" src="../_images/armor-sample-plots_16_13.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
+  warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
+</pre></div>
+</div>
+<img alt="../_images/armor-sample-plots_16_15.png" src="../_images/armor-sample-plots_16_15.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
+  warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
+</pre></div>
+</div>
+<img alt="../_images/armor-sample-plots_16_17.png" src="../_images/armor-sample-plots_16_17.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
+  warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
+</pre></div>
+</div>
+<img alt="../_images/armor-sample-plots_16_19.png" src="../_images/armor-sample-plots_16_19.png" />
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
+  warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
+/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
+  warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
+</pre></div>
+</div>
+<img alt="../_images/armor-sample-plots_16_21.png" src="../_images/armor-sample-plots_16_21.png" />
+</div>
+</div>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="../README.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">ARM Cookbook Template</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="notebook-template.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">ARM Notebook Template</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By ARM Development Team<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>
