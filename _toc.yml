@@ -1,6 +1,6 @@
 format: jb-book
 root: README
 parts:
-- caption: Notebooks
+- caption: Site Exploration
   chapters:
     - glob: notebooks/*
