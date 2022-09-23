@@ -1,9 +1,9 @@
-# ARM Cookbook Template
-This is a Github repository template for creating cookbooks related to working with ARM data
+# AMF3 Radar Examples
+This is a place to collaborate on data related to the Atmospheric Radiation Measurement user facility Advanced Mobile Facility (3) deployment to the Southeastern United States.
 
 ## Motivation
 
-This material will be used to provide an overview of how to use Python for the atmospheric and climate sciences.
+This repository is for collaborating on workflows and visualizations related to the ARM AMF deployment in the Southeastern United States. We use a variety of datasets (mostly radar) to investigate different events, and provide open workflows for others to use.
 
 ## Authors
 
