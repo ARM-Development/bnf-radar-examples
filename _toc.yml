@@ -3,4 +3,4 @@ root: README
 parts:
 - caption: Site Exploration
   chapters:
-    - glob: notebooks/*
+    - file: notebooks/armor-sample-plots.ipynb
