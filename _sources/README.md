@@ -1,9 +1,9 @@
 # AMF3 Radar Examples
-This is a place to collaborate on data related to the Atmospheric Radiation Measurement user facility Advanced Mobile Facility (3) deployment to the Southeastern United States.
+This is a place to collaborate on data related to the Atmospheric Radiation Measurement user facility Advanced Mobile Facility (3) deployment to the Bankhead National Forest (BNF) site in the Southeastern United States.
 
 ## Motivation
 
-This repository is for collaborating on workflows and visualizations related to the ARM AMF deployment in the Southeastern United States. We use a variety of datasets (mostly radar) to investigate different events, and provide open workflows for others to use.
+This repository is for collaborating on workflows and visualizations related to the ARM AMF deployment to the BNF site. We use a variety of datasets (mostly radar) to investigate different events, and provide open workflows for others to use.
 
 ## Authors
 
