@@ -1,417 +1,371 @@
 
 <!DOCTYPE html>
 
-<html>
+
+<html lang="en" data-content_root="../" >
+
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
 
     <title>ARMOR Data Plots &#8212; AMF3 Radar Examples</title>
-    
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  <!-- 
+    this give us a css class that will be invisible only if js is disabled 
+  -->
+  <noscript>
+    <style>
+      .pst-js-only { display: none !important; }
+
+    </style>
+  </noscript>
+  
   <!-- Loaded before other Sphinx assets -->
-  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=26a4bc78f4c0ddb94549" rel="stylesheet" />
 
-    
-  <link rel="stylesheet"
-    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
-  <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
-
-    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
-    
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=fa44fd50" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=a3416100" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- So that users can add custom icons -->
+  <script src="../_static/scripts/fontawesome.js?digest=26a4bc78f4c0ddb94549"></script>
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549" />
 
-    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
-    <script src="../_static/jquery.js"></script>
-    <script src="../_static/underscore.js"></script>
-    <script src="../_static/doctools.js"></script>
-    <script src="../_static/clipboard.min.js"></script>
-    <script src="../_static/copybutton.js"></script>
-    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
-    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/design-tabs.js"></script>
-    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
-const thebe_selector = ".thebe,.cell"
-const thebe_selector_input = "pre"
-const thebe_selector_output = ".output, .cell_output"
-</script>
-    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/armor-sample-plots';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="AMF3 Radar Examples" href="../README.html" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="None">
-    
-
-    <!-- Google Analytics -->
-    
+    <link rel="prev" title="BNF Radar Examples" href="../README.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  <meta name="docsearch:version" content="" />
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
-<!-- Checkboxes to toggle the left sidebar -->
-<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
-<label class="overlay overlay-navbar" for="__navigation">
-    <div class="visually-hidden">Toggle navigation sidebar</div>
-</label>
-<!-- Checkboxes to toggle the in-page toc -->
-<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
-<label class="overlay overlay-pagetoc" for="__page-toc">
-    <div class="visually-hidden">Toggle in-page Table of Contents</div>
-</label>
-<!-- Headers at the top -->
-<div class="announcement header-item noprint"></div>
-<div class="header header-item noprint"></div>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
 
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <dialog id="pst-search-dialog">
     
-    <div class="container-fluid" id="banner"></div>
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+  </dialog>
 
-    
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
 
-    <div class="container-xl">
-      <div class="row">
-          
-<!-- Sidebar -->
-<div class="bd-sidebar noprint" id="site-navigation">
-    <div class="bd-sidebar__content">
-        <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="../index.html">
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
       
-        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+      
+      
+      <dialog id="pst-primary-sidebar-modal"></dialog>
+      <div id="pst-primary-sidebar" class="bd-sidebar-primary bd-sidebar">
         
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    
+    
       
-      
-      <img src="../_static/arm_logo.png" class="logo" alt="logo">
-      
-      
-      <h1 class="site-logo" id="site-title">AMF3 Radar Examples</h1>
-      
-    </a>
-</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
-  <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
-</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
-    <div class="bd-toc-item active">
+    
+    
+    <img src="../_static/arm_logo.png" class="logo__image only-light" alt="AMF3 Radar Examples - Home"/>
+    <img src="../_static/arm_logo.png" class="logo__image only-dark pst-js-only" alt="AMF3 Radar Examples - Home"/>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+<button class="btn search-button-field search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+ <i class="fa-solid fa-magnifying-glass"></i>
+ <span class="search-button__default-text">Search</span>
+ <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+</button></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../README.html">
-                    AMF3 Radar Examples
+                    BNF Radar Examples
                 </a>
             </li>
         </ul>
-        <p aria-level="2" class="caption" role="heading">
- <span class="caption-text">
-  Site Exploration
- </span>
-</p>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Site Exploration</span></p>
 <ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active">
-  <a class="current reference internal" href="#">
-   ARMOR Data Plots
-  </a>
- </li>
+<li class="toctree-l1 current active"><a class="current reference internal" href="#">ARMOR Data Plots</a></li>
 </ul>
 
     </div>
 </nav></div>
-        <div class="bd-sidebar__bottom">
-             <!-- To handle the deprecated key -->
-            
-            <div class="navbar_extra_footer">
-            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
-            </div>
-            
-        </div>
     </div>
-    <div id="rtd-footer-container"></div>
-</div>
-
-
-          
-
-
-          
-<!-- A tiny helper pixel to detect if we've scrolled -->
-<div class="sbt-scroll-pixel-helper"></div>
-<!-- Main content -->
-<div class="col py-0 content-container">
-    
-    <div class="header-article row sticky-top noprint">
-        
-
-
-
-<div class="col py-1 d-flex header-article-main">
-    <div class="header-article__left">
-        
-        <label for="__navigation"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="right"
-title="Toggle navigation"
->
   
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-bars"></i>
-  </span>
-
-</label>
-
-        
-    </div>
-    <div class="header-article__right">
-<div class="menu-dropdown menu-dropdown-launch-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Launch interactive content">
-      <i class="fas fa-rocket"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="https://mybinder.org/v2/gh/ARM-Development/amf3-radar-examples/main?urlpath=lab/tree/notebooks/notebooks/armor-sample-plots.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on Binder"
->
   
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../_static/images/logo_binder.svg">
-  </span>
-<span class="headerbtn__text-container">Binder</span>
-</a>
-
-      </li>
-      
-      <li>
-        <a href="https://jupyterhub.arm.gov/hub/user-redirect/git-pull?repo=https%3A//github.com/ARM-Development/amf3-radar-examples&urlpath=lab/tree/amf3-radar-examples/notebooks/notebooks/armor-sample-plots.ipynb&branch=main"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Launch on JupyterHub"
->
-  
-
-<span class="headerbtn__icon-container">
-  
-    <img src="../_static/images/logo_jupyterhub.svg">
-  </span>
-<span class="headerbtn__text-container">JupyterHub</span>
-</a>
-
-      </li>
-      
-    </ul>
+  <div class="sidebar-primary-items__end sidebar-primary__section">
   </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://jupyterhub.arm.gov/hub/user-redirect/git-pull?repo=https%3A//github.com/ARM-Development/amf3-radar-examples&urlpath=lab/tree/amf3-radar-examples/notebooks/notebooks/armor-sample-plots.ipynb&branch=main" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on JupyterHub"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="JupyterHub logo" src="../_static/images/logo_jupyterhub.svg">
+  </span>
+<span class="btn__text-container">JupyterHub</span>
+</a>
+</li>
+      
+  </ul>
 </div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/armor-sample-plots.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
 
 <button onclick="toggleFullScreen()"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="bottom"
-title="Fullscreen mode"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
 >
   
 
-<span class="headerbtn__icon-container">
+<span class="btn__icon-container">
   <i class="fas fa-expand"></i>
   </span>
 
 </button>
 
-<div class="menu-dropdown menu-dropdown-download-buttons">
-  <button class="headerbtn menu-dropdown__trigger"
-      aria-label="Download this page">
-      <i class="fas fa-download"></i>
-  </button>
-  <div class="menu-dropdown__content">
-    <ul>
-      <li>
-        <a href="../_sources/notebooks/armor-sample-plots.ipynb"
-   class="headerbtn"
-   data-toggle="tooltip"
-data-placement="left"
-title="Download source file"
->
-  
 
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file"></i>
-  </span>
-<span class="headerbtn__text-container">.ipynb</span>
-</a>
 
-      </li>
-      
-      <li>
-        
-<button onclick="printPdf(this)"
-  class="headerbtn"
-  data-toggle="tooltip"
-data-placement="left"
-title="Print to PDF"
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-file-pdf"></i>
-  </span>
-<span class="headerbtn__text-container">.pdf</span>
+<button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button pst-js-only" aria-label="Color mode" data-bs-title="Color mode"  data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <i class="theme-switch fa-solid fa-sun                fa-lg" data-mode="light" title="Light"></i>
+  <i class="theme-switch fa-solid fa-moon               fa-lg" data-mode="dark"  title="Dark"></i>
+  <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"  title="System Settings"></i>
 </button>
 
-      </li>
+
+<button class="btn btn-sm pst-navbar-icon search-button search-button__button pst-js-only" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+</button>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
       
-    </ul>
-  </div>
-</div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
+    </div>
   
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
-
-    </div>
 </div>
-
-<!-- Table of contents -->
-<div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#read-the-site-information">
-   Read the Site Information
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#plot-the-armor-data">
-   Plot the ARMOR Data
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#configure-the-domain-of-the-plots">
-     Configure the domain of the plots
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#loop-through-each-file-plot-the-reflectivity-and-save-the-image">
-     Loop through each file, plot the reflectivity, and save the image
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#plot-the-nexrad-data">
-   Plot the NEXRAD Data
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#search-and-find-the-nexrad-data">
-     Search and find the NEXRAD Data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
-     Loop through each file, plot the reflectivity, and save the image
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
-
-    </nav>
 </div>
-    </div>
-    <div class="article row">
-        <div class="col pl-md-3 pl-lg-5 content-container">
-            <!-- Table of contents that is only displayed when printing the page -->
-            <div id="jb-print-docs-body" class="onlyprint">
-                <h1>ARMOR Data Plots</h1>
-                <!-- Table of contents -->
-                <div id="print-main-content">
-                    <div id="jb-print-toc">
-                        
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#read-the-site-information">
-   Read the Site Information
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#plot-the-armor-data">
-   Plot the ARMOR Data
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#configure-the-domain-of-the-plots">
-     Configure the domain of the plots
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#loop-through-each-file-plot-the-reflectivity-and-save-the-image">
-     Loop through each file, plot the reflectivity, and save the image
-    </a>
-   </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#plot-the-nexrad-data">
-   Plot the NEXRAD Data
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#search-and-find-the-nexrad-data">
-     Search and find the NEXRAD Data
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id1">
-     Loop through each file, plot the reflectivity, and save the image
-    </a>
-   </li>
-  </ul>
- </li>
-</ul>
+              
+              
 
-                        </nav>
-                    </div>
-                </div>
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>ARMOR Data Plots</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
             </div>
-            <main id="main-content" role="main">
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-the-site-information">Read the Site Information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-armor-data">Plot the ARMOR Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-the-domain-of-the-plots">Configure the domain of the plots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loop-through-each-file-plot-the-reflectivity-and-save-the-image">Loop through each file, plot the reflectivity, and save the image</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-nexrad-data">Plot the NEXRAD Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#search-and-find-the-nexrad-data">Search and find the NEXRAD Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Loop through each file, plot the reflectivity, and save the image</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
                 
-              <div>
-                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
   <section class="tex2jax_ignore mathjax_ignore" id="armor-data-plots">
-<h1>ARMOR Data Plots<a class="headerlink" href="#armor-data-plots" title="Permalink to this headline">#</a></h1>
+<h1>ARMOR Data Plots<a class="headerlink" href="#armor-data-plots" title="Link to this heading">#</a></h1>
 <p>This notebook walks through plotting data from the ARMOR radar in northern Alabama and the local NWS radar in Huntsville, Alabama.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -433,7 +387,7 @@ title="Print to PDF"
 </div>
 </div>
 <section id="read-the-site-information">
-<h2>Read the Site Information<a class="headerlink" href="#read-the-site-information" title="Permalink to this headline">#</a></h2>
+<h2>Read the Site Information<a class="headerlink" href="#read-the-site-information" title="Link to this heading">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">site_locations</span> <span class="o">=</span> <span class="n">gpd</span><span class="o">.</span><span class="n">read_file</span><span class="p">(</span><span class="s2">&quot;locations/ARM-SE.kmz&quot;</span><span class="p">)</span>
@@ -661,8 +615,8 @@ title="Print to PDF"
 </div>
 </section>
 <section id="plot-the-armor-data">
-<h2>Plot the ARMOR Data<a class="headerlink" href="#plot-the-armor-data" title="Permalink to this headline">#</a></h2>
-<p>Prior to running this notebook, the datasets were downloaded from this <a class="reference external" href="https://urldefense.com/v3/__https://drive.google.com/drive/folders/1wz2qq3XS6p3Q-t5rKJEhleueHGSc-Hbx?usp=sharing__%3B%21%21P4SdNyxKAPE%21BEGz2W6ktv4pepnbzcbhzpdFlek50FMdQlRuU9qys8uSB2r9zQaV3qezNLfpXLBcN3Cr_ZAe7hJAjRo%24">shared Google drive</a> and placed in a <code class="docutils literal notranslate"><span class="pre">/data</span></code> directory.</p>
+<h2>Plot the ARMOR Data<a class="headerlink" href="#plot-the-armor-data" title="Link to this heading">#</a></h2>
+<p>Prior to running this notebook, the datasets were downloaded from this <a class="reference external" href="https://urldefense.com/v3/__https://drive.google.com/drive/folders/1wz2qq3XS6p3Q-t5rKJEhleueHGSc-Hbx?usp=sharing__;!!P4SdNyxKAPE!BEGz2W6ktv4pepnbzcbhzpdFlek50FMdQlRuU9qys8uSB2r9zQaV3qezNLfpXLBcN3Cr_ZAe7hJAjRo$">shared Google drive</a> and placed in a <code class="docutils literal notranslate"><span class="pre">/data</span></code> directory.</p>
 <p>This case is from a cool-season event that resulted in a Quasi-Linear Convective System forming within the AMF3/ARM-SE domain. We are using data from the UAH ARMOR radar.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -672,7 +626,7 @@ title="Print to PDF"
 </div>
 </div>
 <section id="configure-the-domain-of-the-plots">
-<h3>Configure the domain of the plots<a class="headerlink" href="#configure-the-domain-of-the-plots" title="Permalink to this headline">#</a></h3>
+<h3>Configure the domain of the plots<a class="headerlink" href="#configure-the-domain-of-the-plots" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lon_min</span> <span class="o">=</span> <span class="o">-</span><span class="mi">89</span>
@@ -686,7 +640,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="loop-through-each-file-plot-the-reflectivity-and-save-the-image">
-<h3>Loop through each file, plot the reflectivity, and save the image<a class="headerlink" href="#loop-through-each-file-plot-the-reflectivity-and-save-the-image" title="Permalink to this headline">#</a></h3>
+<h3>Loop through each file, plot the reflectivity, and save the image<a class="headerlink" href="#loop-through-each-file-plot-the-reflectivity-and-save-the-image" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">armor_files</span><span class="p">:</span>
@@ -726,7 +680,7 @@ title="Print to PDF"
   xa *= self.N
 </pre></div>
 </div>
-<img alt="../_images/armor-sample-plots_9_1.png" src="../_images/armor-sample-plots_9_1.png" />
+<img alt="../_images/85b7cfdf697f2a1f91d9bec5a5d7526b817d84e1268cc4a3a94d8b9eb046c5d7.png" src="../_images/85b7cfdf697f2a1f91d9bec5a5d7526b817d84e1268cc4a3a94d8b9eb046c5d7.png" />
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
   warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
 /Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
@@ -735,7 +689,7 @@ title="Print to PDF"
   xa *= self.N
 </pre></div>
 </div>
-<img alt="../_images/armor-sample-plots_9_3.png" src="../_images/armor-sample-plots_9_3.png" />
+<img alt="../_images/558b42d8b25910c16d98e1bbe656297ff5eb39f5b148554c579340c02197120f.png" src="../_images/558b42d8b25910c16d98e1bbe656297ff5eb39f5b148554c579340c02197120f.png" />
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
   warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
 /Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
@@ -744,7 +698,7 @@ title="Print to PDF"
   xa *= self.N
 </pre></div>
 </div>
-<img alt="../_images/armor-sample-plots_9_5.png" src="../_images/armor-sample-plots_9_5.png" />
+<img alt="../_images/07d92f97a5987dc07324ecea2826c7cc0add6598ba4c3e6fa24839afa7bd86d4.png" src="../_images/07d92f97a5987dc07324ecea2826c7cc0add6598ba4c3e6fa24839afa7bd86d4.png" />
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
   warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
 /Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
@@ -753,7 +707,7 @@ title="Print to PDF"
   xa *= self.N
 </pre></div>
 </div>
-<img alt="../_images/armor-sample-plots_9_7.png" src="../_images/armor-sample-plots_9_7.png" />
+<img alt="../_images/669bed5f9d66baaafa15a15752f2daa556a7470d34406f019f490be90f3f3453.png" src="../_images/669bed5f9d66baaafa15a15752f2daa556a7470d34406f019f490be90f3f3453.png" />
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
   warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
 /Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
@@ -762,7 +716,7 @@ title="Print to PDF"
   xa *= self.N
 </pre></div>
 </div>
-<img alt="../_images/armor-sample-plots_9_9.png" src="../_images/armor-sample-plots_9_9.png" />
+<img alt="../_images/83b53bb5474fa452c3ebb127a0a247ba4d61a82d1ef863740ac56b38714d55bf.png" src="../_images/83b53bb5474fa452c3ebb127a0a247ba4d61a82d1ef863740ac56b38714d55bf.png" />
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
   warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
 /Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
@@ -771,7 +725,7 @@ title="Print to PDF"
   xa *= self.N
 </pre></div>
 </div>
-<img alt="../_images/armor-sample-plots_9_11.png" src="../_images/armor-sample-plots_9_11.png" />
+<img alt="../_images/54257b26a3c826786430efeaadd690340f99578977f4f2dbfbe52117c1794fbc.png" src="../_images/54257b26a3c826786430efeaadd690340f99578977f4f2dbfbe52117c1794fbc.png" />
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
   warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
 /Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
@@ -780,7 +734,7 @@ title="Print to PDF"
   xa *= self.N
 </pre></div>
 </div>
-<img alt="../_images/armor-sample-plots_9_13.png" src="../_images/armor-sample-plots_9_13.png" />
+<img alt="../_images/31813ed95a7b2969cf83a521a96c67efb826fea3ca6813492e5515e13b66f14c.png" src="../_images/31813ed95a7b2969cf83a521a96c67efb826fea3ca6813492e5515e13b66f14c.png" />
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
   warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
 /Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
@@ -789,7 +743,7 @@ title="Print to PDF"
   xa *= self.N
 </pre></div>
 </div>
-<img alt="../_images/armor-sample-plots_9_15.png" src="../_images/armor-sample-plots_9_15.png" />
+<img alt="../_images/e7998b18f824a69df3e8e25ddb0dc59183aa342111a1b7ec73b1d57b705585a3.png" src="../_images/e7998b18f824a69df3e8e25ddb0dc59183aa342111a1b7ec73b1d57b705585a3.png" />
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
   warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
 /Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
@@ -798,7 +752,7 @@ title="Print to PDF"
   xa *= self.N
 </pre></div>
 </div>
-<img alt="../_images/armor-sample-plots_9_17.png" src="../_images/armor-sample-plots_9_17.png" />
+<img alt="../_images/f40fbbf8535ff3ec9b1dee3d0f4399c1ca27a3b3ad1bf384b61e7d2949add58c.png" src="../_images/f40fbbf8535ff3ec9b1dee3d0f4399c1ca27a3b3ad1bf384b61e7d2949add58c.png" />
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
   warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
 /Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
@@ -807,7 +761,7 @@ title="Print to PDF"
   xa *= self.N
 </pre></div>
 </div>
-<img alt="../_images/armor-sample-plots_9_19.png" src="../_images/armor-sample-plots_9_19.png" />
+<img alt="../_images/25f4d9ec2c1dc00e87460c4e3e2738d361ab9de5fe1ac7246bcfbda57e630a34.png" src="../_images/25f4d9ec2c1dc00e87460c4e3e2738d361ab9de5fe1ac7246bcfbda57e630a34.png" />
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
   warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
 /Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
@@ -816,7 +770,7 @@ title="Print to PDF"
   xa *= self.N
 </pre></div>
 </div>
-<img alt="../_images/armor-sample-plots_9_21.png" src="../_images/armor-sample-plots_9_21.png" />
+<img alt="../_images/5f81ef00f455433ff073a64e45dac9db7640daf8b7e80d1789602bb596af31d3.png" src="../_images/5f81ef00f455433ff073a64e45dac9db7640daf8b7e80d1789602bb596af31d3.png" />
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
   warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
 /Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
@@ -825,16 +779,16 @@ title="Print to PDF"
   xa *= self.N
 </pre></div>
 </div>
-<img alt="../_images/armor-sample-plots_9_23.png" src="../_images/armor-sample-plots_9_23.png" />
+<img alt="../_images/686841a58d789ee610060cb380d2627e3eeeaf4c6d5ba5b9fbc2bff4c3f5ca95.png" src="../_images/686841a58d789ee610060cb380d2627e3eeeaf4c6d5ba5b9fbc2bff4c3f5ca95.png" />
 </div>
 </div>
 </section>
 </section>
 <hr class="docutils" />
 <section id="plot-the-nexrad-data">
-<h2>Plot the NEXRAD Data<a class="headerlink" href="#plot-the-nexrad-data" title="Permalink to this headline">#</a></h2>
+<h2>Plot the NEXRAD Data<a class="headerlink" href="#plot-the-nexrad-data" title="Link to this heading">#</a></h2>
 <section id="search-and-find-the-nexrad-data">
-<h3>Search and find the NEXRAD Data<a class="headerlink" href="#search-and-find-the-nexrad-data" title="Permalink to this headline">#</a></h3>
+<h3>Search and find the NEXRAD Data<a class="headerlink" href="#search-and-find-the-nexrad-data" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fs</span> <span class="o">=</span> <span class="n">fsspec</span><span class="o">.</span><span class="n">filesystem</span><span class="p">(</span><span class="s2">&quot;s3&quot;</span><span class="p">,</span> <span class="n">anon</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -872,7 +826,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="id1">
-<h3>Loop through each file, plot the reflectivity, and save the image<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h3>
+<h3>Loop through each file, plot the reflectivity, and save the image<a class="headerlink" href="#id1" title="Link to this heading">#</a></h3>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">file</span> <span class="ow">in</span> <span class="n">nexrad_files</span><span class="p">:</span>
@@ -913,77 +867,77 @@ title="Print to PDF"
   warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
 </pre></div>
 </div>
-<img alt="../_images/armor-sample-plots_16_1.png" src="../_images/armor-sample-plots_16_1.png" />
+<img alt="../_images/62bc2e5859d164bca493e2777296034472e91ef3df5e30ce83dc26ed9840871a.png" src="../_images/62bc2e5859d164bca493e2777296034472e91ef3df5e30ce83dc26ed9840871a.png" />
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
   warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
 /Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
   warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
 </pre></div>
 </div>
-<img alt="../_images/armor-sample-plots_16_3.png" src="../_images/armor-sample-plots_16_3.png" />
+<img alt="../_images/6712ccd98375cd6a97cb607d3ac4df82893c4836568e3116e044f50dd6d30d7d.png" src="../_images/6712ccd98375cd6a97cb607d3ac4df82893c4836568e3116e044f50dd6d30d7d.png" />
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
   warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
 /Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
   warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
 </pre></div>
 </div>
-<img alt="../_images/armor-sample-plots_16_5.png" src="../_images/armor-sample-plots_16_5.png" />
+<img alt="../_images/733abe4b233ee50199c5ff8cc7d66bb71e4de6d956c23fe40a8c45539632a917.png" src="../_images/733abe4b233ee50199c5ff8cc7d66bb71e4de6d956c23fe40a8c45539632a917.png" />
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
   warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
 /Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
   warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
 </pre></div>
 </div>
-<img alt="../_images/armor-sample-plots_16_7.png" src="../_images/armor-sample-plots_16_7.png" />
+<img alt="../_images/13f5839adcdb56917bee4c5493faf774ffd265b15b1daf99785d12720f946842.png" src="../_images/13f5839adcdb56917bee4c5493faf774ffd265b15b1daf99785d12720f946842.png" />
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
   warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
 /Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
   warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
 </pre></div>
 </div>
-<img alt="../_images/armor-sample-plots_16_9.png" src="../_images/armor-sample-plots_16_9.png" />
+<img alt="../_images/9231d59992228eeb9c7d462315e1d138ac2bad1483b40f7e06ea107184b68ea6.png" src="../_images/9231d59992228eeb9c7d462315e1d138ac2bad1483b40f7e06ea107184b68ea6.png" />
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
   warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
 /Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
   warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
 </pre></div>
 </div>
-<img alt="../_images/armor-sample-plots_16_11.png" src="../_images/armor-sample-plots_16_11.png" />
+<img alt="../_images/e7607dd16cbe36cc667e540c1d1e6c704337d7e7fd91d6023ef53a75504462b6.png" src="../_images/e7607dd16cbe36cc667e540c1d1e6c704337d7e7fd91d6023ef53a75504462b6.png" />
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
   warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
 /Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
   warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
 </pre></div>
 </div>
-<img alt="../_images/armor-sample-plots_16_13.png" src="../_images/armor-sample-plots_16_13.png" />
+<img alt="../_images/81c75f1c2ce7ee4117948c3a3cd32e65ae58d1d135c8a103efc5ded346494d28.png" src="../_images/81c75f1c2ce7ee4117948c3a3cd32e65ae58d1d135c8a103efc5ded346494d28.png" />
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
   warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
 /Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
   warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
 </pre></div>
 </div>
-<img alt="../_images/armor-sample-plots_16_15.png" src="../_images/armor-sample-plots_16_15.png" />
+<img alt="../_images/560ba5ed833b5b575e059b216ff9abcd3c38b3a6143e9ad225a6c309c63282a7.png" src="../_images/560ba5ed833b5b575e059b216ff9abcd3c38b3a6143e9ad225a6c309c63282a7.png" />
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
   warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
 /Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
   warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
 </pre></div>
 </div>
-<img alt="../_images/armor-sample-plots_16_17.png" src="../_images/armor-sample-plots_16_17.png" />
+<img alt="../_images/672a64cbad3c96106cc47c94b7ae58ffd9c864f43eca02fadce451829d87ad84.png" src="../_images/672a64cbad3c96106cc47c94b7ae58ffd9c864f43eca02fadce451829d87ad84.png" />
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
   warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
 /Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
   warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
 </pre></div>
 </div>
-<img alt="../_images/armor-sample-plots_16_19.png" src="../_images/armor-sample-plots_16_19.png" />
+<img alt="../_images/24176e8298d40cbdf69a7e4111929c6d302d763f754b04bd02606597bc937a25.png" src="../_images/24176e8298d40cbdf69a7e4111929c6d302d763f754b04bd02606597bc937a25.png" />
 <div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:451: UserWarning: The .xlabels_top attribute is deprecated. Please use .top_labels to toggle visibility instead.
   warnings.warn(&#39;The .xlabels_top attribute is deprecated. Please &#39;
 /Users/mgrover/miniforge3/envs/pyart-docs/lib/python3.10/site-packages/cartopy/mpl/gridliner.py:487: UserWarning: The .ylabels_right attribute is deprecated. Please use .right_labels to toggle visibility instead.
   warnings.warn(&#39;The .ylabels_right attribute is deprecated. Please &#39;
 </pre></div>
 </div>
-<img alt="../_images/armor-sample-plots_16_21.png" src="../_images/armor-sample-plots_16_21.png" />
+<img alt="../_images/96ed27fd01d7c7d8299656ede6b4dafe19b68cd041bd502c38aac6f44ff32a0a.png" src="../_images/96ed27fd01d7c7d8299656ede6b4dafe19b68cd041bd502c38aac6f44ff32a0a.png" />
 </div>
 </div>
 </section>
@@ -1002,7 +956,7 @@ title="Print to PDF"
             mode: "python"
         },
         kernelOptions: {
-            kernelName: "python3",
+            name: "python3",
             path: "./notebooks"
         },
         predefinedOutput: true
@@ -1010,43 +964,105 @@ title="Print to PDF"
     </script>
     <script>kernelName = 'python3'</script>
 
-              </div>
+                </article>
               
-            </main>
-            <footer class="footer-article noprint">
-                
-    <!-- Previous / next buttons -->
-<div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../README.html" title="previous page">
-        <i class="fas fa-angle-left"></i>
-        <div class="prev-next-info">
-            <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">AMF3 Radar Examples</p>
-        </div>
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+    <a class="left-prev"
+       href="../README.html"
+       title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+        <p class="prev-next-subtitle">previous</p>
+        <p class="prev-next-title">BNF Radar Examples</p>
+      </div>
     </a>
 </div>
-            </footer>
-        </div>
-    </div>
-    <div class="footer-content row">
-        <footer class="col footer"><p>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <dialog id="pst-secondary-sidebar-modal"></dialog>
+                <div id="pst-secondary-sidebar" class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#read-the-site-information">Read the Site Information</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-armor-data">Plot the ARMOR Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#configure-the-domain-of-the-plots">Configure the domain of the plots</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#loop-through-each-file-plot-the-reflectivity-and-save-the-image">Loop through each file, plot the reflectivity, and save the image</a></li>
+</ul>
+</li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#plot-the-nexrad-data">Plot the NEXRAD Data</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#search-and-find-the-nexrad-data">Search and find the NEXRAD Data</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#id1">Loop through each file, plot the reflectivity, and save the image</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
   
-    By ARM Development Team<br/>
-  
-      &copy; Copyright 2022.<br/>
-</p>
-        </footer>
-    </div>
+  <div class="footer-item">
     
+<p class="component-author">
+By ARM Development Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
 </div>
+          </footer>
+        
 
-
-      </div>
+      </main>
     </div>
+  </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script defer src="../_static/scripts/bootstrap.js?digest=26a4bc78f4c0ddb94549"></script>
+<script defer src="../_static/scripts/pydata-sphinx-theme.js?digest=26a4bc78f4c0ddb94549"></script>
 
-
+  <footer class="bd-footer">
+  </footer>
   </body>
 </html>
