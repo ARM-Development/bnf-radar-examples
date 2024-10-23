@@ -1,4 +1,4 @@
-# AMF3 Radar Examples
+# BNF Radar Examples
 This is a place to collaborate on data related to the Atmospheric Radiation Measurement user facility Advanced Mobile Facility (3) deployment to the Bankhead National Forest (BNF) site in the Southeastern United States.
 
 ## Motivation
