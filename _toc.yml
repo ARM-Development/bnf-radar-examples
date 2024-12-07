@@ -4,3 +4,4 @@ parts:
 - caption: Site Exploration
   chapters:
     - file: notebooks/armor-sample-plots.ipynb
+    - file: notebooks/bnf-insitu.ipynb
