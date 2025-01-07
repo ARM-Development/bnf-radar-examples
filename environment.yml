@@ -4,7 +4,7 @@ channels:
   - defaults
   - pyviz
 dependencies:
-  - python=3.9
+  - python<=3.11
   - matplotlib
   - jupyterlab
   - cartopy
@@ -13,8 +13,10 @@ dependencies:
   - distributed
   - xarray
   - pandas
+  - geopandas
   - fiona
   - pip
   - pip:
     - -r doc-requirements.txt
     - arm_pyart
+    - act-atmos
