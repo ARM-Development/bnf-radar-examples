@@ -11,8 +11,8 @@ This repository is for collaborating on workflows and visualizations related to 
 
 ### Contributors
 
-<a href="https://github.com/ARM-Development/amf3-radar-examples/graphs/contributors">
-  <img src="https://contrib.rocks/image?repo=ARM-Development/amf3-radar-examples" />
+<a href="https://github.com/ARM-Development/bnf-radar-examples/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=ARM-Development/bnf-radar-examples" />
 </a>
 
 ## Structure
@@ -43,10 +43,10 @@ Jupyter](https://foundations.projectpythia.org/foundations/getting-started-jupyt
 ### Running on Your Own Machine
 If you are interested in running this material locally on your computer, you will need to follow this workflow:
 
-1. Clone the `https://github.com/ARM-Development/amf3-radar-examples` repository:
+1. Clone the `https://github.com/ARM-Development/bnf-radar-examples` repository:
 
    ```bash
-    git clone https://github.com/ARM-Development/amf3-radar-examples.git
+    git clone https://github.com/ARM-Development/bnf-radar-examples.git
     ```  
 1. Move into the `cookbook-example` directory
     ```bash
@@ -55,7 +55,7 @@ If you are interested in running this material locally on your computer, you wil
 1. Create and activate your conda environment from the `environment.yml` file
     ```bash
     conda env create -f environment.yml
-    conda activate amf3-radar-examples-dev
+    conda activate bnf-radar-examples-dev
     ```  
 1.  Move into the `notebooks` directory and start up Jupyterlab
     ```bash
