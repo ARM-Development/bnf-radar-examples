@@ -4,6 +4,7 @@ warnings.filterwarnings("ignore", category=UserWarning)
 warnings.filterwarnings("ignore", category=RuntimeWarning)
 
 import glob
+import sys
 import time
 import datetime
 import argparse
@@ -717,9 +718,15 @@ def radclss(volumes, serial=True, outdir=None, postprocess=True):
             columns.append(subset_points(rad))
     # Assemble individual columns into single DataSet
     try:
+        # Concatenate all extracted columns across time dimension to form daily timeseries
         ds = xr.concat([data for data in columns if data], dim="time")
+        # Remove all the unused CMAC variables
+        ds = ds.drop_vars(discard_var["radar"])
+        ds['time'] = ds.sel(station="M1").base_time
     except ValueError:
         ds = None
+        if client:
+            client.close()
     # Free up Memory
     del columns
 
@@ -728,8 +735,6 @@ def radclss(volumes, serial=True, outdir=None, postprocess=True):
         # Remove Global Attributes from the Column Extraction
         # Attributes make sense for single location, but not collection of sites.
         ds.attrs = {}
-        # Remove the Base_Time variable from extracted column
-        del ds['base_time']
         # Depending on how Dask is behaving, may be to resort time
         ds = ds.sortby("time")
         print(volumes['date'] + " finish subset-points: ", time.strftime("%H:%M:%S"))
@@ -789,7 +794,10 @@ def radclss(volumes, serial=True, outdir=None, postprocess=True):
         # ----------------
         # Check DOD - TBD
         # ----------------
-        out_ds = ds.copy()
+        # need to check why xarray does not like unit attribute for time
+        del ds["time"].attrs["units"]
+        del ds["time_offset"].attrs["units"]
+        del ds["base_time"].attrs["units"]
         
         # ------------
         # Save to File
@@ -797,11 +805,13 @@ def radclss(volumes, serial=True, outdir=None, postprocess=True):
         # write to file
         try:
             if outdir:
-                out_ds.to_netcdf(outdir + 'bnfcsapr2radclssS3.c2.' + volumes['date'] + '.000000.nc')
+                ds.to_netcdf(outdir + 'bnfcsapr2radclssS3.c2.' + volumes['date'] + '.000000.nc')
             else:
-                out_ds.to_netcdf('bnfcsapr2radclssS3.c2.' + volumes['date'] + '.000000.nc')
+                ds.to_netcdf('bnfcsapr2radclssS3.c2.' + volumes['date'] + '.000000.nc')
             status = ": RadCLss SUCCESS: " + volumes['date']
-        except ValueError:
+        except ValueError as e:
+            print(f"Error: {e}")
+            print(f"Error type: {type(e).__name__}")
             status = ": RadCLss FAILURE: " + volumes['date']
 
         # create timeseries plot
@@ -813,7 +823,7 @@ def radclss(volumes, serial=True, outdir=None, postprocess=True):
                 print("PLOT FAILURE: " + volumes['date'])
     
         # free up memory
-        del ds, out_ds
+        del ds
 
     else:
         # There is no column extraction
@@ -823,22 +833,27 @@ def radclss(volumes, serial=True, outdir=None, postprocess=True):
     return status
 
 def main(args):
+    print("all args")
+    print(args)
     print("process start time: ", time.strftime("%H:%M:%S"))
     # Define the directories where the CSAPR2 and In-Situ files are located.
     RADAR_DIR = args.radar_dir + '%s/' % args.month
-    INSITU_DIR = args.insitu_dir + '%s/' %args.month
+    INSITU_DIR = args.insitu_dir
     OUT_PATH = args.outdir + '/%s/' % args.month
+    print("\n")
+    print("RADAR_PATH", RADAR_DIR)
+    print("INSITU_PATH", INSITU_DIR)
     print("OUTPATH: ", OUT_PATH)
 
     # Define an output directory for downloaded ground instrumentation
-    insitu_stream = {'bnfmetM1.b1' : INSITU_DIR + 'bnfmetM1.b1',
-                    'bnfmetS20.b1' : INSITU_DIR + "bnfmetS20.b1",
-                    "bnfmetS30.b1" : INSITU_DIR + "bnfmetS30.b1",
-                    "bnfmetS40.b1" : INSITU_DIR + "bnfmetS40.b1",
-                    "bnfsondewnpnM1.b1" : INSITU_DIR + "bnfsondewnpnM1.b1",
-                    "bnfwbpluvio2M1.a1" : INSITU_DIR + "bnfwbpluvio2M1.a1",
-                    "bnfldquantsM1.c1" : INSITU_DIR + "bnfldquantsM1.c1",
-                    "bnfldquantsS30.c1" : INSITU_DIR + "bnfldquantsS30.c1",
+    insitu_stream = {'bnfmetM1.b1' : INSITU_DIR + "*bnfmetM1.b1*",
+                    'bnfmetS20.b1' : INSITU_DIR + "*bnfmetS20.b1*",
+                    "bnfmetS30.b1" : INSITU_DIR + "*bnfmetS30.b1*",
+                    "bnfmetS40.b1" : INSITU_DIR + "*bnfmetS40.b1*",
+                    "bnfsondewnpnM1.b1" : INSITU_DIR + "*bnfsondewnpnM1.b1*",
+                    "bnfwbpluvio2M1.a1" : INSITU_DIR + "*bnfwbpluvio2M1.a1*",
+                    "bnfldquantsM1.c1" : INSITU_DIR + "*bnfldquantsM1.c1*",
+                    "bnfldquantsS30.c1" : INSITU_DIR + "*bnfldquantsS30.c1*",
                     }
 
     # define the number of days within the month
@@ -865,14 +880,14 @@ def main(args):
         day_of_month = args.month + args.day
         print("day of month: ", day_of_month)
         volumes['date'].append(day_of_month)
-        volumes['radar'].append(sorted(glob.glob(RADAR_DIR + day_of_month + '*')))
+        volumes['radar'].append(sorted(glob.glob(RADAR_DIR + '*' + day_of_month + '*')))
         volumes['pluvio'].append(sorted(glob.glob(insitu_stream['bnfwbpluvio2M1.a1'] + day_of_month + '*.nc')))
         volumes['met_m1'].append(sorted(glob.glob(insitu_stream['bnfmetM1.b1'] + day_of_month + '*.cdf')))
         volumes['met_s20'].append(sorted(glob.glob(insitu_stream['bnfmetS20.b1'] + day_of_month + '*.cdf')))
         volumes['met_s30'].append(sorted(glob.glob(insitu_stream['bnfmetS30.b1'] + day_of_month + '*.cdf')))
         volumes['met_s40'].append(sorted(glob.glob(insitu_stream['bnfmetS40.b1'] + day_of_month + '*.cdf')))
         volumes['ld_m1'].append(sorted(glob.glob(insitu_stream['bnfldquantsM1.c1'] + day_of_month + '*.cdf')))
-        volumes['ld_s30'].append(sorted(glob.glob(insitu_stream['bnfldquantsS30.b1'] + day_of_month + '*.cdf')))
+        volumes['ld_s30'].append(sorted(glob.glob(insitu_stream['bnfldquantsS30.c1'] + day_of_month + '*.cdf')))
         volumes['sonde'].append(sorted(glob.glob(insitu_stream['bnfsondewnpnM1.b1'] + day_of_month + '*.cdf')))
     else:
         for i in range((d1-d0).days):
@@ -886,7 +901,7 @@ def main(args):
                 volumes['met_s30'].append(sorted(glob.glob(insitu_stream['bnfmetS30.b1'] + day_of_month + '*.cdf')))
                 volumes['met_s40'].append(sorted(glob.glob(insitu_stream['bnfmetS40.b1'] + day_of_month + '*.cdf')))
                 volumes['ld_m1'].append(sorted(glob.glob(insitu_stream['bnfldquantsM1.c1'] + day_of_month + '*.cdf')))
-                volumes['ld_s30'].append(sorted(glob.glob(insitu_stream['bnfldquantsS30.b1'] + day_of_month + '*.cdf')))
+                volumes['ld_s30'].append(sorted(glob.glob(insitu_stream['bnfldquantsS30.c1'] + day_of_month + '*.cdf')))
                 volumes['sonde'].append(sorted(glob.glob(insitu_stream['bnfsondewnpnM1.b1'] + day_of_month + '*.cdf')))
             else:
                 day_of_month = args.month + str(i+1)
@@ -898,7 +913,7 @@ def main(args):
                 volumes['met_s30'].append(sorted(glob.glob(insitu_stream['bnfmetS30.b1'] + day_of_month + '*.cdf')))
                 volumes['met_s40'].append(sorted(glob.glob(insitu_stream['bnfmetS40.b1'] + day_of_month + '*.cdf')))
                 volumes['ld_m1'].append(sorted(glob.glob(insitu_stream['bnfldquantsM1.c1'] + day_of_month + '*.cdf')))
-                volumes['ld_s30'].append(sorted(glob.glob(insitu_stream['bnfldquantsS30.b1'] + day_of_month + '*.cdf')))
+                volumes['ld_s30'].append(sorted(glob.glob(insitu_stream['bnfldquantsS30.c1'] + day_of_month + '*.cdf')))
                 volumes['sonde'].append(sorted(glob.glob(insitu_stream['bnfsondewnpnM1.b1'] + day_of_month + '*.cdf')))
  
     # Send volume to RadClss for processing
@@ -908,7 +923,7 @@ def main(args):
             if args.verbose:
                 print("serial - ", args.serial)
                 print(volumes['date'][i], nvol["radar"])
-            status = radclss(nvol, outdir=OUT_PATH, serial=args.serial)
+            status = radclss(nvol, outdir=OUT_PATH, serial=args.serial, postprocess=args.postproc)
             print(status)
  
     print("processing finished: ", time.strftime("%H:%M:%S"))
@@ -940,17 +955,10 @@ if __name__ == "__main__":
                         type=bool,
                         help="[bool|default=False] If Set, check for specific days to process"
     )
-    
-    parser.add_argument("--day",
-                        default="01",
-                        dest='day',
-                        type=str,
-                        help="[str|DD format] Specific Day to Process. Checks for `array` first"
-    )
-    
+   
     parser.add_argument("--serial",
-                        default=True,
-                        dest='serial',
+                        default=False,
+                        dest="serial",
                         type=bool,
                         help="[bool|default=False] Process in Serial for testing"
     )
@@ -970,17 +978,17 @@ if __name__ == "__main__":
     )
 
     parser.add_argument("--insitu_dir",
-                        default='/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/in_situ',
-                        dest='radar_dir',
+                        default='/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/in_situ/',
+                        dest='insitu_dir',
                         type=str,
                         help="[str] Specific directory where the in-situ files are located"
     )
     
     parser.add_argument("--postprocessing",
-                        default=True,
+                        default=False,
                         dest="postproc",
                         type=bool,
-                        help="[bool|default=True] Create timeseries figures using generated RadClss files"
+                        help="[bool|default=False] Create timeseries figures using generated RadClss files"
     )
     
     parser.add_argument("--verbose",
