@@ -837,9 +837,9 @@ def main(args):
     print(args)
     print("process start time: ", time.strftime("%H:%M:%S"))
     # Define the directories where the CSAPR2 and In-Situ files are located.
-    RADAR_DIR = args.radar_dir + '%s/' % args.month
+    RADAR_DIR = args.radar_dir 
     INSITU_DIR = args.insitu_dir
-    OUT_PATH = args.outdir + '/%s/' % args.month
+    OUT_PATH = args.outdir 
     print("\n")
     print("RADAR_PATH", RADAR_DIR)
     print("INSITU_PATH", INSITU_DIR)
@@ -964,21 +964,21 @@ if __name__ == "__main__":
     )
     
     parser.add_argument("--outdir",
-                        default='/gpfs/wolf2/arm/atm124/world-shared/gucxprecipradclssS2.c2',
+                        default='/gpfs/wolf2/arm/atm124/proj-shared/bnf/bnfcsapr2radclssS3.c2/',
                         dest='outdir',
                         type=str,
                         help="[str] Specific directory to write RadCLss to"
     )
     
     parser.add_argument("--radar_dir",
-                        default='/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/',
+                        default='/gpfs/wolf2/arm/atm124/proj-shared/bnf/bnfcsapr2cmacS3.c1/',
                         dest='radar_dir',
                         type=str,
                         help="[str] Specific directory where the CMAC files are located"
     )
 
     parser.add_argument("--insitu_dir",
-                        default='/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/in_situ/',
+                        default='/gpfs/wolf2/arm/atm124/proj-shared/bnf/in_situ/',
                         dest='insitu_dir',
                         type=str,
                         help="[str] Specific directory where the in-situ files are located"
