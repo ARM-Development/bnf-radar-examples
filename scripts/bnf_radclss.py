@@ -833,27 +833,28 @@ def radclss(volumes, serial=True, outdir=None, postprocess=True):
     return status
 
 def main(args):
-    print("all args")
-    print(args)
+    if args.verbose:
+        print(args)
     print("process start time: ", time.strftime("%H:%M:%S"))
     # Define the directories where the CSAPR2 and In-Situ files are located.
     RADAR_DIR = args.radar_dir 
     INSITU_DIR = args.insitu_dir
-    OUT_PATH = args.outdir 
-    print("\n")
-    print("RADAR_PATH", RADAR_DIR)
-    print("INSITU_PATH", INSITU_DIR)
-    print("OUTPATH: ", OUT_PATH)
+    OUT_PATH = args.outdir
+    if args.verbose:
+        print("\n")
+        print("RADAR_PATH", RADAR_DIR)
+        print("INSITU_PATH", INSITU_DIR)
+        print("OUTPATH: ", OUT_PATH)
 
     # Define an output directory for downloaded ground instrumentation
-    insitu_stream = {'bnfmetM1.b1' : INSITU_DIR + "*bnfmetM1.b1*",
-                    'bnfmetS20.b1' : INSITU_DIR + "*bnfmetS20.b1*",
-                    "bnfmetS30.b1" : INSITU_DIR + "*bnfmetS30.b1*",
-                    "bnfmetS40.b1" : INSITU_DIR + "*bnfmetS40.b1*",
-                    "bnfsondewnpnM1.b1" : INSITU_DIR + "*bnfsondewnpnM1.b1*",
-                    "bnfwbpluvio2M1.a1" : INSITU_DIR + "*bnfwbpluvio2M1.a1*",
-                    "bnfldquantsM1.c1" : INSITU_DIR + "*bnfldquantsM1.c1*",
-                    "bnfldquantsS30.c1" : INSITU_DIR + "*bnfldquantsS30.c1*",
+    insitu_stream = {'bnfmetM1.b1' : INSITU_DIR + "/bnfmetM1.b1/*",
+                    'bnfmetS20.b1' : INSITU_DIR + "/bnfmetS20.b1/*",
+                    "bnfmetS30.b1" : INSITU_DIR + "/bnfmetS30.b1/*",
+                    "bnfmetS40.b1" : INSITU_DIR + "/bnfmetS40.b1/*",
+                    "bnfsondewnpnM1.b1" : INSITU_DIR + "/bnfsondewnpnM1.b1/*",
+                    "bnfwbpluvio2M1.a1" : INSITU_DIR + "/bnfwbpluvio2M1.a1/*",
+                    "bnfldquantsM1.c1" : INSITU_DIR + "/bnfldquantsM1.c1/*",
+                    "bnfldquantsS30.c1" : INSITU_DIR + "/bnfldquantsS30.c1/*",
                     }
 
     # define the number of days within the month
@@ -878,7 +879,8 @@ def main(args):
     # iterate through files and collect together
     if args.array is True:
         day_of_month = args.month + args.day
-        print("day of month: ", day_of_month)
+        if args.verbose:
+            print("day of month: ", day_of_month)
         volumes['date'].append(day_of_month)
         volumes['radar'].append(sorted(glob.glob(RADAR_DIR + '*' + day_of_month + '*')))
         volumes['pluvio'].append(sorted(glob.glob(insitu_stream['bnfwbpluvio2M1.a1'] + day_of_month + '*.nc')))
@@ -886,8 +888,8 @@ def main(args):
         volumes['met_s20'].append(sorted(glob.glob(insitu_stream['bnfmetS20.b1'] + day_of_month + '*.cdf')))
         volumes['met_s30'].append(sorted(glob.glob(insitu_stream['bnfmetS30.b1'] + day_of_month + '*.cdf')))
         volumes['met_s40'].append(sorted(glob.glob(insitu_stream['bnfmetS40.b1'] + day_of_month + '*.cdf')))
-        volumes['ld_m1'].append(sorted(glob.glob(insitu_stream['bnfldquantsM1.c1'] + day_of_month + '*.cdf')))
-        volumes['ld_s30'].append(sorted(glob.glob(insitu_stream['bnfldquantsS30.c1'] + day_of_month + '*.cdf')))
+        volumes['ld_m1'].append(sorted(glob.glob(insitu_stream['bnfldquantsM1.c1'] + day_of_month + '*.nc')))
+        volumes['ld_s30'].append(sorted(glob.glob(insitu_stream['bnfldquantsS30.c1'] + day_of_month + '*.nc')))
         volumes['sonde'].append(sorted(glob.glob(insitu_stream['bnfsondewnpnM1.b1'] + day_of_month + '*.cdf')))
     else:
         for i in range((d1-d0).days):
@@ -916,14 +918,22 @@ def main(args):
                 volumes['ld_s30'].append(sorted(glob.glob(insitu_stream['bnfldquantsS30.c1'] + day_of_month + '*.cdf')))
                 volumes['sonde'].append(sorted(glob.glob(insitu_stream['bnfsondewnpnM1.b1'] + day_of_month + '*.cdf')))
  
+    if args.verbose:
+        print("\n")
+        print("in-situ files located: ")
+        for field in volumes:
+            if field != "radar":
+                print(volumes[field])
+        print("\n")
+
     # Send volume to RadClss for processing
     for i in range(len(volumes['date'])):
         nvol = ith_val_subdict(volumes, i)
         if nvol["radar"]:
-            if args.verbose:
-                print("serial - ", args.serial)
-                print(volumes['date'][i], nvol["radar"])
-            status = radclss(nvol, outdir=OUT_PATH, serial=args.serial, postprocess=args.postproc)
+            status = radclss(nvol, 
+                             outdir=OUT_PATH, 
+                             serial=args.serial, 
+                             postprocess=args.postproc)
             print(status)
  
     print("processing finished: ", time.strftime("%H:%M:%S"))
