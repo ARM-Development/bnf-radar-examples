@@ -1,0 +1,1466 @@
+
+<!DOCTYPE html>
+
+
+<html lang="en" data-content_root="../" >
+
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="viewport" content="width=device-width, initial-scale=1" />
+
+    <title>Bankhead National Forest - CMAC/RadClss Rain Rates Investigation &#8212; AMF3 Radar Examples</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/bootstrap.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+
+  
+  <link href="../_static/vendor/fontawesome/6.5.2/css/all.min.css?digest=dfe6caa3a7d634c4db9b" rel="stylesheet" />
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-solid-900.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-brands-400.woff2" />
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../_static/vendor/fontawesome/6.5.2/webfonts/fa-regular-400.woff2" />
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css?v=03e43079" />
+    <link rel="stylesheet" type="text/css" href="../_static/styles/sphinx-book-theme.css?v=eba8b062" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css?v=13237357" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css?v=4fa983c6" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-design.min.css?v=95c83b7e" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b" />
+<link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b" />
+  <script src="../_static/vendor/fontawesome/6.5.2/js/all.min.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+    <script src="../_static/documentation_options.js?v=9eb32ce0"></script>
+    <script src="../_static/doctools.js?v=9a2dae69"></script>
+    <script src="../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="../_static/copybutton.js?v=f281be69"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?v=887ef09a"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js?v=4a39c7ea"></script>
+    <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script src="../_static/design-tabs.js?v=f930bc37"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script async="async" src="../_static/sphinx-thebe.js?v=c100c467"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown';</script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"; const thebe_selector = ".thebe,.cell"; const thebe_selector_input = "pre"; const thebe_selector_output = ".output, .cell_output"</script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/bnf-cmac-radclss';</script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <meta name="docsearch:language" content="en"/>
+  </head>
+  
+  
+  <body data-bs-spy="scroll" data-bs-target=".bd-toc-nav" data-offset="180" data-bs-root-margin="0px 0px -60%" data-default-mode="">
+
+  
+  
+  <div id="pst-skip-link" class="skip-link d-print-none"><a href="#main-content">Skip to main content</a></div>
+  
+  <div id="pst-scroll-pixel-helper"></div>
+  
+  <button type="button" class="btn rounded-pill" id="pst-back-to-top">
+    <i class="fa-solid fa-arrow-up"></i>Back to top</button>
+
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-primary-sidebar-checkbox"/>
+  <label class="overlay overlay-primary" for="pst-primary-sidebar-checkbox"></label>
+  
+  <input type="checkbox"
+          class="sidebar-toggle"
+          id="pst-secondary-sidebar-checkbox"/>
+  <label class="overlay overlay-secondary" for="pst-secondary-sidebar-checkbox"></label>
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+<form class="bd-search d-flex align-items-center"
+      action="../search.html"
+      method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search"
+         class="form-control"
+         name="q"
+         id="search-input"
+         placeholder="Search this book..."
+         aria-label="Search this book..."
+         autocomplete="off"
+         autocorrect="off"
+         autocapitalize="off"
+         spellcheck="false"/>
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form></div>
+  </div>
+
+  <div class="pst-async-banner-revealer d-none">
+  <aside id="bd-header-version-warning" class="d-none d-print-none" aria-label="Version warning"></aside>
+</div>
+
+  
+    <header class="bd-header navbar navbar-expand-lg bd-navbar d-print-none">
+    </header>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      
+      
+        
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+    
+    
+  </div>
+  
+    <div class="sidebar-primary-items__start sidebar-primary__section">
+        <div class="sidebar-primary-item">
+
+  
+    
+  
+
+<a class="navbar-brand logo" href="../README.html">
+  
+  
+  
+  
+  
+    
+    
+      
+    
+    
+    <img src="../_static/arm_logo.png" class="logo__image only-light" alt="AMF3 Radar Examples - Home"/>
+    <script>document.write(`<img src="../_static/arm_logo.png" class="logo__image only-dark" alt="AMF3 Radar Examples - Home"/>`);</script>
+  
+  
+</a></div>
+        <div class="sidebar-primary-item">
+
+ <script>
+ document.write(`
+   <button class="btn search-button-field search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <span class="search-button__default-text">Search</span>
+    <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd class="kbd-shortcut__modifier">K</kbd></span>
+   </button>
+ `);
+ </script></div>
+        <div class="sidebar-primary-item"><nav class="bd-links bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item navbar-nav active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../README.html">
+                    BNF Radar Examples
+                </a>
+            </li>
+        </ul>
+        <p aria-level="2" class="caption" role="heading"><span class="caption-text">Site Exploration</span></p>
+<ul class="nav bd-sidenav">
+<li class="toctree-l1"><a class="reference internal" href="armor-sample-plots.html">ARMOR Data Plots</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bnf-insitu.html">Bankhead National Forest In-Situ Observation Locations</a></li>
+<li class="toctree-l1"><a class="reference internal" href="squire-bnf.html">Surface QUantitatIve pRecipitation Estimation (SQUIRE) for BNF</a></li>
+</ul>
+
+    </div>
+</nav></div>
+    </div>
+  
+  
+  <div class="sidebar-primary-items__end sidebar-primary__section">
+  </div>
+  
+  <div id="rtd-footer-container"></div>
+
+
+      </div>
+      
+      <main id="main-content" class="bd-main" role="main">
+        
+        
+
+<div class="sbt-scroll-pixel-helper"></div>
+
+          <div class="bd-content">
+            <div class="bd-article-container">
+              
+              <div class="bd-header-article d-print-none">
+<div class="header-article-items header-article__inner">
+  
+    <div class="header-article-items__start">
+      
+        <div class="header-article-item"><button class="sidebar-toggle primary-toggle btn btn-sm" title="Toggle primary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+  <span class="fa-solid fa-bars"></span>
+</button></div>
+      
+    </div>
+  
+  
+    <div class="header-article-items__end">
+      
+        <div class="header-article-item">
+
+<div class="article-header-buttons">
+
+
+
+
+
+<div class="dropdown dropdown-launch-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Launch interactive content">
+    <i class="fas fa-rocket"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="https://jupyterhub.arm.gov/hub/user-redirect/git-pull?repo=https%3A//github.com/ARM-Development/amf3-radar-examples&urlpath=lab/tree/amf3-radar-examples/notebooks/notebooks/bnf-cmac-radclss.ipynb&branch=main" target="_blank"
+   class="btn btn-sm dropdown-item"
+   title="Launch on JupyterHub"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  
+    <img alt="JupyterHub logo" src="../_static/images/logo_jupyterhub.svg">
+  </span>
+<span class="btn__text-container">JupyterHub</span>
+</a>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+
+
+<div class="dropdown dropdown-download-buttons">
+  <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" aria-label="Download this page">
+    <i class="fas fa-download"></i>
+  </button>
+  <ul class="dropdown-menu">
+      
+      
+      
+      <li><a href="../_sources/notebooks/bnf-cmac-radclss.ipynb" target="_blank"
+   class="btn btn-sm btn-download-source-button dropdown-item"
+   title="Download source file"
+   data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="btn__text-container">.ipynb</span>
+</a>
+</li>
+      
+      
+      
+      
+      <li>
+<button onclick="window.print()"
+  class="btn btn-sm btn-download-pdf-button dropdown-item"
+  title="Print to PDF"
+  data-bs-placement="left" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="btn__text-container">.pdf</span>
+</button>
+</li>
+      
+  </ul>
+</div>
+
+
+
+
+<button onclick="toggleFullScreen()"
+  class="btn btn-sm btn-fullscreen-button"
+  title="Fullscreen mode"
+  data-bs-placement="bottom" data-bs-toggle="tooltip"
+>
+  
+
+<span class="btn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm nav-link pst-navbar-icon theme-switch-button" title="light/dark" aria-label="light/dark" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="theme-switch fa-solid fa-sun fa-lg" data-mode="light"></i>
+    <i class="theme-switch fa-solid fa-moon fa-lg" data-mode="dark"></i>
+    <i class="theme-switch fa-solid fa-circle-half-stroke fa-lg" data-mode="auto"></i>
+  </button>
+`);
+</script>
+
+
+<script>
+document.write(`
+  <button class="btn btn-sm pst-navbar-icon search-button search-button__button" title="Search" aria-label="Search" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <i class="fa-solid fa-magnifying-glass fa-lg"></i>
+  </button>
+`);
+</script>
+<button class="sidebar-toggle secondary-toggle btn btn-sm" title="Toggle secondary sidebar" data-bs-placement="bottom" data-bs-toggle="tooltip">
+    <span class="fa-solid fa-list"></span>
+</button>
+</div></div>
+      
+    </div>
+  
+</div>
+</div>
+              
+              
+
+<div id="jb-print-docs-body" class="onlyprint">
+    <h1>Bankhead National Forest - CMAC/RadClss Rain Rates Investigation</h1>
+    <!-- Table of contents -->
+    <div id="print-main-content">
+        <div id="jb-print-toc">
+            
+            <div>
+                <h2> Contents </h2>
+            </div>
+            <nav aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#current-list-of-supported-radclss-sites">Current List of Supported RadCLss Sites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-processing-variables">Define Processing Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-functions">Define Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#radclss-corrected-reflectivity-display">RadCLss Corrected Reflectivity Display</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mosaic-display-cmac-parameters-with-radclss-extracted-column">Mosaic Display - CMAC Parameters with RadCLss Extracted Column</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-daily-mosaic-figure-to-visualize-timeseries">Create a Daily Mosaic Figure to visualize timeseries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#surface-meteorological-instrumentation-met">Surface Meteorological Instrumentation (MET)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#balloon-borne-sounding-system-sondewnpn">Balloon-Borne Sounding System (SONDEWNPN)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#weighing-bucket-preciptiation-gauge-wbpluvio2">Weighing Bucket Preciptiation Gauge (WBPLUVIO2)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#laser-disdrometer-quantities-ldquants">Laser Disdrometer Quantities (LDQUANTS)</a></li>
+</ul>
+</li>
+</ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+              
+                
+<div id="searchbox"></div>
+                <article class="bd-article">
+                  
+  <p><a class="reference internal" href="../_images/arm_logo.png"><img alt="ARM Logo" src="../_images/arm_logo.png" style="width: 500px;" /></a></img></p>
+<section class="tex2jax_ignore mathjax_ignore" id="bankhead-national-forest-cmac-radclss-rain-rates-investigation">
+<h1>Bankhead National Forest - CMAC/RadClss Rain Rates Investigation<a class="headerlink" href="#bankhead-national-forest-cmac-radclss-rain-rates-investigation" title="Link to this heading">#</a></h1>
+<section id="overview">
+<h2>Overview<a class="headerlink" href="#overview" title="Link to this heading">#</a></h2>
+<p>The Corrected Moments to Antenna Coordinates (CMAC) Value-Added Product (VAP) is designed to provide a quality assured dataset which includes pre-processing and corrections for the significant influence of attenuation in rain, specific differential phase measurements to better account for non-uniform beam filling and anticipated beam blockage, and the anticipated need to de-aliasing Doppler velocities in severe convective cloud contexts</p>
+<p>The Extracted Radar Columns and In-Situ Sensors (RadClss) Value-Added Product (VAP) is
+a dataset containing in-situ ground observations matched to CSAPR-2 radar columns above ARM Mobile Facility (AMF-3) supplemental sites of interest.</p>
+<p>Together, these products allow for the investigation of radar derived rain rates within BNF.</p>
+</section>
+<section id="prerequisites">
+<h2>Prerequisites<a class="headerlink" href="#prerequisites" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Concepts</p></th>
+<th class="head"><p>Importance</p></th>
+<th class="head"><p>Notes</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p><a class="reference external" href="https://foundations.projectpythia.org/core/cartopy/cartopy.html">Intro to Cartopy</a></p></td>
+<td><p>Necessary</p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://foundations.projectpythia.org/core/data-formats/netcdf-cf.html">Understanding of NetCDF</a></p></td>
+<td><p>Helpful</p></td>
+<td><p>Familiarity with metadata structure</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference external" href="https://geopandas.org/en/stable/docs.html">GeoPandas</a></p></td>
+<td><p>Necessary</p></td>
+<td><p>Familiarity with Geospatial Plotting</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference external" href="https://projectpythia.org/radar-cookbook/README.html">Py-ART / Radar Foundations</a></p></td>
+<td><p>Necessary</p></td>
+<td><p>Basics of Weather Radar</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul class="simple">
+<li><p><strong>Time to learn</strong>: 30 minutes</p></li>
+</ul>
+</section>
+<section id="current-list-of-supported-radclss-sites">
+<h2>Current List of Supported RadCLss Sites<a class="headerlink" href="#current-list-of-supported-radclss-sites" title="Link to this heading">#</a></h2>
+<div class="pst-scrollable-table-container"><table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Site</p></th>
+<th class="head"><p>Lat</p></th>
+<th class="head"><p>Lon</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>M1</p></td>
+<td><p>34.34525</p></td>
+<td><p>-87.33842</p></td>
+</tr>
+<tr class="row-odd"><td><p>S4</p></td>
+<td><p>34.46451</p></td>
+<td><p>-87.23598</p></td>
+</tr>
+<tr class="row-even"><td><p>S20</p></td>
+<td><p>34.65401</p></td>
+<td><p>-87.29264</p></td>
+</tr>
+<tr class="row-odd"><td><p>S30</p></td>
+<td><p>34.38501</p></td>
+<td><p>-86.92757</p></td>
+</tr>
+<tr class="row-even"><td><p>S40</p></td>
+<td><p>34.17932</p></td>
+<td><p>-87.45349</p></td>
+</tr>
+</tbody>
+</table>
+</div>
+<p><a class="reference internal" href="../_images/bnf-cmac-radclss-moasic.20250305.015921.png"><img alt="BNF Mosaic Radar Display" src="../_images/bnf-cmac-radclss-moasic.20250305.015921.png" style="width: 1500px;" /></a></img></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span><span class="w"> </span><span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">,</span> <span class="n">category</span><span class="o">=</span><span class="ne">DeprecationWarning</span><span class="p">)</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">glob</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">os</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">datetime</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">tempfile</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">datetime</span><span class="w"> </span><span class="kn">import</span> <span class="n">timedelta</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.gridspec</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">gridspec</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">xarray</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">xr</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">dask</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">cartopy.crs</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ccrs</span>
+
+<span class="kn">from</span><span class="w"> </span><span class="nn">math</span><span class="w"> </span><span class="kn">import</span> <span class="n">atan2</span> <span class="k">as</span> <span class="n">atan2</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cartopy</span><span class="w"> </span><span class="kn">import</span> <span class="n">crs</span> <span class="k">as</span> <span class="n">ccrs</span><span class="p">,</span> <span class="n">feature</span> <span class="k">as</span> <span class="n">cfeature</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">cartopy.io.img_tiles</span><span class="w"> </span><span class="kn">import</span> <span class="n">OSM</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib.transforms</span><span class="w"> </span><span class="kn">import</span> <span class="n">offset_copy</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">mpl_toolkits.axes_grid1</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_axes_locatable</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">matplotlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">colors</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">dask.distributed</span><span class="w"> </span><span class="kn">import</span> <span class="n">Client</span><span class="p">,</span> <span class="n">LocalCluster</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">metpy.plots</span><span class="w"> </span><span class="kn">import</span> <span class="n">USCOUNTIES</span>
+<span class="kn">from</span><span class="w"> </span><span class="nn">PIL</span><span class="w"> </span><span class="kn">import</span> <span class="n">Image</span>
+
+<span class="kn">import</span><span class="w"> </span><span class="nn">act</span>
+<span class="kn">import</span><span class="w"> </span><span class="nn">pyart</span>
+
+<span class="n">dask</span><span class="o">.</span><span class="n">config</span><span class="o">.</span><span class="n">set</span><span class="p">({</span><span class="s1">&#39;logging.distributed&#39;</span><span class="p">:</span> <span class="s1">&#39;error&#39;</span><span class="p">})</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;dask.config.set at 0x7f025450c2d0&gt;
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="define-processing-variables">
+<h2>Define Processing Variables<a class="headerlink" href="#define-processing-variables" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the desired processing date for the BNF CSAPR-2 in YYYY-MM-DD format.</span>
+<span class="n">DATE</span> <span class="o">=</span> <span class="s2">&quot;2025-03-05&quot;</span>
+<span class="c1"># Define the directory where the BNF CSAPR-2 CMAC files are located.</span>
+<span class="n">RADAR_DIR</span> <span class="o">=</span> <span class="s2">&quot;/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/&quot;</span>
+<span class="c1"># Define an output directory for downloaded ground instrumentation</span>
+<span class="n">INSITU_DIR</span> <span class="o">=</span> <span class="s2">&quot;/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/in_situ/&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the RadCLss file</span>
+<span class="n">RADCLSS</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;data/bnf-csapr2-radclss.c2.&quot;</span> <span class="o">+</span> <span class="s2">&quot;*&quot;</span> <span class="o">+</span> <span class="n">DATE</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;*.nc&#39;</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="define-functions">
+<h2>Define Functions<a class="headerlink" href="#define-functions" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">create_gif</span><span class="p">(</span><span class="n">file_location</span><span class="p">,</span> <span class="n">out_dir</span><span class="p">,</span> <span class="n">date</span><span class="p">):</span>
+    <span class="c1"># Define files created and define movie path</span>
+    <span class="n">map_images</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">file_location</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;/bnf-cmac-radclss-moasic*&quot;</span><span class="p">))</span>
+    <span class="n">gif_title</span> <span class="o">=</span> <span class="n">out_dir</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot;bnf-cmac-radclss-moasic-&quot;</span> <span class="o">+</span> <span class="n">date</span> <span class="o">+</span> <span class="s2">&quot;.gif&quot;</span>
+
+    <span class="c1"># Check to see if the file exists - if it does, delete it</span>
+    <span class="k">if</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">exists</span><span class="p">(</span><span class="n">gif_title</span><span class="p">):</span>
+        <span class="n">os</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">gif_title</span><span class="p">)</span>
+
+    <span class="c1"># Step 2: Open images using Pillow</span>
+    <span class="n">frames</span> <span class="o">=</span> <span class="p">[</span><span class="n">Image</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">f</span><span class="p">)</span> <span class="k">for</span> <span class="n">f</span> <span class="ow">in</span> <span class="n">map_images</span><span class="p">]</span>
+
+    <span class="c1"># Step 3: Save as GIF with 2.5s per frame</span>
+    <span class="n">frames</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">save</span><span class="p">(</span>
+        <span class="n">gif_title</span><span class="p">,</span>
+        <span class="n">save_all</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+        <span class="n">append_images</span><span class="o">=</span><span class="n">frames</span><span class="p">[</span><span class="mi">1</span><span class="p">:],</span>
+        <span class="n">duration</span><span class="o">=</span><span class="mi">850</span><span class="p">,</span>  <span class="c1"># Duration in ms</span>
+        <span class="n">loop</span><span class="o">=</span><span class="mi">0</span>          <span class="c1"># Loop forever</span>
+    <span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">gc_latlon_bear_dist</span><span class="p">(</span><span class="n">lat1</span><span class="p">,</span> <span class="n">lon1</span><span class="p">,</span> <span class="n">bear</span><span class="p">,</span> <span class="n">dist</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Input lat1/lon1 as decimal degrees, as well as bearing and distance from</span>
+<span class="sd">    the coordinate. Returns lat2/lon2 of final destination. Cannot be</span>
+<span class="sd">    vectorized due to atan2.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">re</span> <span class="o">=</span> <span class="mf">6371.1</span>  <span class="c1"># km</span>
+    <span class="n">lat1r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">lat1</span><span class="p">)</span>
+    <span class="n">lon1r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">lon1</span><span class="p">)</span>
+    <span class="n">bearr</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">deg2rad</span><span class="p">(</span><span class="n">bear</span><span class="p">)</span>
+    <span class="n">lat2r</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arcsin</span><span class="p">((</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">lat1r</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">dist</span><span class="o">/</span><span class="n">re</span><span class="p">))</span> <span class="o">+</span>
+                      <span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lat1r</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">dist</span><span class="o">/</span><span class="n">re</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">bearr</span><span class="p">)))</span>
+    <span class="n">lon2r</span> <span class="o">=</span> <span class="n">lon1r</span> <span class="o">+</span> <span class="n">atan2</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">bearr</span><span class="p">)</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">dist</span><span class="o">/</span><span class="n">re</span><span class="p">)</span> <span class="o">*</span>
+                          <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">lat1r</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">dist</span><span class="o">/</span><span class="n">re</span><span class="p">)</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">lat1r</span><span class="p">)</span> <span class="o">*</span>
+                          <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">lat2r</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">lat2r</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">rad2deg</span><span class="p">(</span><span class="n">lon2r</span><span class="p">)</span>
+ 
+    
+<span class="k">def</span><span class="w"> </span><span class="nf">add_scale_line</span><span class="p">(</span><span class="n">scale</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">projection</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">,</span>
+                  <span class="n">linewidth</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="kc">None</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Adds a line that shows the map scale in km. The line will automatically</span>
+<span class="sd">    scale based on zoom level of the map. Works with cartopy.</span>
+<span class="sd"> </span>
+<span class="sd">    Parameters</span>
+<span class="sd">    ----------</span>
+<span class="sd">    scale : scalar</span>
+<span class="sd">        Length of line to draw, in km.</span>
+<span class="sd">    ax : matplotlib.pyplot.Axes instance</span>
+<span class="sd">        Axes instance to draw line on. It is assumed that this was created</span>
+<span class="sd">        with a map projection.</span>
+<span class="sd">    projection : cartopy.crs projection</span>
+<span class="sd">        Cartopy projection being used in the plot.</span>
+<span class="sd"> </span>
+<span class="sd">    Other Parameters</span>
+<span class="sd">    ----------------</span>
+<span class="sd">    color : str</span>
+<span class="sd">        Color of line and text to draw. Default is black.</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">frac_lat</span> <span class="o">=</span> <span class="mf">0.1</span>  <span class="c1"># distance fraction from bottom of plot</span>
+    <span class="n">frac_lon</span> <span class="o">=</span> <span class="mf">0.5</span>  <span class="c1"># distance fraction from left of plot</span>
+    <span class="n">e1</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">get_extent</span><span class="p">()</span>
+    <span class="n">center_lon</span> <span class="o">=</span> <span class="n">e1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">frac_lon</span> <span class="o">*</span> <span class="p">(</span><span class="n">e1</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">e1</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">center_lat</span> <span class="o">=</span> <span class="n">e1</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">+</span> <span class="n">frac_lat</span> <span class="o">*</span> <span class="p">(</span><span class="n">e1</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">e1</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+    <span class="c1"># Main line</span>
+    <span class="n">lat1</span><span class="p">,</span> <span class="n">lon1</span> <span class="o">=</span> <span class="n">gc_latlon_bear_dist</span><span class="p">(</span>
+        <span class="n">center_lat</span><span class="p">,</span> <span class="n">center_lon</span><span class="p">,</span> <span class="o">-</span><span class="mi">90</span><span class="p">,</span> <span class="n">scale</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span>  <span class="c1"># left point</span>
+    <span class="n">lat2</span><span class="p">,</span> <span class="n">lon2</span> <span class="o">=</span> <span class="n">gc_latlon_bear_dist</span><span class="p">(</span>
+        <span class="n">center_lat</span><span class="p">,</span> <span class="n">center_lon</span><span class="p">,</span> <span class="mi">90</span><span class="p">,</span> <span class="n">scale</span> <span class="o">/</span> <span class="mf">2.0</span><span class="p">)</span>  <span class="c1"># right point</span>
+    <span class="k">if</span> <span class="n">lon1</span> <span class="o">&lt;=</span> <span class="n">e1</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="ow">or</span> <span class="n">lon2</span> <span class="o">&gt;=</span> <span class="n">e1</span><span class="p">[</span><span class="mi">1</span><span class="p">]:</span>
+        <span class="n">warnings</span><span class="o">.</span><span class="n">warn</span><span class="p">(</span><span class="s1">&#39;Scale line longer than extent of plot! &#39;</span> <span class="o">+</span>
+                      <span class="s1">&#39;Try shortening for best effect.&#39;</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">lon1</span><span class="p">,</span> <span class="n">lon2</span><span class="p">],</span> <span class="p">[</span><span class="n">lat1</span><span class="p">,</span> <span class="n">lat2</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">projection</span><span class="p">,</span> 
+            <span class="n">linewidth</span><span class="o">=</span><span class="n">linewidth</span><span class="p">)</span>
+    <span class="c1"># Draw a vertical hash on the left edge</span>
+    <span class="n">lat1a</span><span class="p">,</span> <span class="n">lon1a</span> <span class="o">=</span> <span class="n">gc_latlon_bear_dist</span><span class="p">(</span>
+        <span class="n">lat1</span><span class="p">,</span> <span class="n">lon1</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="n">frac_lon</span> <span class="o">*</span> <span class="n">scale</span> <span class="o">/</span> <span class="mf">20.0</span><span class="p">)</span>  <span class="c1"># bottom left hash</span>
+    <span class="n">lat1b</span><span class="p">,</span> <span class="n">lon1b</span> <span class="o">=</span> <span class="n">gc_latlon_bear_dist</span><span class="p">(</span>
+        <span class="n">lat1</span><span class="p">,</span> <span class="n">lon1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">frac_lon</span> <span class="o">*</span> <span class="n">scale</span> <span class="o">/</span> <span class="mf">20.0</span><span class="p">)</span>  <span class="c1"># top left hash</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">lon1a</span><span class="p">,</span> <span class="n">lon1b</span><span class="p">],</span> <span class="p">[</span><span class="n">lat1a</span><span class="p">,</span> <span class="n">lat1b</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">projection</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">linewidth</span><span class="p">)</span>
+    <span class="c1"># Draw a vertical hash on the right edge</span>
+    <span class="n">lat2a</span><span class="p">,</span> <span class="n">lon2a</span> <span class="o">=</span> <span class="n">gc_latlon_bear_dist</span><span class="p">(</span>
+        <span class="n">lat2</span><span class="p">,</span> <span class="n">lon2</span><span class="p">,</span> <span class="mi">180</span><span class="p">,</span> <span class="n">frac_lon</span> <span class="o">*</span> <span class="n">scale</span> <span class="o">/</span> <span class="mf">20.0</span><span class="p">)</span>  <span class="c1"># bottom right hash</span>
+    <span class="n">lat2b</span><span class="p">,</span> <span class="n">lon2b</span> <span class="o">=</span> <span class="n">gc_latlon_bear_dist</span><span class="p">(</span>
+        <span class="n">lat2</span><span class="p">,</span> <span class="n">lon2</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">frac_lon</span> <span class="o">*</span> <span class="n">scale</span> <span class="o">/</span> <span class="mf">20.0</span><span class="p">)</span>  <span class="c1"># top right hash</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">plot</span><span class="p">([</span><span class="n">lon2a</span><span class="p">,</span> <span class="n">lon2b</span><span class="p">],</span> <span class="p">[</span><span class="n">lat2a</span><span class="p">,</span> <span class="n">lat2b</span><span class="p">],</span> <span class="n">linestyle</span><span class="o">=</span><span class="s1">&#39;-&#39;</span><span class="p">,</span>
+            <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">transform</span><span class="o">=</span><span class="n">projection</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="n">linewidth</span><span class="p">)</span>
+    <span class="c1"># Draw scale label</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">center_lon</span><span class="p">,</span> <span class="n">center_lat</span> <span class="o">-</span> <span class="n">frac_lat</span> <span class="o">*</span> <span class="p">(</span><span class="n">e1</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">-</span> <span class="n">e1</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span> <span class="o">/</span> <span class="mf">3.0</span><span class="p">,</span>
+            <span class="nb">str</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="n">scale</span><span class="p">))</span> <span class="o">+</span> <span class="s1">&#39; km&#39;</span><span class="p">,</span> <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span>
+            <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">color</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="n">fontweight</span><span class="p">,</span>
+            <span class="n">fontsize</span><span class="o">=</span><span class="n">fontsize</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="radclss-corrected-reflectivity-display">
+<h2>RadCLss Corrected Reflectivity Display<a class="headerlink" href="#radclss-corrected-reflectivity-display" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">RADCLSS</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">axarr</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">[</span><span class="mi">16</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">hspace</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
+
+<span class="n">fig</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;BNF RadCLss - &quot;</span> <span class="o">+</span> <span class="n">DATE</span><span class="p">)</span>
+
+<span class="n">ds</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">station</span><span class="o">=</span><span class="s2">&quot;M1&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="s2">&quot;2025-03-05T00:00:00&quot;</span><span class="p">,</span> <span class="s2">&quot;2025-03-05T08:30:00&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">corrected_reflectivity</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;height&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axarr</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">30</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">65</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;ChaseSpectral&quot;</span><span class="p">)</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">station</span><span class="o">=</span><span class="s2">&quot;S4&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="s2">&quot;2025-03-05T00:00:00&quot;</span><span class="p">,</span> <span class="s2">&quot;2025-03-05T08:30:00&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">corrected_reflectivity</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;height&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axarr</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">30</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">65</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;ChaseSpectral&quot;</span><span class="p">)</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">station</span><span class="o">=</span><span class="s2">&quot;S20&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="s2">&quot;2025-03-05T00:00:00&quot;</span><span class="p">,</span> <span class="s2">&quot;2025-03-05T08:30:00&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">corrected_reflectivity</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;height&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axarr</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">30</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">65</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;ChaseSpectral&quot;</span><span class="p">)</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">station</span><span class="o">=</span><span class="s2">&quot;S30&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="s2">&quot;2025-03-05T00:00:00&quot;</span><span class="p">,</span> <span class="s2">&quot;2025-03-05T08:30:00&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">corrected_reflectivity</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;height&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axarr</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">30</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">65</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;ChaseSpectral&quot;</span><span class="p">)</span>
+<span class="n">ds</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">station</span><span class="o">=</span><span class="s2">&quot;S40&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="s2">&quot;2025-03-05T00:00:00&quot;</span><span class="p">,</span> <span class="s2">&quot;2025-03-05T08:30:00&quot;</span><span class="p">))</span><span class="o">.</span><span class="n">corrected_reflectivity</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="s2">&quot;height&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">axarr</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">vmin</span><span class="o">=-</span><span class="mi">30</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">65</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;ChaseSpectral&quot;</span><span class="p">)</span>
+
+<span class="n">axarr</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/3c5bdf4277d4f6f2b2ac92f1848d349cf04c18adf0f981fba78aade00683d0cf.png" src="../_images/3c5bdf4277d4f6f2b2ac92f1848d349cf04c18adf0f981fba78aade00683d0cf.png" />
+</div>
+</div>
+</section>
+<section id="mosaic-display-cmac-parameters-with-radclss-extracted-column">
+<h2>Mosaic Display - CMAC Parameters with RadCLss Extracted Column<a class="headerlink" href="#mosaic-display-cmac-parameters-with-radclss-extracted-column" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span><span class="w"> </span><span class="nf">bnf_mosasic_display</span><span class="p">(</span><span class="n">cmac</span><span class="p">,</span> 
+                        <span class="n">radclss</span><span class="p">,</span> 
+                        <span class="n">field</span><span class="o">=</span><span class="s2">&quot;corrected_reflectivity&quot;</span><span class="p">,</span> 
+                        <span class="n">vmin</span><span class="o">=-</span><span class="mi">5</span><span class="p">,</span> 
+                        <span class="n">vmax</span><span class="o">=</span><span class="mi">65</span><span class="p">,</span> 
+                        <span class="n">dis_site</span><span class="o">=</span><span class="s2">&quot;M1&quot;</span><span class="p">,</span>
+                        <span class="n">out_dir</span><span class="o">=</span><span class="s2">&quot;./&quot;</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Create a display to visualize CMAC Reflectivity across</span>
+<span class="sd">    the domain, marking locations of the extracted columns,</span>
+<span class="sd">    and displaying slices over the site of interest. </span>
+
+<span class="sd">    Input</span>
+<span class="sd">    -----</span>
+<span class="sd">    cmac : str</span>
+<span class="sd">        Path to Corrected Moments to Antenna Coordinates (CMAC) file </span>
+<span class="sd">    radclss : str</span>
+<span class="sd">        Path to Extracted Radar Columns and In-Situ Sensors (RadCLss)</span>
+<span class="sd">    field : str</span>
+<span class="sd">        Specific radar parameter to display</span>
+<span class="sd">    vmin : int</span>
+<span class="sd">        Minimum value to display between all subplots for the specific radar</span>
+<span class="sd">        parameter</span>
+<span class="sd">    vmax : int</span>
+<span class="sd">        Maximum value to display between all subplots for the specific radar</span>
+<span class="sd">        parameter</span>
+<span class="sd">    dis_site : str</span>
+<span class="sd">        Identifer of the supported location for lat/lon slices</span>
+<span class="sd">    out_dir : str</span>
+<span class="sd">        Path to location to save figure to</span>
+
+<span class="sd">    Returns</span>
+<span class="sd">    -------</span>
+<span class="sd">    STATUS : bool</span>
+<span class="sd">        bool flag to determine if generated plot saved</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="c1">#------------------</span>
+    <span class="c1"># Inputs</span>
+    <span class="c1">#------------------</span>
+    
+    <span class="c1"># Open the files</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">radar</span> <span class="o">=</span> <span class="n">pyart</span><span class="o">.</span><span class="n">io</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">cmac</span><span class="p">)</span>
+        <span class="c1"># skip the RHI scans for now</span>
+        <span class="k">if</span> <span class="n">radar</span><span class="o">.</span><span class="n">scan_type</span> <span class="o">!=</span> <span class="s2">&quot;sector&quot;</span><span class="p">:</span>
+            <span class="k">return</span>
+        <span class="c1"># check for those weird files</span>
+        <span class="k">if</span> <span class="n">radar</span><span class="o">.</span><span class="n">elevation</span><span class="p">[</span><span class="s1">&#39;data&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="p">:</span>
+            <span class="k">return</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="k">return</span>
+    
+    <span class="n">ds</span> <span class="o">=</span> <span class="n">xr</span><span class="o">.</span><span class="n">open_dataset</span><span class="p">(</span><span class="n">radclss</span><span class="p">)</span>
+
+    <span class="c1"># define the sites of interest</span>
+    <span class="n">nsite</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;M1&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="mf">34.34525</span><span class="p">,</span> <span class="o">-</span><span class="mf">87.33842</span><span class="p">],</span>
+             <span class="s2">&quot;S4&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="mf">34.46451</span><span class="p">,</span> <span class="o">-</span><span class="mf">87.23598</span><span class="p">],</span>
+             <span class="s2">&quot;S3&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="mf">34.63080</span><span class="p">,</span> <span class="o">-</span><span class="mf">87.13311</span><span class="p">],</span>
+             <span class="s2">&quot;S20&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="mf">34.65401</span><span class="p">,</span> <span class="o">-</span><span class="mf">87.29264</span><span class="p">],</span>
+             <span class="s2">&quot;S30&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="mf">34.38501</span><span class="p">,</span> <span class="o">-</span><span class="mf">86.92757</span><span class="p">],</span>
+             <span class="s2">&quot;S40&quot;</span> <span class="p">:</span> <span class="p">[</span><span class="mf">34.17932</span><span class="p">,</span> <span class="o">-</span><span class="mf">87.45349</span><span class="p">]}</span>
+
+    <span class="c1"># define the center of the map to be the CSAPR2</span>
+    <span class="n">central_lon</span> <span class="o">=</span> <span class="o">-</span><span class="mf">87.13076</span>
+    <span class="n">central_lat</span> <span class="o">=</span> <span class="mf">34.63080</span>
+
+    <span class="c1">#---------------------------------------------------</span>
+    <span class="c1"># Define the GridSpec for Detailed Subplot Placement</span>
+    <span class="c1">#---------------------------------------------------</span>
+
+    <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">18</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+    <span class="n">tiler</span> <span class="o">=</span> <span class="n">OSM</span><span class="p">()</span>
+    <span class="n">mercator</span> <span class="o">=</span> <span class="n">tiler</span><span class="o">.</span><span class="n">crs</span>
+
+    <span class="c1"># define the main subplot</span>
+    <span class="n">gs0</span> <span class="o">=</span> <span class="n">gridspec</span><span class="o">.</span><span class="n">GridSpec</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figure</span><span class="o">=</span><span class="n">fig</span><span class="p">)</span>
+    <span class="n">gs00</span> <span class="o">=</span> <span class="n">gs0</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">subgridspec</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">hspace</span><span class="o">=</span><span class="mf">.32</span><span class="p">,</span> <span class="n">wspace</span><span class="o">=</span><span class="mf">0.75</span><span class="p">)</span>
+
+    <span class="c1"># update the extent of the subplot</span>
+    <span class="c1">#gs0.update(top=.90, bottom=0.1, left=0.1, right=.95)</span>
+     <span class="c1"># update the extent of the subplot</span>
+    <span class="c1">#gs0.update(top=.90, bottom=0.1, left=0.1, right=.95)</span>
+
+    <span class="c1">#--------------------------------------</span>
+    <span class="c1"># Main Plot - Display the CMAC Field</span>
+    <span class="c1">#--------------------------------------</span>
+    <span class="c1"># Create a subplot and define projection</span>
+    <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs0</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+
+    <span class="c1"># Add some various map elements to the plot to make it recognizable.</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">add_feature</span><span class="p">(</span><span class="n">cfeature</span><span class="o">.</span><span class="n">COASTLINE</span><span class="p">)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">add_image</span><span class="p">(</span><span class="n">tiler</span><span class="p">,</span> <span class="mi">9</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.35</span><span class="p">)</span>
+    <span class="c1"># Set the BNF Domain (adjust later for various groups)</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">set_extent</span><span class="p">([</span><span class="mf">272.0</span><span class="p">,</span> <span class="mf">274.0</span><span class="p">,</span> <span class="mf">35.1</span><span class="p">,</span> <span class="mf">34.1</span><span class="p">])</span>
+    <span class="n">gl</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">gridlines</span><span class="p">(</span><span class="n">draw_labels</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># Hide the right side ticks</span>
+    <span class="n">ax</span><span class="o">.</span><span class="n">tick_params</span><span class="p">(</span><span class="n">labeltop</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">labelright</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1"># Add the column sites</span>
+    <span class="n">markers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;p&quot;</span><span class="p">,</span> <span class="s2">&quot;*&quot;</span><span class="p">,</span> <span class="s2">&quot;+&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="s2">&quot;s&quot;</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">site</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">nsite</span><span class="p">):</span>
+            <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">nsite</span><span class="p">[</span><span class="n">site</span><span class="p">][</span><span class="mi">1</span><span class="p">],</span>
+                       <span class="n">nsite</span><span class="p">[</span><span class="n">site</span><span class="p">][</span><span class="mi">0</span><span class="p">],</span>
+                       <span class="n">marker</span><span class="o">=</span><span class="n">markers</span><span class="p">[</span><span class="n">i</span><span class="p">],</span>
+                       <span class="n">color</span><span class="o">=</span><span class="s2">&quot;black&quot;</span><span class="p">,</span>
+                       <span class="n">s</span><span class="o">=</span><span class="mi">75</span><span class="p">,</span>
+                       <span class="n">label</span><span class="o">=</span><span class="n">site</span><span class="p">,</span>
+                       <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                       <span class="n">transform</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">())</span>
+        
+            <span class="c1"># Use the cartopy interface to create a matplotlib transform object</span>
+            <span class="c1"># for the Geodetic coordinate system. We will use this along with</span>
+            <span class="c1"># matplotlib&#39;s offset_copy function to define a coordinate system which</span>
+            <span class="c1"># translates the text by 25 pixels to the left.</span>
+            <span class="c1"># note - taken from cartopy examples</span>
+            <span class="n">geodetic_transform</span> <span class="o">=</span> <span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">()</span><span class="o">.</span><span class="n">_as_mpl_transform</span><span class="p">(</span><span class="n">ax</span><span class="p">)</span>
+            <span class="n">text_transform</span> <span class="o">=</span> <span class="n">offset_copy</span><span class="p">(</span><span class="n">geodetic_transform</span><span class="p">,</span> <span class="n">units</span><span class="o">=</span><span class="s1">&#39;dots&#39;</span><span class="p">,</span> <span class="n">x</span><span class="o">=+</span><span class="mi">50</span><span class="p">,</span> <span class="n">y</span><span class="o">=+</span><span class="mi">15</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="n">site</span> <span class="o">==</span> <span class="s2">&quot;S3&quot;</span><span class="p">:</span>
+                <span class="c1"># Add text 25 pixels to the left of the volcano.</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">nsite</span><span class="p">[</span><span class="n">site</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">+</span><span class="mf">0.07</span><span class="p">,</span> 
+                        <span class="n">nsite</span><span class="p">[</span><span class="n">site</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mf">0.035</span><span class="p">,</span> 
+                        <span class="s2">&quot;CSAPR-2&quot;</span><span class="p">,</span> 
+                        <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> 
+                        <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> 
+                        <span class="n">transform</span><span class="o">=</span><span class="n">text_transform</span><span class="p">,</span>
+                        <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;sandybrown&#39;</span><span class="p">,</span> 
+                        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> 
+                        <span class="n">boxstyle</span><span class="o">=</span><span class="s1">&#39;round&#39;</span><span class="p">))</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># Add text 25 pixels to the left of the volcano.</span>
+                <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">nsite</span><span class="p">[</span><span class="n">site</span><span class="p">][</span><span class="mi">1</span><span class="p">]</span><span class="o">-</span><span class="mf">0.035</span><span class="p">,</span> 
+                        <span class="n">nsite</span><span class="p">[</span><span class="n">site</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span><span class="o">+</span><span class="mf">0.04</span><span class="p">,</span> 
+                        <span class="n">site</span><span class="p">,</span> 
+                        <span class="n">verticalalignment</span><span class="o">=</span><span class="s1">&#39;center&#39;</span><span class="p">,</span> 
+                        <span class="n">horizontalalignment</span><span class="o">=</span><span class="s1">&#39;right&#39;</span><span class="p">,</span> 
+                        <span class="n">transform</span><span class="o">=</span><span class="n">text_transform</span><span class="p">,</span>
+                        <span class="n">bbox</span><span class="o">=</span><span class="nb">dict</span><span class="p">(</span><span class="n">facecolor</span><span class="o">=</span><span class="s1">&#39;sandybrown&#39;</span><span class="p">,</span> 
+                        <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> 
+                        <span class="n">boxstyle</span><span class="o">=</span><span class="s1">&#39;round&#39;</span><span class="p">))</span>
+
+    <span class="n">display</span> <span class="o">=</span> <span class="n">pyart</span><span class="o">.</span><span class="n">graph</span><span class="o">.</span><span class="n">RadarMapDisplay</span><span class="p">(</span><span class="n">radar</span><span class="p">)</span>
+    <span class="n">display</span><span class="o">.</span><span class="n">plot_ppi_map</span><span class="p">(</span><span class="n">field</span><span class="p">,</span>  
+                         <span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">,</span> 
+                         <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span><span class="p">,</span>
+                         <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span>
+                         <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;ChaseSpectral&quot;</span><span class="p">,</span>
+                         <span class="n">zorder</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span>
+                         <span class="n">colorbar_flag</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                        <span class="p">)</span>
+
+    <span class="n">ims</span> <span class="o">=</span> <span class="n">display</span><span class="o">.</span><span class="n">plots</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">cbar</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">ims</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">location</span><span class="o">=</span><span class="s2">&quot;bottom&quot;</span><span class="p">,</span> <span class="n">shrink</span><span class="o">=</span><span class="mf">0.6</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+    <span class="n">cbar_label</span> <span class="o">=</span> <span class="p">(</span><span class="s2">&quot;CMAC &quot;</span> <span class="o">+</span>
+                  <span class="n">radar</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s2">&quot;corrected_reflectivity&quot;</span><span class="p">][</span><span class="s2">&quot;long_name&quot;</span><span class="p">]</span> <span class="o">+</span>  
+                 <span class="s1">&#39;</span><span class="se">\n</span><span class="s1"> [&#39;</span> <span class="o">+</span> 
+                 <span class="n">radar</span><span class="o">.</span><span class="n">fields</span><span class="p">[</span><span class="s2">&quot;corrected_reflectivity&quot;</span><span class="p">][</span><span class="s2">&quot;units&quot;</span><span class="p">]</span> <span class="o">+</span> <span class="s1">&#39;]&#39;</span>
+    <span class="p">)</span>
+    <span class="n">cbar</span><span class="o">.</span><span class="n">set_label</span><span class="p">(</span><span class="n">cbar_label</span><span class="p">)</span>
+
+    <span class="c1"># Add our scale bar</span>
+    <span class="n">add_scale_line</span><span class="p">(</span><span class="mf">35.0</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">projection</span><span class="o">=</span><span class="n">ccrs</span><span class="o">.</span><span class="n">PlateCarree</span><span class="p">(),</span> 
+                   <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span>
+                   <span class="n">fontsize</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span>
+                   <span class="n">fontweight</span><span class="o">=</span><span class="s1">&#39;bold&#39;</span><span class="p">)</span>
+
+    <span class="c1">#------------------------------</span>
+    <span class="c1"># Cumulative Subplot Parameters</span>
+    <span class="c1">#------------------------------</span>
+    <span class="c1"># Define the time of the radar file we are plotting against</span>
+    <span class="n">radar_time</span> <span class="o">=</span> <span class="n">pyart</span><span class="o">.</span><span class="n">util</span><span class="o">.</span><span class="n">datetimes_from_radar</span><span class="p">(</span><span class="n">radar</span><span class="p">)[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">final_time</span> <span class="o">=</span> <span class="n">radar_time</span> <span class="o">+</span> <span class="n">timedelta</span><span class="p">(</span><span class="n">days</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+
+    <span class="c1">#-----------------------------------------------</span>
+    <span class="c1"># Side Plot A - Display the RadClss Radar Field</span>
+    <span class="c1">#-----------------------------------------------</span>
+    <span class="c1"># Top right hand subplot - Radar TimeSeries</span>
+    <span class="n">ax2</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs00</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+
+    <span class="n">ds</span><span class="p">[</span><span class="n">field</span><span class="p">]</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">station</span><span class="o">=</span><span class="n">dis_site</span><span class="p">)</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span>
+         <span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="n">radar_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T00:00:00&quot;</span><span class="p">),</span> <span class="n">radar_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%S&quot;</span><span class="p">))</span>
+         <span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> 
+                <span class="n">ax</span><span class="o">=</span><span class="n">ax2</span><span class="p">,</span> 
+                <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;ChaseSpectral&quot;</span><span class="p">,</span>
+                <span class="n">vmin</span><span class="o">=</span><span class="n">vmin</span><span class="p">,</span>
+                <span class="n">vmax</span><span class="o">=</span><span class="n">vmax</span>
+    <span class="p">)</span>
+    
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot;BNF Site: &quot;</span> <span class="o">+</span> <span class="n">dis_site</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Height [m]&quot;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time [UTC]&quot;</span><span class="p">)</span>
+    <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="n">radar_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T00:00:00&quot;</span><span class="p">),</span> <span class="n">final_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T00:00:00&quot;</span><span class="p">)])</span>
+
+    <span class="c1">#--------------------------------------</span>
+    <span class="c1"># Side Plot B - Display the Rain Rates</span>
+    <span class="c1">#--------------------------------------</span>
+    <span class="c1"># Top right hand subplot - Radar TimeSeries</span>
+    <span class="n">ax3</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs00</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+
+    <span class="c1"># CMAC derived rain rate</span>
+    <span class="n">ds</span><span class="p">[</span><span class="s2">&quot;rain_rate_A&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">station</span><span class="o">=</span><span class="n">dis_site</span><span class="p">)</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;nearest&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span>
+         <span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="n">radar_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T00:00:00&quot;</span><span class="p">),</span> <span class="n">radar_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%S&quot;</span><span class="p">))</span>
+         <span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> 
+                <span class="n">ax</span><span class="o">=</span><span class="n">ax3</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="s2">&quot;CMAC&quot;</span>
+    <span class="p">)</span>
+
+    <span class="c1"># Pluvio2 Weighing Bucket Rain Gauge</span>
+    <span class="k">if</span> <span class="n">dis_site</span> <span class="o">==</span> <span class="s2">&quot;M1&quot;</span><span class="p">:</span>
+        <span class="n">ds</span><span class="p">[</span><span class="s2">&quot;intensity_rtnrt&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">station</span><span class="o">=</span><span class="n">dis_site</span><span class="p">)</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span>
+            <span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="n">radar_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T00:00:00&quot;</span><span class="p">),</span> <span class="n">radar_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%S&quot;</span><span class="p">))</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span>
+                   <span class="n">ax</span><span class="o">=</span><span class="n">ax3</span><span class="p">,</span>
+                   <span class="n">label</span><span class="o">=</span><span class="s2">&quot;PLUVIO2&quot;</span>
+        <span class="p">)</span>
+
+    <span class="c1"># LDQUANTS derived rain rate</span>
+    <span class="k">if</span> <span class="n">dis_site</span> <span class="o">==</span> <span class="s2">&quot;M1&quot;</span> <span class="ow">or</span> <span class="n">dis_site</span> <span class="o">==</span> <span class="s2">&quot;S30&quot;</span><span class="p">:</span>
+        <span class="n">ds</span><span class="p">[</span><span class="s2">&quot;rain_rate&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">station</span><span class="o">=</span><span class="n">dis_site</span><span class="p">)</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span>
+            <span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="n">radar_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T00:00:00&quot;</span><span class="p">),</span> <span class="n">radar_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%S&quot;</span><span class="p">))</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span>
+                   <span class="n">ax</span><span class="o">=</span><span class="n">ax3</span><span class="p">,</span>
+                   <span class="n">label</span><span class="o">=</span><span class="s2">&quot;LDQUANTS&quot;</span>
+        <span class="p">)</span>
+            
+    <span class="n">ax3</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+    <span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Precipitation Rate [mm/hr]&quot;</span><span class="p">)</span>
+    <span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time [UTC]&quot;</span><span class="p">)</span>
+    <span class="n">ax3</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="n">radar_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T00:00:00&quot;</span><span class="p">),</span> <span class="n">final_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T00:00:00&quot;</span><span class="p">)])</span>
+    <span class="n">ax3</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper right&quot;</span><span class="p">)</span>
+    <span class="n">ax3</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="c1"># Add a blank space next to the subplot to shape it as the above plot</span>
+    <span class="n">divider</span> <span class="o">=</span> <span class="n">make_axes_locatable</span><span class="p">(</span><span class="n">ax3</span><span class="p">)</span>
+    <span class="n">cax</span> <span class="o">=</span> <span class="n">divider</span><span class="o">.</span><span class="n">append_axes</span><span class="p">(</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="s2">&quot;3%&quot;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">1.05</span><span class="p">)</span>
+    <span class="n">cax</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1">#------------------------------------------</span>
+    <span class="c1"># Side Plot C - Precipitation Accumulation</span>
+    <span class="c1">#------------------------------------------</span>
+    <span class="n">ax4</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">add_subplot</span><span class="p">(</span><span class="n">gs00</span><span class="p">[</span><span class="mi">2</span><span class="p">])</span>
+   
+    <span class="c1"># CMAC Accumulated Rain Rates</span>
+    <span class="n">radar_accum</span> <span class="o">=</span> <span class="n">act</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">accumulate_precip</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">station</span><span class="o">=</span><span class="n">dis_site</span><span class="p">)</span><span class="o">.</span><span class="n">isel</span><span class="p">(</span><span class="n">height</span><span class="o">=</span><span class="mi">4</span><span class="p">),</span> <span class="s1">&#39;rain_rate_A&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+    <span class="c1"># CMAC Accumulated Rain Rates</span>
+    <span class="n">radar_accum</span><span class="p">[</span><span class="s1">&#39;rain_rate_A_accumulated&#39;</span><span class="p">]</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span>
+         <span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="n">radar_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T00:00:00&quot;</span><span class="p">),</span> <span class="n">radar_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%S&quot;</span><span class="p">))</span>
+         <span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> 
+                <span class="n">ax</span><span class="o">=</span><span class="n">ax4</span><span class="p">,</span>
+                <span class="n">label</span><span class="o">=</span><span class="s2">&quot;CMAC&quot;</span>
+    <span class="p">)</span>
+
+    <span class="c1"># PLUVIO2 Accumulation </span>
+    <span class="k">if</span> <span class="n">dis_site</span> <span class="o">==</span> <span class="s2">&quot;M1&quot;</span><span class="p">:</span>
+        <span class="n">gauge_precip_accum</span> <span class="o">=</span> <span class="n">act</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">accumulate_precip</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">station</span><span class="o">=</span><span class="n">dis_site</span><span class="p">),</span> <span class="s1">&#39;intensity_rtnrt&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">intensity_rtnrt_accumulated</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+        <span class="n">gauge_precip_accum</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span>
+            <span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="n">radar_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T00:00:00&quot;</span><span class="p">),</span> <span class="n">radar_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%S&quot;</span><span class="p">))</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> 
+                   <span class="n">ax</span><span class="o">=</span><span class="n">ax4</span><span class="p">,</span>
+                   <span class="n">label</span><span class="o">=</span><span class="s2">&quot;PLUVIO2&quot;</span>
+        <span class="p">)</span>
+
+    <span class="c1"># LDQUANTS Accumulation</span>
+    <span class="k">if</span> <span class="n">dis_site</span> <span class="o">==</span> <span class="s2">&quot;M1&quot;</span> <span class="ow">or</span> <span class="n">dis_site</span> <span class="o">==</span> <span class="s2">&quot;S30&quot;</span><span class="p">:</span>
+         <span class="n">ld_precip_accum</span> <span class="o">=</span> <span class="n">act</span><span class="o">.</span><span class="n">utils</span><span class="o">.</span><span class="n">accumulate_precip</span><span class="p">(</span><span class="n">ds</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span><span class="n">station</span><span class="o">=</span><span class="n">dis_site</span><span class="p">),</span> <span class="s1">&#39;rain_rate&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">rain_rate_accumulated</span><span class="o">.</span><span class="n">compute</span><span class="p">()</span>
+         <span class="n">ld_precip_accum</span><span class="o">.</span><span class="n">sel</span><span class="p">(</span>
+            <span class="n">time</span><span class="o">=</span><span class="nb">slice</span><span class="p">(</span><span class="n">radar_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T00:00:00&quot;</span><span class="p">),</span> <span class="n">radar_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T%H:%M:%S&quot;</span><span class="p">))</span>
+            <span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;time&quot;</span><span class="p">,</span> 
+                   <span class="n">ax</span><span class="o">=</span><span class="n">ax4</span><span class="p">,</span>
+                   <span class="n">label</span><span class="o">=</span><span class="s2">&quot;LDQUANTS&quot;</span>
+        <span class="p">)</span>  
+    
+    <span class="n">ax4</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&quot; &quot;</span><span class="p">)</span>
+    <span class="n">ax4</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;Accumulated Precipitation [mm]&quot;</span><span class="p">)</span>
+    <span class="n">ax4</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time [UTC]&quot;</span><span class="p">)</span>
+    <span class="n">ax4</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">([</span><span class="n">radar_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T00:00:00&quot;</span><span class="p">),</span> <span class="n">final_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y-%m-</span><span class="si">%d</span><span class="s2">T00:00:00&quot;</span><span class="p">)])</span>
+    <span class="n">ax4</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="s2">&quot;upper left&quot;</span><span class="p">)</span>
+    <span class="n">ax4</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">ax4</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">radar_accum</span><span class="p">[</span><span class="s2">&quot;rain_rate_A_accumulated&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">max</span><span class="p">()</span><span class="o">+</span><span class="mf">0.25</span><span class="p">)</span>
+    <span class="c1"># Add a blank space next to the subplot to shape it as the above plot</span>
+    <span class="n">divider</span> <span class="o">=</span> <span class="n">make_axes_locatable</span><span class="p">(</span><span class="n">ax4</span><span class="p">)</span>
+    <span class="n">cax</span> <span class="o">=</span> <span class="n">divider</span><span class="o">.</span><span class="n">append_axes</span><span class="p">(</span><span class="s2">&quot;right&quot;</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="s2">&quot;3%&quot;</span><span class="p">,</span> <span class="n">pad</span><span class="o">=</span><span class="mf">1.05</span><span class="p">)</span>
+    <span class="n">cax</span><span class="o">.</span><span class="n">set_visible</span><span class="p">(</span><span class="kc">False</span><span class="p">)</span>
+
+    <span class="c1"># Set the DPI to a higher value (e.g., 300)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;figure.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">300</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;savefig.dpi&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="mi">300</span>
+
+    <span class="c1"># save the figure</span>
+    <span class="k">try</span><span class="p">:</span>
+        <span class="n">fig</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">out_dir</span> <span class="o">+</span> 
+                    <span class="s1">&#39;bnf-cmac-radclss-moasic.&#39;</span> <span class="o">+</span> 
+                    <span class="n">radar_time</span><span class="o">.</span><span class="n">strftime</span><span class="p">(</span><span class="s2">&quot;%Y%m</span><span class="si">%d</span><span class="s2">.%H%M%S&quot;</span><span class="p">)</span> <span class="o">+</span>
+                    <span class="s1">&#39;.png&#39;</span><span class="p">)</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">close</span><span class="p">(</span><span class="n">fig</span><span class="p">)</span>
+        <span class="n">STATUS</span> <span class="o">=</span> <span class="kc">True</span>
+    <span class="k">except</span><span class="p">:</span>
+        <span class="n">STATUS</span> <span class="o">=</span> <span class="kc">False</span>
+
+    <span class="c1"># Clean up this function </span>
+    <span class="k">del</span> <span class="n">fig</span><span class="p">,</span> <span class="n">ax</span><span class="p">,</span> <span class="n">ax2</span><span class="p">,</span> <span class="n">ax3</span><span class="p">,</span> <span class="n">ax4</span>
+    <span class="k">del</span> <span class="n">gauge_precip_accum</span><span class="p">,</span> <span class="n">ld_precip_accum</span><span class="p">,</span> <span class="n">radar_accum</span>
+    <span class="k">del</span> <span class="n">radar_time</span><span class="p">,</span> <span class="n">final_time</span><span class="p">,</span> <span class="n">tiler</span>
+    <span class="k">del</span> <span class="n">radar</span><span class="p">,</span> <span class="n">ds</span>
+
+    <span class="k">return</span> <span class="n">STATUS</span>
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="create-a-daily-mosaic-figure-to-visualize-timeseries">
+<h2>Create a Daily Mosaic Figure to visualize timeseries<a class="headerlink" href="#create-a-daily-mosaic-figure-to-visualize-timeseries" title="Link to this heading">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">templocation</span> <span class="o">=</span> <span class="n">tempfile</span><span class="o">.</span><span class="n">mkdtemp</span><span class="p">()</span> <span class="o">+</span> <span class="s2">&quot;/&quot;</span>
+<span class="k">for</span> <span class="n">cmac</span> <span class="ow">in</span> <span class="n">file_list</span><span class="p">[</span><span class="mi">2</span><span class="p">:]:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">cmac</span><span class="p">)</span>
+    <span class="n">mosaic</span> <span class="o">=</span> <span class="n">bnf_mosasic_display</span><span class="p">(</span><span class="n">cmac</span><span class="p">,</span> 
+                                 <span class="n">RADCLSS</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+                                 <span class="n">out_dir</span><span class="o">=</span><span class="n">templocation</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.001255.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.001313.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.002258.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.002316.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.003301.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.003319.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.004303.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.004321.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.005306.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.005324.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.010308.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.011001.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.011947.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.012004.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.012949.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.013007.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.013952.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.014010.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.015003.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.015934.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.020002.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.020948.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.021006.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.021950.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.022008.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.022956.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.023013.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.023947.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.024005.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.024913.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.025002.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.025948.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.030006.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.030956.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.031014.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.031958.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.032016.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.033004.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.033937.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.034002.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.034911.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.035002.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.035947.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.040005.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.040950.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.041008.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.041952.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.042010.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.042955.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.043013.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.043957.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.044015.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.045000.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.045018.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.050030.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.050048.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.051033.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.051051.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.052035.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.052053.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.053038.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.053056.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.054040.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.054058.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.055043.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.055101.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.060112.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.060130.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.061039.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.061057.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.062042.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.062100.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.063044.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.063102.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.064047.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.064105.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.065001.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.065947.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.070005.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.070950.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.071008.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.071952.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.072010.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.072955.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.073013.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.073957.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.074015.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.075000.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.075018.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.080002.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.080020.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.081005.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.081023.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.082007.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.082025.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.083010.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.083028.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.084012.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.084030.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.085015.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.085033.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.090017.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.090035.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.091020.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.091038.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.092022.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.092040.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.093025.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.093043.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.094027.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.094045.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.095030.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.095048.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.100032.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.100050.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.101035.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.101053.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.102037.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.102055.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.103019.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.103037.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.104022.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.104040.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.105024.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.105042.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.110027.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.110045.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.111048.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.111106.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.112050.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.112108.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.113053.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.113111.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.114055.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.114113.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.115058.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.115116.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.120024.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.120042.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.121027.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.121045.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.122029.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.122047.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.123032.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.123050.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.124034.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.124052.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.125049.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.125107.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.130051.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.130109.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.131117.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.131135.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.132119.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.132137.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.133122.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.133140.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.134125.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.134143.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.135127.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.135145.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.140129.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.140147.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.141118.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.141136.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.142001.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.143006.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.143024.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.144008.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.144026.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.145011.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.145028.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.150013.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.150031.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.151016.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.151034.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.152018.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.152036.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.152945.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.153002.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.153911.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.154002.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.154947.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.155005.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.155950.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.160008.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.160952.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.161010.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.162003.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.162934.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.163002.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.163947.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.164005.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.165007.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.165025.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.170010.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.170027.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.171012.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.171030.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.172015.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.172033.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.173017.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.173035.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.174020.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.174037.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.175022.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.175040.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.180025.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.180042.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.181027.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.181045.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.182106.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.182124.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.183109.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.183127.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.184045.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.185030.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.185048.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.190032.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.190050.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.191101.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.191119.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.192103.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.193000.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.194006.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.194023.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.195008.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.195026.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.200011.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.200028.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.201017.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.201034.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.202041.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.202059.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.203044.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.203126.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.204111.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.204129.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.205114.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.205131.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.210116.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.210134.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.211119.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.211137.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.212122.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.212139.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.213001.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.214003.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.214942.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.215002.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.215947.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.220005.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.221014.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.221032.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.222016.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.222034.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.223016.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.223034.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.223956.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.224014.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.224958.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.225016.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.230003.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.230939.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.231002.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.232004.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.233002.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.233935.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.234002.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.234947.nc
+/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/bnfcsapr2cmacS3.c1.20250305.235005.nc
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">create_gif</span><span class="p">(</span><span class="n">templocation</span><span class="p">,</span> <span class="s2">&quot;./&quot;</span><span class="p">,</span> <span class="n">DATE</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p><img alt="BNF CMAC RadCLss Mosaic GIF" src="../_images/bnf-cmac-radclss-moasic-2025-03-05_before8Z.gif" /></p>
+</section>
+<section id="references">
+<h2>References<a class="headerlink" href="#references" title="Link to this heading">#</a></h2>
+<section id="surface-meteorological-instrumentation-met">
+<h3>Surface Meteorological Instrumentation (MET)<a class="headerlink" href="#surface-meteorological-instrumentation-met" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Kyrouac, J., Shi, Y., &amp; Tuftedal, M. Surface Meteorological Instrumentation
+(MET), 2025-03-05 to 2025-03-05, Bankhead National Forest, AL, USA; Long-term
+Mobile Facility (BNF), Bankhead National Forest, AL, AMF3 (Main Site) <strong>(M1)</strong>.
+Atmospheric Radiation Measurement (ARM) User Facility.
+https://doi.org/10.5439/1786358</p></li>
+<li><p>Kyrouac, J., Shi, Y., &amp; Tuftedal, M. Surface Meteorological Instrumentation
+(MET), 2025-03-05 to 2025-03-05, Bankhead National Forest, AL, USA; Long-term
+Mobile Facility (BNF), Bankhead National Forest, AL, Supplemental facility at
+Courtland <strong>(S20)</strong>. Atmospheric Radiation Measurement (ARM) User Facility.
+https://doi.org/10.5439/1786358</p></li>
+<li><p>Kyrouac, J., Shi, Y., &amp; Tuftedal, M. Surface Meteorological Instrumentation
+(MET), 2025-03-05 to 2025-03-05, Bankhead National Forest, AL, USA; Long-term
+Mobile Facility (BNF), Bankhead National Forest, AL, Supplemental facility at
+Falkville <strong>(S30)</strong>. Atmospheric Radiation Measurement (ARM) User Facility.
+https://doi.org/10.5439/1786358</p></li>
+<li><p>Kyrouac, J., Shi, Y., &amp; Tuftedal, M. Surface Meteorological Instrumentation
+(MET), 2025-03-05 to 2025-03-05, Bankhead National Forest, AL, USA; Long-term
+Mobile Facility (BNF), Bankhead National Forest, AL, Supplemental facility at
+Double Springs <strong>(S40)</strong>. Atmospheric Radiation Measurement (ARM) User Facility.
+https://doi.org/10.5439/1786358</p></li>
+</ul>
+</section>
+<section id="balloon-borne-sounding-system-sondewnpn">
+<h3>Balloon-Borne Sounding System (SONDEWNPN)<a class="headerlink" href="#balloon-borne-sounding-system-sondewnpn" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Keeler, E., Burk, K., &amp; Kyrouac, J. Balloon-Borne Sounding System (SONDEWNPN),
+2025-03-05 to 2025-03-05, Bankhead National Forest, AL, USA; Long-term Mobile
+Facility (BNF), Bankhead National Forest, AL, AMF3 (Main Site) <strong>(M1)</strong>. Atmospheric
+Radiation Measurement (ARM) User Facility. https://doi.org/10.5439/1595321</p></li>
+</ul>
+</section>
+<section id="weighing-bucket-preciptiation-gauge-wbpluvio2">
+<h3>Weighing Bucket Preciptiation Gauge (WBPLUVIO2)<a class="headerlink" href="#weighing-bucket-preciptiation-gauge-wbpluvio2" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Zhu, Z., Wang, D., Jane, M., Cromwell, E., Sturm, M., Irving, K., &amp; Delamere, J.
+Weighing Bucket Precipitation Gauge (WBPLUVIO2), 2025-03-05 to 2025-03-05,
+Bankhead National Forest, AL, USA; Long-term Mobile Facility (BNF), Bankhead
+National Forest, AL, AMF3 (Main Site) <strong>(M1)</strong>. Atmospheric Radiation Measurement
+(ARM) User Facility. https://doi.org/10.5439/1338194</p></li>
+</ul>
+</section>
+<section id="laser-disdrometer-quantities-ldquants">
+<h3>Laser Disdrometer Quantities (LDQUANTS)<a class="headerlink" href="#laser-disdrometer-quantities-ldquants" title="Link to this heading">#</a></h3>
+<ul class="simple">
+<li><p>Hardin, J., Giangrande, S., &amp; Zhou, A. Laser Disdrometer Quantities (LDQUANTS),
+2025-03-05 to 2025-03-05, Bankhead National Forest, AL, USA; Long-term Mobile
+Facility (BNF), Bankhead National Forest, AL, AMF3 (Main Site) <strong>(M1)</strong>. Atmospheric
+Radiation Measurement (ARM) User Facility. https://doi.org/10.5439/1432694</p></li>
+<li><p>Hardin, J., Giangrande, S., &amp; Zhou, A. Laser Disdrometer Quantities (LDQUANTS),
+2025-03-05 to 2025-03-05, Bankhead National Forest, AL, USA; Long-term Mobile
+Facility (BNF), Bankhead National Forest, AL, Supplemental facility at Falkville
+<strong>(S30)</strong>. Atmospheric Radiation Measurement (ARM) User Facility.
+https://doi.org/10.5439/1432694</p></li>
+</ul>
+</section>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./notebooks"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+                </article>
+              
+
+              
+              
+              
+              
+                <footer class="prev-next-footer d-print-none">
+                  
+<div class="prev-next-area">
+</div>
+                </footer>
+              
+            </div>
+            
+            
+              
+                <div class="bd-sidebar-secondary bd-toc"><div class="sidebar-secondary-items sidebar-secondary__inner">
+
+
+  <div class="sidebar-secondary-item">
+  <div class="page-toc tocsection onthispage">
+    <i class="fa-solid fa-list"></i> Contents
+  </div>
+  <nav class="bd-toc-nav page-toc">
+    <ul class="visible nav section-nav flex-column">
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#overview">Overview</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#prerequisites">Prerequisites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#current-list-of-supported-radclss-sites">Current List of Supported RadCLss Sites</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-processing-variables">Define Processing Variables</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#define-functions">Define Functions</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#radclss-corrected-reflectivity-display">RadCLss Corrected Reflectivity Display</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#mosaic-display-cmac-parameters-with-radclss-extracted-column">Mosaic Display - CMAC Parameters with RadCLss Extracted Column</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#create-a-daily-mosaic-figure-to-visualize-timeseries">Create a Daily Mosaic Figure to visualize timeseries</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#references">References</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#surface-meteorological-instrumentation-met">Surface Meteorological Instrumentation (MET)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#balloon-borne-sounding-system-sondewnpn">Balloon-Borne Sounding System (SONDEWNPN)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#weighing-bucket-preciptiation-gauge-wbpluvio2">Weighing Bucket Preciptiation Gauge (WBPLUVIO2)</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#laser-disdrometer-quantities-ldquants">Laser Disdrometer Quantities (LDQUANTS)</a></li>
+</ul>
+</li>
+</ul>
+  </nav></div>
+
+</div></div>
+              
+            
+          </div>
+          <footer class="bd-footer-content">
+            
+<div class="bd-footer-content__inner container">
+  
+  <div class="footer-item">
+    
+<p class="component-author">
+By ARM Development Team
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+
+  <p class="copyright">
+    
+      © Copyright 2023.
+      <br/>
+    
+  </p>
+
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+  <div class="footer-item">
+    
+  </div>
+  
+</div>
+          </footer>
+        
+
+      </main>
+    </div>
+  </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/bootstrap.js?digest=dfe6caa3a7d634c4db9b"></script>
+<script src="../_static/scripts/pydata-sphinx-theme.js?digest=dfe6caa3a7d634c4db9b"></script>
+
+  <footer class="bd-footer">
+  </footer>
+  </body>
+</html>
