@@ -5,4 +5,7 @@ parts:
   chapters:
     - file: notebooks/armor-sample-plots.ipynb
     - file: notebooks/bnf-insitu.ipynb
+    - file: notebooks/ldquants_analysis.ipynb
     - file: notebooks/squire-bnf.ipynb
+    - file: notebooks/bnf-radclss.ipynb
+    - file: notebooks/bnf-cmac-radclss.ipynb
