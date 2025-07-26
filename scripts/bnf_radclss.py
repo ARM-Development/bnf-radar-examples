@@ -768,16 +768,16 @@ def main(args):
         print("OUTPATH: ", OUT_PATH)
 
     # Define an output directory for downloaded ground instrumentation
-    insitu_stream = {'bnfmetM1.b1' : INSITU_DIR + "/bnfmetM1.b1/*",
-                    'bnfmetS20.b1' : INSITU_DIR + "/bnfmetS20.b1/*",
-                    "bnfmetS30.b1" : INSITU_DIR + "/bnfmetS30.b1/*",
-                    "bnfmetS40.b1" : INSITU_DIR + "/bnfmetS40.b1/*",
-                    "bnfsondewnpnM1.b1" : INSITU_DIR + "/bnfsondewnpnM1.b1/*",
-                    "bnfwbpluvio2M1.a1" : INSITU_DIR + "/bnfwbpluvio2M1.a1/*",
-                    "bnfldquantsM1.c1" : INSITU_DIR + "/bnfldquantsM1.c1/*",
-                    "bnfldquantsS30.c1" : INSITU_DIR + "/bnfldquantsS30.c1/*",
-                    "bnfvdisquantsM1.c1" : INSITU_DIR + "/bnfvdisquantsM1.c1/*",
-                    "bnfmetwxtS13.b1" : INSITU_DIR + "/bnfmetwxtS13.b1/*"
+    insitu_stream = {'bnfmetM1.b1' : INSITU_DIR + "bnfmetM1.b1/*",
+                    'bnfmetS20.b1' : INSITU_DIR + "bnfmetS20.b1/*",
+                    "bnfmetS30.b1" : INSITU_DIR + "bnfmetS30.b1/*",
+                    "bnfmetS40.b1" : INSITU_DIR + "bnfmetS40.b1/*",
+                    "bnfsondewnpnM1.b1" : INSITU_DIR + "bnfsondewnpnM1.b1/*",
+                    "bnfwbpluvio2M1.a1" : INSITU_DIR + "bnfwbpluvio2M1.a1/*",
+                    "bnfldquantsM1.c1" : INSITU_DIR + "bnfldquantsM1.c1/*",
+                    "bnfldquantsS30.c1" : INSITU_DIR + "bnfldquantsS30.c1/*",
+                    "bnfvdisquantsM1.c1" : INSITU_DIR + "bnfvdisquantsM1.c1/*",
+                    "bnfmetwxtS13.b1" : INSITU_DIR + "bnfmetwxtS13.b1/*"
     }
 
     # define the number of days within the month
@@ -933,7 +933,7 @@ if __name__ == "__main__":
     )
     
     parser.add_argument("--dod_file",
-                        default="/ccsopen/home/jrobrien/git-repos/bnf-radar-examples/bnf-csapr2-radclss.dod.v1.28.nc",
+                        default="/ccsopen/home/jrobrien/git-repos/bnf-radar-examples/notebooks/data/bnf-csapr2-radclss.dod.v1.28.nc",
                         dest="dod_file",
                         type=str,
                         help="[str] RadCLss DOD file"
