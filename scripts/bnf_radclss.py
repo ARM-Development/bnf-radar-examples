@@ -12,15 +12,11 @@ import logging
 import dask
 
 import numpy as np
-import matplotlib.pyplot as plt
 import xarray as xr
 import pandas as pd
 
 from dask.distributed import Client, LocalCluster, wait, as_completed, fire_and_forget
 dask.config.set({'logging.distributed': 'error'})
-
-from matplotlib.dates import DateFormatter
-from matplotlib import colors
 
 import pyart
 import act
@@ -62,7 +58,8 @@ def subset_points(nfile, **kwargs):
     S40	= [34.17932, -87.45349]
     S13 = [34.343889, -87.350556]
 
-    sites = ["M1", "S4", "S20", "S30", "S40", "S13"]
+    sites    = ["M1", "S4", "S20", "S30", "S40", "S13"]
+    site_alt = [293, 197, 178, 183, 236, 286]
 
     # Zip these together!
     lats, lons = list(zip(M1,
@@ -143,7 +140,7 @@ def subset_points(nfile, **kwargs):
                     # Interpolate NaNs out
                     da = da.interpolate_na(dim="height", method="linear", fill_value="extrapolate")   
                     # Add the latitude and longitude of the extracted column
-                    da["latitude"], da["longitude"] = lat, lon
+                    da["lat"], da["lon"] = lat, lon
                     # Convert timeoffsets to timedelta object and precision on datetime64
                     da.time_offset.data = da.time_offset.values.astype("timedelta64[s]")
                     da.base_time.data = da.base_time.values.astype("datetime64[s]")
@@ -154,6 +151,8 @@ def subset_points(nfile, **kwargs):
                 # Concatenate the extracted radar columns for this scan across all sites    
                 ds = xr.concat([data for data in column_list if data], dim='station')
                 ds["station"] = sites
+                # Assign the Main and Supplemental Site altitudes
+                ds = ds.assign(alt=("station", site_alt))
                 # Add attributes for Time, Latitude, Longitude, and Sites
                 ds.gate_time.attrs.update(long_name=('Time in Seconds that Cooresponds to the Start'
                                                     + " of each Individual Radar Volume Scan before"
@@ -166,10 +165,12 @@ def subset_points(nfile, **kwargs):
                                                         + "Above the Target Location ")
                                             )
                 ds.station.attrs.update(long_name="Bankhead National Forest AMF-3 In-Situ Ground Observation Station Identifers")
-                ds.latitude.attrs.update(long_name='Latitude of BNF AMF-3 Ground Observation Site',
+                ds.lat.attrs.update(long_name='Latitude of BNF AMF-3 Ground Observation Site',
                                          units='Degrees North')
-                ds.longitude.attrs.update(long_name='Longitude of BNF AMF-3 Ground Observation Site',
+                ds.lon.attrs.update(long_name='Longitude of BNF AMF-3 Ground Observation Site',
                                           units='Degrees East')
+                ds.alt.attrs.update(long_name="Altitude above mean sea level for each station",
+                                          units="m")
                 # delete the radar to free up memory
                 del radar, column_list, da
             else:
@@ -179,7 +180,13 @@ def subset_points(nfile, **kwargs):
             del radar
     return ds
 
-def match_datasets_act(column, ground, site, discard, resample='sum', DataSet=False):
+def match_datasets_act(column, 
+                       ground, 
+                       site, 
+                       discard, 
+                       resample='sum', 
+                       DataSet=False,
+                       prefix=None):
     """
     Time synchronization of a Ground Instrumentation Dataset to 
     a Radar Column for Specific Locations using the ARM ACT package
@@ -210,6 +217,10 @@ def match_datasets_act(column, ground, site, discard, resample='sum', DataSet=Fa
     DataSet : boolean
         Boolean flag to determine if ground input is an Xarray Dataset.
         Set to True if ground input is Xarray DataSet. 
+
+    prefix : str
+        prefix for the desired spelling of variable names for the input
+        datastream (to fix duplicate variable names between instruments)
              
     Returns
     -------
@@ -217,7 +228,7 @@ def match_datasets_act(column, ground, site, discard, resample='sum', DataSet=Fa
         Xarray Dataset containing the time-synced in-situ ground observations with
         the inputed radar column 
     """
-    # Check to see if input is xarray DataSet or a file path
+     # Check to see if input is xarray DataSet or a file path
     if DataSet == True:
         grd_ds = ground
     else:
@@ -225,6 +236,9 @@ def match_datasets_act(column, ground, site, discard, resample='sum', DataSet=Fa
         grd_ds = act.io.read_arm_netcdf(ground, cleanup_qc=True, drop_variables=discard)
         # Default are Lazy Arrays; convert for matching with column
         grd_ds = grd_ds.compute()
+        # check if a list containing new variable names exists. 
+        if prefix:
+            grd_ds = grd_ds.rename_vars({v: f"{prefix}{v}" for v in grd_ds.data_vars})
         
     # Remove Base_Time before Resampling Data since you can't force 1 datapoint to 5 min sum
     if 'base_time' in grd_ds.data_vars:
@@ -233,9 +247,9 @@ def match_datasets_act(column, ground, site, discard, resample='sum', DataSet=Fa
     # Check to see if height is a dimension within the ground instrumentation. 
     # If so, first interpolate heights to match radar, before interpolating time.
     if 'height' in grd_ds.dims:
-        grd_ds = grd_ds.interp(height=np.arange(500, 8500, 250), method='linear')
+        grd_ds = grd_ds.interp(height=np.arange(3150, 10050, 50), method='linear')
         
-    # Resample the ground data to 5 min and interpolate to the CSAPR-2. 
+    # Resample the ground data to 5 min and interpolate to the CSU X-Band time. 
     # Keep data variable attributes to help distingish between instruments/locations
     if resample.split('=')[-1] == 'mean':
         matched = grd_ds.resample(time='5Min', 
@@ -248,7 +262,7 @@ def match_datasets_act(column, ground, site, discard, resample='sum', DataSet=Fa
                                   closed='right').sum(keep_attrs=True).interp(time=column.time, 
                                                                               method='linear')
     
-    # Add BNF site location as a dimension for the Pluvio data
+    # Add SAIL site location as a dimension for the Pluvio data
     matched = matched.assign_coords(coords=dict(station=site))
     matched = matched.expand_dims('station')
    
@@ -271,83 +285,97 @@ def match_datasets_act(column, ground, site, discard, resample='sum', DataSet=Fa
    
     return column
 
-def adjust_dod(ds, ntime, height_fix=False):
+def adjust_radclss_dod(radclss, dod):
     """
-    the ability to create a DOD with adjustable dimensions via ACT is not 
-    allowed on specific nodes
+    Adjust the RadCLss DataSet to include missing datastreams
 
-    therefore, using the stored DOD file for RadCLss, adjust the time 
-    dimension as needed. 
+    Parameters
+    ----------
+    radclss : Xarray DataSet
+        extracted columns and in-situ sensor file
+    dod : Xarray DataSet
+        expected datastreams and data standards for RadCLss
 
-    Input
-    -----
-    ds : xarray Dataset
-        The input DOD to have the time variable adjusted
-    
-    ntime : int
-        New dimension to expand or shrink the DOD time dimension to
-
-    Output
-    ------
-    adj_ds : xarray Dataset
-        blank dataset containing the DOD metadata adjusted for proper time 
-        dimensions
+    returns
+    -------
+    radclss : Xarray DataSet
+        Corrected RadCLss that has all expected parmeters and attributes
     """
-    # Create a blank DataSet
-    newds = xr.Dataset()
-    
-    # Get the global attributes and add to dataset
-    newds.attrs = ds.attrs
-    if height_fix is True:
-        nskip = ['latitude', 'longitude', 'base_time']
-        nheight = np.arange(3150, 10050, 50)
-    else:
-        nskip = ['lat', 'lon']
+    # Supplied DOD has correct data attributes and all required parameters. 
+    # Update the RadCLss dataset variable values with the DOD dataset. 
+    for var in dod.variables:
+        # Make sure the variable isn't a dimension
+        if var not in dod.dims:
+            # check to see if variable is within RadCLss
+            # note: it may not be if file is missing.
+            if var not in radclss.variables:
+                print(var)
+                new_size = []
+                for dim in dod[var].dims:
+                    if dim == "time":
+                        new_size.append(radclss.sizes['time'])
+                    else:
+                        new_size.append(dod.sizes[dim])
+                    #new_data = np.full(())
+                # create a new array to hold the updated values
+                new_data = np.full(new_size, dod[var].data[0])
+                # create a new DataArray and add back into RadCLss
+                new_array = xr.DataArray(new_data, dims=dod[var].dims)
+                new_array.attrs = dod[var].attrs
+                radclss[var] = new_array
+                
+                # clean up some saved values
+                del new_size, new_data, new_array
 
-    # Assign the variables to the DataSet, expand the blank arrays to the input int time
-    for var in ds.data_vars:
-        if var not in nskip:
-            if height_fix is True:
-                x = np.full(len(nheight), ds[var].data[0])
-                newds[var] = ('height', x)
-                newds[var].attrs = ds[var].attrs
-            else:
-                if len(ds[var].data.shape) == 4:
-                    x = np.full((ntime, ds[var].data.shape[1],
-                                 ds[var].data.shape[2],
-                                 ds[var].data.shape[3]),
-                                 ds[var].data[0, 0, 0, 0])
-                elif len(ds[var].data.shape) == 3:
-                    x = np.full((ntime, ds[var].data.shape[1],
-                                 ds[var].data.shape[2]), ds[var].data[0, 0, 0])
-                elif len(ds[var].data.shape) == 2:
-                    x = np.full((ntime, ds[var].data.shape[1]), ds[var].data[0, 0])
-                else:
-                    x = np.full((ntime), ds[var].data[0])
-                newds[var] = (ds[var].dims, x)
-                newds[var].attrs = ds[var].attrs
-    if height_fix is True:
-        newds['latitude'] = ds['latitude']
-        newds['longitude'] = ds['longitude']
-    else:
-        # Skipped the variables without time, add those back in
-        newds['lat'] = ds['lat']
-        newds['lon'] = ds['lon']
-    
-    if height_fix is True:
-        newds = newds.assign_coords(height=nheight)
-    else:
-        # Assign Coordinates to the array
-        newds = newds.assign_coords(time=np.arange(0, newds['time'].shape[0]),
-                                    height=np.arange(0, newds['height'].shape[0]),
-                                    station=np.arange(0, 6),
-                                    particle_size=np.arange(0, 32),
-                                    raw_fall_velocity=np.arange(0, 32)
-                                   )
-    
-    return newds
+    # Adjust the radclss time attributes
+    del radclss["time"].attrs["units"]
+    del radclss["time_offset"].attrs["units"]
+    del radclss["base_time"].attrs["units"]
 
-def radclss(volumes, serial=True, outdir=None):
+    # reorder the DataArrays to match the ARM Data Object Identifier 
+    first = ["base_time", "time_offset", "time", "height", "station", "gate_time"]           # the two you want first
+    last  = ["lat", "lon", "alt"]   # the three you want last
+
+    # Keep only data variables, preserve order, and drop the ones already in first/last
+    middle = [v for v in radclss.data_vars if v not in first + last]
+
+    ordered = first + middle + last
+    radclss = radclss[ordered]
+
+    # Update the global attributes
+    radclss.drop_attrs()
+    radclss.attrs = dod.attrs
+    radclss.attrs['vap_name'] = ""
+    radclss.attrs['command_line'] = "python bnf_radclss.py --serial True --array True"
+    radclss.attrs['dod_version'] = "csapr2radclss-c2-1.28"
+    radclss.attrs['site_id'] = "bnf"
+    radclss.attrs['platform_id'] = "csapr2radclss"
+    radclss.attrs['facility_id'] = "S3"
+    radclss.attrs['data_level'] = "c2"
+    radclss.attrs['location_description'] = "Southeast U.S. in Bankhead National Forest (BNF), Decatur, Alabama"
+    radclss.attrs['datastream'] = "bnfcsapr2radclssS3.c2"
+    radclss.attrs['input_datastreams'] = ["bnfcsapr2cmacS3.c1",
+                                          'bnfmetM1.b1',
+                                          'bnfmetS20.b1',
+                                          "bnfmetS30.b1",
+                                          "bnfmetS40.b1",
+                                          "bnfsondewnpnM1.b1",
+                                          "bnfwbpluvio2M1.a1",
+                                          "bnfldquantsM1.c1",
+                                          "bnfldquantsS30.c1",
+                                          "bnfvdisquantsM1.c1",
+                                          "bnfmetwxtS13.b1"
+    ]
+    radclss.attrs['history'] = ("created by user jrobrien on machine cumulus.ccs.ornl.gov at " + 
+                                 str(datetime.datetime.now()) +
+                                " using Py-ART and ACT"
+    )
+    # return radclss, close DOD file
+    del dod
+
+    return radclss
+
+def radclss(volumes, serial=True, outdir=None, dod_file=None):
     """
     Extracted Radar Columns and In-Situ Sensors
 
@@ -382,6 +410,9 @@ def radclss(volumes, serial=True, outdir=None):
     outdir : str, Default = None
         Option of specifying Location of where to write RadCLss files
 
+    dod_file : str, Default = None
+        Option to supply a Data Object Description file to verify standards
+
     Returns
     -------
     ds : Xarray Dataset
@@ -389,153 +420,139 @@ def radclss(volumes, serial=True, outdir=None):
     """
     # Define variables to drop from RadCLss from the respective datastreams 
     discard_var = {'radar' : ['classification_mask',
-                              'censor_mask',
-                              'uncorrected_copol_correlation_coeff',
-                              'uncorrected_differential_phase',
-                              'uncorrected_differential_reflectivity',
-                              'uncorrected_differential_reflectivity_lag_1',
-                              'uncorrected_mean_doppler_velocity_h',
-                              'uncorrected_mean_doppler_velocity_v',
-                              'uncorrected_reflectivity_h',
-                              'uncorrected_reflectivity_v',
-                              'uncorrected_spectral_width_h',
-                              'uncorrected_spectral_width_v',
-                              'clutter_masked_velocity',
-                              'gate_id',
-                              'ground_clutter',
-                              'partial_beam_blockage',
-                              'cumulative_beam_blockage',
-                              'unfolded_differential_phase',
-                              'path_integrated_attenuation',
-                              'path_integrated_differential_attenuation',
-                              'unthresholded_power_copolar_v',
-                              'unthresholded_power_copolar_h',
-                              'specific_differential_phase',
-                              'specific_differential_attenuation',
-                              'reflectivity_v',
-                              'reflectivity',
-                              'mean_doppler_velocity_v',
-                              'mean_doppler_velocity',
-                              'differential_reflectivity_lag_1',
-                              'differential_reflectivity',
-                              'differential_phase'
+                          'censor_mask',
+                          'uncorrected_copol_correlation_coeff',
+                          'uncorrected_differential_phase',
+                          'uncorrected_differential_reflectivity',
+                          'uncorrected_differential_reflectivity_lag_1',
+                          'uncorrected_mean_doppler_velocity_h',
+                          'uncorrected_mean_doppler_velocity_v',
+                          'uncorrected_reflectivity_h',
+                          'uncorrected_reflectivity_v',
+                          'uncorrected_spectral_width_h',
+                          'uncorrected_spectral_width_v',
+                          'clutter_masked_velocity',
+                          'gate_id',
+                          'ground_clutter',
+                          'partial_beam_blockage',
+                          'cumulative_beam_blockage',
+                          'unfolded_differential_phase',
+                          'path_integrated_attenuation',
+                          'path_integrated_differential_attenuation',
+                          'unthresholded_power_copolar_v',
+                          'unthresholded_power_copolar_h',
+                          'specific_differential_phase',
+                          'specific_differential_attenuation',
+                          'reflectivity_v',
+                          'reflectivity',
+                          'mean_doppler_velocity_v',
+                          'mean_doppler_velocity',
+                          'differential_reflectivity_lag_1',
+                          'differential_reflectivity',
+                          'differential_phase',
+                          'normalized_coherent_power',
+                          'normalized_coherent_power_v',
+                          'signal_to_noise_ratio_copolar_h',
+                          'signal_to_noise_ratio_copolar_v',
+                          'specific_attenuation',
+                          'spectral_width',
+                          'spectral_width_v',
+                          'sounding_temperature',
+                          'signal_to_noise_ratio',
+                          'velocity_texture',
+                          'simulated_velocity',
+                          'height_over_iso0'
                     ],
-                    'met' : ['base_time', 
-                             'time_offset', 
-                             'time_bounds', 
-                             'logger_volt',
-                             'logger_temp', 
-                             'qc_logger_temp', 
-                             'lat', 
-                             'lon', 
-                             'alt', 
-                             'qc_temp_mean',
-                             'qc_rh_mean', 
-                             'qc_vapor_pressure_mean', 
-                             'qc_wspd_arith_mean', 
-                             'qc_wspd_vec_mean',
-                             'qc_wdir_vec_mean', 
-                             'qc_pwd_mean_vis_1min', 
-                             'qc_pwd_mean_vis_10min', 
-                             'qc_pwd_pw_code_inst',
-                             'qc_pwd_pw_code_15min', 
-                             'qc_pwd_pw_code_1hr', 
-                             'qc_pwd_precip_rate_mean_1min',
-                             'qc_pwd_cumul_rain', 
-                             'qc_pwd_cumul_snow', 
-                             'qc_org_precip_rate_mean', 
-                             'qc_tbrg_precip_total',
-                             'qc_tbrg_precip_total_corr', 
-                             'qc_logger_volt', 
-                             'qc_logger_temp', 
-                             'qc_atmos_pressure', 
-                             'pwd_pw_code_inst', 
-                             'pwd_pw_code_15min', 
-                             'pwd_pw_code_1hr', 
-                             'temp_std', 
-                             'rh_std',
-                             'vapor_pressure_std', 
-                             'wdir_vec_std', 
-                             'tbrg_precip_total', 
-                             'org_precip_rate_mean',
-                             'pwd_mean_vis_1min', 
-                             'pwd_mean_vis_10min', 
-                             'pwd_precip_rate_mean_1min', 
-                             'pwd_cumul_rain',
-                             'pwd_cumul_snow', 
-                             'pwd_err_code'
+                    'met' : ['base_time', 'time_offset', 'time_bounds', 'logger_volt',
+                        'logger_temp', 'qc_logger_temp', 'lat', 'lon', 'alt', 'qc_temp_mean',
+                        'qc_rh_mean', 'qc_vapor_pressure_mean', 'qc_wspd_arith_mean', 'qc_wspd_vec_mean',
+                        'qc_wdir_vec_mean', 'qc_pwd_mean_vis_1min', 'qc_pwd_mean_vis_10min', 'qc_pwd_pw_code_inst',
+                        'qc_pwd_pw_code_15min', 'qc_pwd_pw_code_1hr', 'qc_pwd_precip_rate_mean_1min',
+                        'qc_pwd_cumul_rain', 'qc_pwd_cumul_snow', 'qc_org_precip_rate_mean', 'qc_tbrg_precip_total',
+                        'qc_tbrg_precip_total_corr', 'qc_logger_volt', 'qc_logger_temp', 'qc_atmos_pressure', 
+                        'pwd_pw_code_inst', 'pwd_pw_code_15min', 'pwd_pw_code_1hr', 'temp_std', 'rh_std',
+                        'vapor_pressure_std', 'wdir_vec_std', 'tbrg_precip_total', 'org_precip_rate_mean',
+                        'pwd_mean_vis_1min', 'pwd_mean_vis_10min', 'pwd_precip_rate_mean_1min', 'pwd_cumul_rain',
+                        'pwd_cumul_snow', 'pwd_err_code'
                     ],
-                    'sonde' : ['base_time', 
-                               'time_offset', 
-                               'lat', 
-                               'lon', 
-                               'qc_pres',
-                               'qc_tdry', 
-                               'qc_dp', 
-                               'qc_wspd', 
-                               'qc_deg', 
-                               'qc_rh',
-                               'qc_u_wind', 
-                               'qc_v_wind', 
-                               'qc_asc', 
-                               "wstat", 
-                               "asc"
+                    'sonde' : ['base_time', 'time_offset', 'lat', 'lon', 'qc_pres',
+                           'qc_tdry', 'qc_dp', 'qc_wspd', 'qc_deg', 'qc_rh',
+                           'qc_u_wind', 'qc_v_wind', 'qc_asc', "wstat", "asc"
                     ],
-                    'pluvio' : ['base_time', 
-                                'time_offset', 
-                                'load_cell_temp', 
-                                'heater_status',
-                                'elec_unit_temp', 
-                                'supply_volts', 
-                                'orifice_temp', 
-                                'volt_min',
-                                'ptemp', 
-                                'lat', 
-                                'lon', 
-                                'alt', 
-                                'maintenance_flag', 
-                                'reset_flag', 
-                                'qc_rh_mean', 
-                                'pluvio_status', 
-                                'bucket_rt', 
-                                'accum_total_nrt'
+                    'pluvio' : ['base_time', 'time_offset', 'load_cell_temp', 'heater_status',
+                            'elec_unit_temp', 'supply_volts', 'orifice_temp', 'volt_min',
+                            'ptemp', 'lat', 'lon', 'alt', 'maintenance_flag', 'reset_flag', 
+                            'qc_rh_mean', 'pluvio_status', 'bucket_rt', 'accum_total_nrt'
                     ],
                     'ldquants' : ['specific_differential_attenuation_xband20c',
-                                  'specific_differential_attenuation_kaband20c',
-                                  'specific_differential_attenuation_sband20c',
-                                  'bringi_conv_stra_flag',
-                                  'exppsd_slope',
-                                  'norm_num_concen',
-                                  'num_concen',
-                                  'gammapsd_shape',
-                                  'gammapsd_slope',
-                                  'mean_doppler_vel_wband20c',
-                                  'mean_doppler_vel_kaband20c',
-                                  'mean_doppler_vel_xband20c',
-                                  'mean_doppler_vel_sband20c',
-                                  'specific_attenuation_kaband20c',
-                                  'specific_attenuation_xband20c',
-                                  'specific_attenuation_sband20c',
-                                  'specific_differential_phase_kaband20c',
-                                  'specific_differential_phase_xband20c',
-                                  'specific_differential_phase_sband20c',
-                                  'differential_reflectivity_kaband20c',
-                                  'differential_reflectivity_xband20c',
-                                  'differential_reflectivity_sband20c',
-                                  'reflectivity_factor_wband20c',
-                                  'reflectivity_factor_kaband20c',
-                                  'reflectivity_factor_xband20c',
-                                  'reflectivity_factor_sband20c',
-                                  'time_offset',
-                                  'base_time',
-                                  'lat',
-                                  'lon',
-                                  'alt'
+                              'specific_differential_attenuation_kaband20c',
+                              'specific_differential_attenuation_sband20c',
+                              'bringi_conv_stra_flag',
+                              'exppsd_slope',
+                              'norm_num_concen',
+                              'num_concen',
+                              'gammapsd_shape',
+                              'gammapsd_slope',
+                              'mean_doppler_vel_wband20c',
+                              'mean_doppler_vel_kaband20c',
+                              'mean_doppler_vel_xband20c',
+                              'mean_doppler_vel_sband20c',
+                              'specific_attenuation_kaband20c',
+                              'specific_attenuation_xband20c',
+                              'specific_attenuation_sband20c',
+                              'specific_differential_phase_kaband20c',
+                              'specific_differential_phase_xband20c',
+                              'specific_differential_phase_sband20c',
+                              'differential_reflectivity_kaband20c',
+                              'differential_reflectivity_xband20c',
+                              'differential_reflectivity_sband20c',
+                              'reflectivity_factor_wband20c',
+                              'reflectivity_factor_kaband20c',
+                              'reflectivity_factor_xband20c',
+                              'reflectivity_factor_sband20c',
+                              'bringi_conv_stra_flag',
+                              'time_offset',
+                              'base_time',
+                              'lat',
+                              'lon',
+                              'alt'
+                    ],
+                    'vdisquants' : ['specific_differential_attenuation_xband20c',
+                                'specific_differential_attenuation_kaband20c',
+                                'specific_differential_attenuation_sband20c',
+                                'bringi_conv_stra_flag',
+                                'exppsd_slope',
+                                'norm_num_concen',
+                                'num_concen',
+                                'gammapsd_shape',
+                                'gammapsd_slope',
+                                'mean_doppler_vel_wband20c',
+                                'mean_doppler_vel_kaband20c',
+                                'mean_doppler_vel_xband20c',
+                                'mean_doppler_vel_sband20c',
+                                'specific_attenuation_kaband20c',
+                                'specific_attenuation_xband20c',
+                                'specific_attenuation_sband20c',
+                                'specific_differential_phase_kaband20c',
+                                'specific_differential_phase_xband20c',
+                                'specific_differential_phase_sband20c',
+                                'differential_reflectivity_kaband20c',
+                                'differential_reflectivity_xband20c',
+                                'differential_reflectivity_sband20c',
+                                'reflectivity_factor_wband20c',
+                                'reflectivity_factor_kaband20c',
+                                'reflectivity_factor_xband20c',
+                                'reflectivity_factor_sband20c',
+                                'bringi_conv_stra_flag',
+                                'time_offset',
+                                'base_time',
+                                'lat',
+                                'lon',
+                                'alt'
                     ],
                     'wxt' : ['base_time',
                          'time_offset',
                          'time_bounds',
-                         'temp_mean',
                          'qc_temp_mean',
                          'temp_std',
                          'rh_mean',
@@ -559,8 +576,9 @@ def radclss(volumes, serial=True, outdir=None):
                          'lat',
                          'lon',
                          'alt'
-                ]
+                    ]
     }
+
     print(volumes['date'] + " start subset-points: ", time.strftime("%H:%M:%S"))
     
     # Call Subset Points
@@ -581,9 +599,16 @@ def radclss(volumes, serial=True, outdir=None):
     try:
         # Concatenate all extracted columns across time dimension to form daily timeseries
         ds = xr.concat([data for data in columns if data], dim="time")
+        ds['time'] = ds.sel(station="M1").base_time
+        ds['time_offset'] = ds.sel(station="M1").base_time
+        ds['base_time'] = ds.sel(station="M1").isel(time=0).base_time
+        ds['lat'] = ds.isel(time=0).lat
+        ds['lon'] = ds.isel(time=0).lon
+        ds['alt'] = ds.isel(time=0).alt
         # Remove all the unused CMAC variables
         ds = ds.drop_vars(discard_var["radar"])
-        ds['time'] = ds.sel(station="M1").base_time
+        # Drop duplicate latitude and longitude
+        ds = ds.drop_vars(['latitude', 'longitude'])
     except ValueError:
         ds = None
         if client:
@@ -593,21 +618,10 @@ def radclss(volumes, serial=True, outdir=None):
 
     # If successful column extraction, apply in-situ
     if ds:
-        # Remove Global Attributes from the Column Extraction
-        # Attributes make sense for single location, but not collection of sites.
-        ds.attrs = {}
         # Depending on how Dask is behaving, may be to resort time
         ds = ds.sortby("time")
         print(volumes['date'] + " finish subset-points: ", time.strftime("%H:%M:%S"))
     
-        # Pluvio Weighing Bucket Rain Gauge
-        if volumes['pluvio']:
-            # Weighing Bucket Rain Gauge
-            ds = match_datasets_act(ds, 
-                                    volumes['pluvio'][0], 
-                                    "M1", 
-                                    discard=discard_var['pluvio'])
-
         if volumes['met_m1']:
             # Surface Meteorological Station
             ds = match_datasets_act(ds, 
@@ -635,6 +649,34 @@ def radclss(volumes, serial=True, outdir=None):
                                     volumes['met_s40'][0], 
                                     "S40", 
                                     discard=discard_var['met'])
+            
+        if volumes['sonde']:
+            print(volumes['sonde'][0])
+            # Read in the file using ACT
+            grd_ds = act.io.read_arm_netcdf(volumes['sonde'], 
+                                            cleanup_qc=True, 
+                                            drop_variables=discard_var['sonde'])
+            # Default are Lazy Arrays; convert for matching with column
+            grd_ds = grd_ds.compute()
+            # check if a list containing new variable names exists.
+            prefix = "sonde_"
+            grd_ds = grd_ds.rename_vars({v: f"{prefix}{v}" for v in grd_ds.data_vars})
+            # Match to the columns
+            ds = match_datasets_act(ds, 
+                                    grd_ds, 
+                                    "M1",
+                                    discard=discard_var['sonde'],
+                                    DataSet=True)
+            # clean up
+            del grd_ds
+        
+        # Pluvio Weighing Bucket Rain Gauge
+        if volumes['pluvio']:
+            # Weighing Bucket Rain Gauge
+            ds = match_datasets_act(ds, 
+                                    volumes['pluvio'][0], 
+                                    "M1", 
+                                    discard=discard_var['pluvio'])
 
         if volumes['ld_m1']:
             # Laser Disdrometer - Main Site
@@ -642,7 +684,8 @@ def radclss(volumes, serial=True, outdir=None):
                                     volumes['ld_m1'][0], 
                                     "M1", 
                                     discard=discard_var['ldquants'],
-                                    resample="mean")
+                                    resample="mean",
+                                    prefix="ldquants_")
 
         if volumes['ld_s30']:
             # Laser Disdrometer - Supplemental Site
@@ -650,7 +693,17 @@ def radclss(volumes, serial=True, outdir=None):
                                     volumes['ld_s30'][0], 
                                     "S30", 
                                     discard=discard_var['ldquants'],
-                                    resample="mean")
+                                    resample="mean",
+                                    prefix="ldquants_")
+            
+        if volumes['vd_m1']:
+            # Laser Disdrometer - Supplemental Site
+            ds = match_datasets_act(ds, 
+                                    volumes['vd_m1'][0], 
+                                    "M1", 
+                                    discard=discard_var['vdisquants'],
+                                    resample="mean",
+                                    prefix="vdisquants_")
         
         if volumes['wxt_s13']:
             # Laser Disdrometer - Supplemental Site
@@ -663,10 +716,17 @@ def radclss(volumes, serial=True, outdir=None):
         # ----------------
         # Check DOD - TBD
         # ----------------
-        # need to check why xarray does not like unit attribute for time
-        del ds["time"].attrs["units"]
-        del ds["time_offset"].attrs["units"]
-        del ds["base_time"].attrs["units"]
+        # verify the correct dimension order
+        ds = ds.transpose("time", "height", "station")
+        if dod_file:
+            try:
+                dod = xr.open_dataset(dod_file)
+                # verify the correct dimension order
+                ds = adjust_radclss_dod(ds, dod)
+            except ValueError as e:
+                print(f"Error: {e}")
+                print(f"Error type: {type(e).__name__}")
+                print("WARNING: Unable to Verify DOD")
         
         # ------------
         # Save to File
@@ -716,7 +776,7 @@ def main(args):
                     "bnfwbpluvio2M1.a1" : INSITU_DIR + "/bnfwbpluvio2M1.a1/*",
                     "bnfldquantsM1.c1" : INSITU_DIR + "/bnfldquantsM1.c1/*",
                     "bnfldquantsS30.c1" : INSITU_DIR + "/bnfldquantsS30.c1/*",
-                    "bnfvdisquantsM1.c1" : INSITU_DIR + "/bnfvdisquantsM1.c/*",
+                    "bnfvdisquantsM1.c1" : INSITU_DIR + "/bnfvdisquantsM1.c1/*",
                     "bnfmetwxtS13.b1" : INSITU_DIR + "/bnfmetwxtS13.b1/*"
     }
 
@@ -731,7 +791,8 @@ def main(args):
                'met_s30' : [],
                'met_s40' : [],
                'ld_m1' : [], 
-               'ld_s30' : [], 
+               'ld_s30' : [],
+               'vd_m1' : [],
                'sonde' : [],
                'wxt_s13' : [], 
     }
@@ -754,6 +815,7 @@ def main(args):
         volumes['met_s40'].append(sorted(glob.glob(insitu_stream['bnfmetS40.b1'] + day_of_month + '*.cdf')))
         volumes['ld_m1'].append(sorted(glob.glob(insitu_stream['bnfldquantsM1.c1'] + day_of_month + '*.nc')))
         volumes['ld_s30'].append(sorted(glob.glob(insitu_stream['bnfldquantsS30.c1'] + day_of_month + '*.nc')))
+        volumes['vd_m1'].append(sorted(glob.glob(insitu_stream["bnfvdisquantsM1.c1"] + day_of_month + '*.nc')))
         volumes['sonde'].append(sorted(glob.glob(insitu_stream['bnfsondewnpnM1.b1'] + day_of_month + '*.cdf')))
         volumes['wxt_s13'].append(sorted(glob.glob(insitu_stream['bnfmetwxtS13.b1'] + day_of_month + '*.nc')))
     else:
@@ -769,6 +831,7 @@ def main(args):
                 volumes['met_s40'].append(sorted(glob.glob(insitu_stream['bnfmetS40.b1'] + day_of_month + '*.cdf')))
                 volumes['ld_m1'].append(sorted(glob.glob(insitu_stream['bnfldquantsM1.c1'] + day_of_month + '*.cdf')))
                 volumes['ld_s30'].append(sorted(glob.glob(insitu_stream['bnfldquantsS30.c1'] + day_of_month + '*.cdf')))
+                volumes['vd_m1'].append(sorted(glob.glob(insitu_stream["bnfvdisquantsM1.c1"] + day_of_month + '*.nc')))
                 volumes['sonde'].append(sorted(glob.glob(insitu_stream['bnfsondewnpnM1.b1'] + day_of_month + '*.cdf')))
                 volumes['wxt_s13'].append(sorted(glob.glob(insitu_stream['bnfmetwxtS13.b1'] + day_of_month + '*.nc')))
             else:
@@ -782,6 +845,7 @@ def main(args):
                 volumes['met_s40'].append(sorted(glob.glob(insitu_stream['bnfmetS40.b1'] + day_of_month + '*.cdf')))
                 volumes['ld_m1'].append(sorted(glob.glob(insitu_stream['bnfldquantsM1.c1'] + day_of_month + '*.cdf')))
                 volumes['ld_s30'].append(sorted(glob.glob(insitu_stream['bnfldquantsS30.c1'] + day_of_month + '*.cdf')))
+                volumes['vd_m1'].append(sorted(glob.glob(insitu_stream["bnfvdisquantsM1.c1"] + day_of_month + '*.nc')))
                 volumes['sonde'].append(sorted(glob.glob(insitu_stream['bnfsondewnpnM1.b1'] + day_of_month + '*.cdf')))
                 volumes['wxt_s13'].append(sorted(glob.glob(insitu_stream['bnfmetwxtS13.b1'] + day_of_month + '*.nc')))
  
@@ -799,7 +863,8 @@ def main(args):
         if nvol["radar"]:
             status = radclss(nvol, 
                              outdir=OUT_PATH, 
-                             serial=args.serial)
+                             serial=args.serial,
+                             dod_file=args.dod_file)
             print(status)
  
     print("processing finished: ", time.strftime("%H:%M:%S"))
@@ -865,6 +930,13 @@ if __name__ == "__main__":
                         dest="verbose",
                         type=bool,
                         help="[bool|default=False] Display file paths"
+    )
+    
+    parser.add_argument("--dod_file",
+                        default="/ccsopen/home/jrobrien/git-repos/bnf-radar-examples/bnf-csapr2-radclss.dod.v1.28.nc",
+                        dest="dod_file",
+                        type=str,
+                        help="[str] RadCLss DOD file"
     )
     
     args = parser.parse_args()

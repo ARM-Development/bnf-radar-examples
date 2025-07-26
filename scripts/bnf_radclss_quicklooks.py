@@ -462,14 +462,14 @@ if __name__ == "__main__":
     )
     
     parser.add_argument("--outdir",
-                        default='/gpfs/wolf2/arm/atm124/world-shared/gucxprecipradclssS2.c2/quicklooks/',
+                        default='/gpfs/wolf2/arm/atm124/proj-shared/bnf/bnfcsapr2radclssS3.c2/quicklooks/',
                         dest='outdir',
                         type=str,
                         help="[str] Specific directory to write RadCLss to"
     )
     
     parser.add_argument("--radclss_dir",
-                        default='/gpfs/wolf2/arm/atm124/world-shared/gucxprecipradclssS2.c2/',
+                        default='/gpfs/wolf2/arm/atm124/proj-shared/bnf/bnfcsapr2radclssS3.c2/',
                         dest='radclss',
                         type=str,
                         help="[str] Specific directory where the RadCLss files are located"
