@@ -15,6 +15,7 @@ dependencies:
   - pandas
   - geopandas
   - fiona
+  - cfgrib
   - pip
   - pip:
     - -r doc-requirements.txt

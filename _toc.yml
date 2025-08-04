@@ -7,3 +7,4 @@ parts:
     - file: notebooks/bnf-insitu.ipynb
     - file: notebooks/squire-bnf.ipynb
     - file: notebooks/bnf-radclss-tower.ipynb
+    - file: notebooks/bnf-mrms-qpe-hourly.ipynb
