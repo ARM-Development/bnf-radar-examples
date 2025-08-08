@@ -264,7 +264,7 @@ def create_radclss_timeseries(radclss,
 
     # LDQUANTS derived rain rate
     if dis_site == "M1" or dis_site == "S30":
-        ds["rain_rate"].sel(station=dis_site).plot(x="time",
+        ds["ldquants_rain_rate"].sel(station=dis_site).plot(x="time",
                                                    ax=ax3,
                                                    label="LDQUANTS"
         )
@@ -305,7 +305,7 @@ def create_radclss_timeseries(radclss,
 
     # LDQUANTS Accumulation
     if dis_site == "M1" or dis_site == "S30":
-        ld_precip_accum = act.utils.accumulate_precip(ds.sel(station=dis_site), 'rain_rate').rain_rate_accumulated.compute()
+        ld_precip_accum = act.utils.accumulate_precip(ds.sel(station=dis_site), 'ldquants_rain_rate').ldquants_rain_rate_accumulated.compute()
         ld_precip_accum.plot(x="time", 
                              ax=ax4,
                              label="LDQUANTS"
