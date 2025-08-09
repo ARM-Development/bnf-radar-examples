@@ -132,13 +132,15 @@ def subset_points(nfile, **kwargs):
                         )
                     except ValueError:
                         da = pyart.util.columnsect.column_vertical_profile(radar, lat, lon)
-                        # drop the NaNs (and associated fields) from the extraction
-                        da = da.isel(height=~np.isnan(da.height))
-                        # interpolate to the same profile 
-                        da = da.interp(height=np.arange(500, 8500, 250))
+                        # check for valid heights
+                        valid = np.isfinite(da["height"])
+                        n_valid = int(valid.sum())
+                        if n_valid > 0:
+                            da = da.sel(height=valid).sortby("height").interp(height=np.arange(500, 8500, 250))
+                        else:
+                            target_height = xr.DataArray(np.arange(500, 8500, 250), dims="height", name="height")
+                            da = da.reindex(height=target_height)
 
-                    # Interpolate NaNs out
-                    da = da.interpolate_na(dim="height", method="linear", fill_value="extrapolate")   
                     # Add the latitude and longitude of the extracted column
                     da["lat"], da["lon"] = lat, lon
                     # Convert timeoffsets to timedelta object and precision on datetime64
