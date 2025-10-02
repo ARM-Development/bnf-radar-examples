@@ -15,8 +15,10 @@ dependencies:
   - pandas
   - geopandas
   - fiona
+  - cfgrib
   - pip
   - pip:
     - -r doc-requirements.txt
     - arm_pyart
     - act-atmos
+    - wradlib
