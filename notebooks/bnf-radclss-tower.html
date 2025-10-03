@@ -61,8 +61,8 @@
     <script>DOCUMENTATION_OPTIONS.pagename = 'notebooks/bnf-radclss-tower';</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="NOAA Multi-Radar / Multi-Sensor System (MRMS)" href="bnf-mrms-qpe-hourly.html" />
-    <link rel="prev" title="Surface QUantitatIve pRecipitation Estimation (SQUIRE) for BNF" href="squire-bnf.html" />
+    <link rel="next" title="Surface QUantitatIve pRecipitation Estimation (SQUIRE) for BNF" href="squire-bnf.html" />
+    <link rel="prev" title="Bankhead National Forest - CMAC/RadClss Rain Rates Investigation" href="bnf-cmac-radclss.html" />
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   <meta name="docsearch:language" content="en"/>
   </head>
@@ -184,8 +184,14 @@
 <ul class="current nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="armor-sample-plots.html">ARMOR Data Plots</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bnf-insitu.html">Bankhead National Forest In-Situ Observation Locations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="squire-bnf.html">Surface QUantitatIve pRecipitation Estimation (SQUIRE) for BNF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ldquants_analysis.html">Overview</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="bnf-radclss.html">Bankhead National Forest - RadClss Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bnf-cmac-radclss.html">Bankhead National Forest - CMAC/RadClss Rain Rates Investigation</a></li>
 <li class="toctree-l1 current active"><a class="current reference internal" href="#">Bankhead National Forest - RadCLss Met Tower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="squire-bnf.html">Surface QUantitatIve pRecipitation Estimation (SQUIRE) for BNF</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bnf-mrms-qpe-hourly.html">NOAA Multi-Radar / Multi-Sensor System (MRMS)</a></li>
 </ul>
 
@@ -548,7 +554,7 @@ a dataset containing in-situ ground observations matched to CSAPR-2 radar column
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Define the desired processing date for the BNF CSAPR-2 in YYYY-MM-DD format.</span>
 <span class="n">DATE</span> <span class="o">=</span> <span class="s2">&quot;2025-03-05&quot;</span>
 <span class="c1"># Define the directory where the BNF CSAPR-2 CMAC files are located.</span>
-<span class="n">RADAR_DIR</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="s2">&quot;/Users/jrobrien/ANL/Instruments/csapr2/bnf/*.nc&quot;</span><span class="p">))</span>
+<span class="n">RADAR_DIR</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;BNF_RADAR_R5_DIR&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;202503/*.nc&quot;</span><span class="p">))</span>
 </pre></div>
 </div>
 </div>
@@ -5664,20 +5670,20 @@ Attributes:
                   
 <div class="prev-next-area">
     <a class="left-prev"
-       href="squire-bnf.html"
+       href="bnf-cmac-radclss.html"
        title="previous page">
       <i class="fa-solid fa-angle-left"></i>
       <div class="prev-next-info">
         <p class="prev-next-subtitle">previous</p>
-        <p class="prev-next-title">Surface QUantitatIve pRecipitation Estimation (SQUIRE) for BNF</p>
+        <p class="prev-next-title">Bankhead National Forest - CMAC/RadClss Rain Rates Investigation</p>
       </div>
     </a>
     <a class="right-next"
-       href="bnf-mrms-qpe-hourly.html"
+       href="squire-bnf.html"
        title="next page">
       <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">NOAA Multi-Radar / Multi-Sensor System (MRMS)</p>
+        <p class="prev-next-title">Surface QUantitatIve pRecipitation Estimation (SQUIRE) for BNF</p>
       </div>
       <i class="fa-solid fa-angle-right"></i>
     </a>

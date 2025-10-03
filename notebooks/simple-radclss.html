@@ -184,8 +184,14 @@
 <ul class="nav bd-sidenav">
 <li class="toctree-l1"><a class="reference internal" href="armor-sample-plots.html">ARMOR Data Plots</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bnf-insitu.html">Bankhead National Forest In-Situ Observation Locations</a></li>
-<li class="toctree-l1"><a class="reference internal" href="squire-bnf.html">Surface QUantitatIve pRecipitation Estimation (SQUIRE) for BNF</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ldquants_analysis.html">Overview</a></li>
+
+
+
+<li class="toctree-l1"><a class="reference internal" href="bnf-radclss.html">Bankhead National Forest - RadClss Example</a></li>
+<li class="toctree-l1"><a class="reference internal" href="bnf-cmac-radclss.html">Bankhead National Forest - CMAC/RadClss Rain Rates Investigation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bnf-radclss-tower.html">Bankhead National Forest - RadCLss Met Tower</a></li>
+<li class="toctree-l1"><a class="reference internal" href="squire-bnf.html">Surface QUantitatIve pRecipitation Estimation (SQUIRE) for BNF</a></li>
 <li class="toctree-l1"><a class="reference internal" href="bnf-mrms-qpe-hourly.html">NOAA Multi-Radar / Multi-Sensor System (MRMS)</a></li>
 </ul>
 
@@ -435,8 +441,8 @@ document.write(`
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">DATE</span> <span class="o">=</span> <span class="s2">&quot;2025-03-05&quot;</span>
 <span class="c1"># Define the directory where the BNF CSAPR-2 CMAC files are located.</span>
-<span class="n">RADAR_DIR</span> <span class="o">=</span> <span class="s2">&quot;/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/&quot;</span>
-<span class="n">INSITU_DIR</span> <span class="o">=</span> <span class="s2">&quot;/nfs/gce/globalscratch/obrienj/bnf-cmac-r4/in_situ/&quot;</span>
+<span class="n">RADAR_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;BNF_RADAR_R5_DIR&quot;</span><span class="p">)</span> <span class="o">+</span> <span class="s2">&quot;202503/&quot;</span>
+<span class="n">INSITU_DIR</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">getenv</span><span class="p">(</span><span class="s2">&quot;BNF_INSITU_DIR&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -578,7 +584,6 @@ document.write(`
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">met_list</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">insitu_stream</span><span class="p">[</span><span class="s1">&#39;bnfmetM1.b1&#39;</span><span class="p">]</span> <span class="o">+</span> <span class="s2">&quot;/*&quot;</span> <span class="o">+</span> <span class="n">DATE</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;*.cdf&#39;</span><span class="p">))</span>
-<span class="n">met_list</span>
 </pre></div>
 </div>
 </div>
@@ -1040,7 +1045,6 @@ Attributes: (12/22)
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># With the user defined RADAR_DIR, grab all the XPRECIPRADAR CMAC files for the defined DATE</span>
 <span class="n">file_list</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">glob</span><span class="o">.</span><span class="n">glob</span><span class="p">(</span><span class="n">RADAR_DIR</span> <span class="o">+</span> <span class="s1">&#39;bnfcsapr2cmacS3.c1.&#39;</span> <span class="o">+</span> <span class="n">DATE</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s1">&#39;-&#39;</span><span class="p">,</span> <span class="s1">&#39;&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;*.nc&#39;</span><span class="p">))</span>
-<span class="n">file_list</span><span class="p">[</span><span class="mi">20</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
