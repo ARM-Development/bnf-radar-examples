@@ -330,9 +330,12 @@ def adjust_radclss_dod(radclss, dod):
                 del new_size, new_data, new_array
 
     # Adjust the radclss time attributes
-    del radclss["time"].attrs["units"]
-    del radclss["time_offset"].attrs["units"]
-    del radclss["base_time"].attrs["units"]
+    if hasattr(ds['time'], "units"):
+        del radclss["time"].attrs["units"]
+    if hasattr(ds['time_offset'], "units"):
+        del radclss["time_offset"].attrs["units"]
+    if hasattr(ds['base_time'], "units"):
+        del radclss["base_time"].attrs["units"]
 
     # reorder the DataArrays to match the ARM Data Object Identifier 
     first = ["base_time", "time_offset", "time", "height", "station", "gate_time"]           # the two you want first
@@ -629,6 +632,7 @@ def radclss(volumes, serial=True, outdir=None, dod_file=None):
             ds = match_datasets_act(ds, 
                                     volumes['met_m1'][0], 
                                     "M1", 
+                                    resample="mean",
                                     discard=discard_var['met'])
         
         if volumes['met_s20']:
@@ -636,6 +640,7 @@ def radclss(volumes, serial=True, outdir=None, dod_file=None):
             ds = match_datasets_act(ds, 
                                     volumes['met_s20'][0], 
                                     "S20", 
+                                    resample="mean",
                                     discard=discard_var['met'])
 
         if volumes['met_s30']:
@@ -643,6 +648,7 @@ def radclss(volumes, serial=True, outdir=None, dod_file=None):
             ds = match_datasets_act(ds, 
                                     volumes['met_s30'][0], 
                                     "S30", 
+                                    resample="mean",
                                     discard=discard_var['met'])
 
         if volumes['met_s40']:
@@ -650,6 +656,7 @@ def radclss(volumes, serial=True, outdir=None, dod_file=None):
             ds = match_datasets_act(ds, 
                                     volumes['met_s40'][0], 
                                     "S40", 
+                                    resample="mean",
                                     discard=discard_var['met'])
             
         if volumes['sonde']:
@@ -657,6 +664,7 @@ def radclss(volumes, serial=True, outdir=None, dod_file=None):
             # Read in the file using ACT
             grd_ds = act.io.read_arm_netcdf(volumes['sonde'], 
                                             cleanup_qc=True, 
+                                            resample="mean",
                                             drop_variables=discard_var['sonde'])
             # Default are Lazy Arrays; convert for matching with column
             grd_ds = grd_ds.compute()
