@@ -943,7 +943,7 @@ if __name__ == "__main__":
     )
     
     parser.add_argument("--dod_file",
-                        default="/ccsopen/home/jrobrien/git-repos/bnf-radar-examples/notebooks/data/bnf-csapr2-radclss.dod.v1.28.nc",
+                        default="/ccsopen/home/jrobrien/git-repos/bnf-radar-examples/notebooks/data/radclss/bnf-csapr2-radclss.dod.v1.1.nc",
                         dest="dod_file",
                         type=str,
                         help="[str] RadCLss DOD file"
