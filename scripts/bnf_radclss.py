@@ -330,11 +330,11 @@ def adjust_radclss_dod(radclss, dod):
                 del new_size, new_data, new_array
 
     # Adjust the radclss time attributes
-    if hasattr(ds['time'], "units"):
+    if hasattr(radclss['time'], "units"):
         del radclss["time"].attrs["units"]
-    if hasattr(ds['time_offset'], "units"):
+    if hasattr(radclss['time_offset'], "units"):
         del radclss["time_offset"].attrs["units"]
-    if hasattr(ds['base_time'], "units"):
+    if hasattr(radclss['base_time'], "units"):
         del radclss["base_time"].attrs["units"]
 
     # reorder the DataArrays to match the ARM Data Object Identifier 
@@ -663,8 +663,7 @@ def radclss(volumes, serial=True, outdir=None, dod_file=None):
             print(volumes['sonde'][0])
             # Read in the file using ACT
             grd_ds = act.io.read_arm_netcdf(volumes['sonde'], 
-                                            cleanup_qc=True, 
-                                            resample="mean",
+                                            cleanup_qc=True,
                                             drop_variables=discard_var['sonde'])
             # Default are Lazy Arrays; convert for matching with column
             grd_ds = grd_ds.compute()
@@ -676,7 +675,8 @@ def radclss(volumes, serial=True, outdir=None, dod_file=None):
                                     grd_ds, 
                                     "M1",
                                     discard=discard_var['sonde'],
-                                    DataSet=True)
+                                    DataSet=True,
+                                    resample="mean")
             # clean up
             del grd_ds
         
@@ -887,7 +887,7 @@ if __name__ == "__main__":
             "Extracts Radar columns above a given site and collocates with in-situ sensors")
 
     parser.add_argument("--month",
-                        default="202203",
+                        default="202503",
                         dest='month',
                         type=str,
                         help="[str|YYYMM format] Specific Month to Process"
