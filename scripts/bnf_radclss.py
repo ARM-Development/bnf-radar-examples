@@ -305,6 +305,7 @@ def adjust_radclss_dod(radclss, dod):
     """
     # Supplied DOD has correct data attributes and all required parameters. 
     # Update the RadCLss dataset variable values with the DOD dataset. 
+    print("\n Variables not within RADClss ds:")
     for var in dod.variables:
         # Make sure the variable isn't a dimension
         if var not in dod.dims:
@@ -352,29 +353,19 @@ def adjust_radclss_dod(radclss, dod):
     radclss.attrs = dod.attrs
     radclss.attrs['vap_name'] = ""
     radclss.attrs['command_line'] = "python bnf_radclss.py --serial True --array True"
-    radclss.attrs['dod_version'] = "csapr2radclss-c2-1.28"
+    radclss.attrs['dod_version'] = "csapr2radclss-c2-1.1"
     radclss.attrs['site_id'] = "bnf"
     radclss.attrs['platform_id'] = "csapr2radclss"
     radclss.attrs['facility_id'] = "S3"
     radclss.attrs['data_level'] = "c2"
     radclss.attrs['location_description'] = "Southeast U.S. in Bankhead National Forest (BNF), Decatur, Alabama"
     radclss.attrs['datastream'] = "bnfcsapr2radclssS3.c2"
-    radclss.attrs['input_datastreams'] = ["bnfcsapr2cmacS3.c1",
-                                          'bnfmetM1.b1',
-                                          'bnfmetS20.b1',
-                                          "bnfmetS30.b1",
-                                          "bnfmetS40.b1",
-                                          "bnfsondewnpnM1.b1",
-                                          "bnfwbpluvio2M1.a1",
-                                          "bnfldquantsM1.c1",
-                                          "bnfldquantsS30.c1",
-                                          "bnfvdisquantsM1.c1",
-                                          "bnfmetwxtS13.b1"
-    ]
+    radclss.attrs['input_datastreams'] = "bnfcsapr2cmacS3.c1"
     radclss.attrs['history'] = ("created by user jrobrien on machine cumulus.ccs.ornl.gov at " + 
                                  str(datetime.datetime.now()) +
                                 " using Py-ART and ACT"
     )
+    print("\n")
     # return radclss, close DOD file
     del dod
 
@@ -719,9 +710,9 @@ def radclss(volumes, serial=True, outdir=None, dod_file=None):
                                     discard=discard_var['wxt'],
                                     resample="mean")
 
-        # ----------------
-        # Check DOD - TBD
-        # ----------------
+        # ---------------------------------------------------------------
+        # Cumulus cannot access the DOD API, Requires locally stored file
+        # ---------------------------------------------------------------
         # verify the correct dimension order
         ds = ds.transpose("time", "height", "station")
         if dod_file:
@@ -737,17 +728,70 @@ def radclss(volumes, serial=True, outdir=None, dod_file=None):
         # ------------
         # Save to File
         # ------------
-        # write to file
+        # Define RADCLss keys to skip
+        keys_to_skip = ['alt', 
+                        'lat', 
+                        'lon', 
+                        'gate_time', 
+                        'station', 
+                        'base_time',
+                        'time_offset',
+                        'time']
+
+        # Define the keys that have int MVC
+        diff_keys = ['vdisquants_rain_rate',
+                     'vdisquants_reflectivity_factor_cband20c',
+                     'vdisquants_differential_reflectivity_cband20c',
+                     'vdisquants_specific_differential_phase_cband20c',
+                     'vdisquants_specific_attenuation_cband20c',
+                     'vdisquants_med_diameter',
+                     'vdisquants_mass_weighted_mean_diameter',
+                     'vdisquants_lwc',
+                     'vdisquants_total_droplet_concentration',
+                     'vdisquants_mean_doppler_vel_cband20c',
+                     'vdisquants_specific_differential_attenuation_cband20c',
+                     'wxt_temp_mean',
+                     'wxt_precip_rate_mean',
+                     'wxt_cumul_precip']
+
+        # Drop the missing value code attribute from the diff_keys
+        for key in diff_keys:
+            if hasattr(ds[key], "missing_value"):
+                del ds[key].attrs['missing_value']
+
+        # Create a dictionary to hold encoding information
+        filtered_keys = [key for key in ds.keys() if key not in {*keys_to_skip, *diff_keys}]
+        encoding_dict = {key : {"_FillValue" : -9999.} for key in filtered_keys}
+        diff_dict = {key : {"_FillValue" : -9999} for key in diff_keys}
+        encoding_dict.update(diff_dict)
+
         try:
             if outdir:
-                ds.to_netcdf(outdir + 'bnfcsapr2radclssS3.c2.' + volumes['date'] + '.000000.nc')
+                out_path = outdir + 'bnfcsapr2radclssS3.c2.' + volumes['date'] + '.000000.nc'
+                # Convert DataSet to ACT DataSet for writing
+                ds_out = act.io.WriteDataset(ds)
+                # If FillValue set to True, will just apply NaNs instead of encodings
+                ds_out.write_netcdf(path=out_path,
+                                    FillValue=False,
+                                    encoding=encoding_dict)
+                # Free up Memory
+                del ds_out, encoding_dict,diff_dict, keys_to_skip, diff_keys
+                status = ": RadCLss SUCCESS: " + volumes['date']
             else:
-                ds.to_netcdf('bnfcsapr2radclssS3.c2.' + volumes['date'] + '.000000.nc')
-            status = ": RadCLss SUCCESS: " + volumes['date']
+                out_path = 'bnfcsapr2radclssS3.c2.' + volumes['date'] + '.000000.nc'
+                # Convert DataSet to ACT DataSet for writing
+                ds_out = act.io.WriteDataset(ds)
+                # If FillValue set to True, will just apply NaNs instead of encodings
+                ds_out.write_netcdf(path=out_path,
+                                    FillValue=False,
+                                    encoding=encoding_dict)
+                # Free up Memory
+                del ds_out, encoding_dict,diff_dict, keys_to_skip, diff_keys
+                status = ": RadCLss SUCCESS: " + volumes['date']
         except ValueError as e:
             print(f"Error: {e}")
             print(f"Error type: {type(e).__name__}")
-            status = ": RadCLss FAILURE: " + volumes['date']
+            status = ": RadCLss Write FAILURE: " + volumes['date']
   
         # free up memory
         del ds
