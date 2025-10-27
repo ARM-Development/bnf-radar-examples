@@ -631,32 +631,28 @@ def radclss(volumes, serial=True, outdir=None, dod_file=None):
             # Surface Meteorological Station
             ds = match_datasets_act(ds, 
                                     volumes['met_m1'][0], 
-                                    "M1", 
-                                    resample="mean",
+                                    "M1",
                                     discard=discard_var['met'])
         
         if volumes['met_s20']:
             # Surface Meteorological Station
             ds = match_datasets_act(ds, 
                                     volumes['met_s20'][0], 
-                                    "S20", 
-                                    resample="mean",
+                                    "S20",
                                     discard=discard_var['met'])
 
         if volumes['met_s30']:
             # Surface Meteorological Station
             ds = match_datasets_act(ds, 
                                     volumes['met_s30'][0], 
-                                    "S30", 
-                                    resample="mean",
+                                    "S30",
                                     discard=discard_var['met'])
 
         if volumes['met_s40']:
             # Surface Meteorological Station
             ds = match_datasets_act(ds, 
                                     volumes['met_s40'][0], 
-                                    "S40", 
-                                    resample="mean",
+                                    "S40",
                                     discard=discard_var['met'])
             
         if volumes['sonde']:
