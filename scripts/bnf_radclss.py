@@ -147,7 +147,11 @@ def subset_points(nfile, **kwargs):
                     da.time_offset.data = da.time_offset.values.astype("timedelta64[s]")
                     da.base_time.data = da.base_time.values.astype("datetime64[s]")
                     # Time is based off the start of the radar volume
-                    da["gate_time"] = da.base_time.values + da.isel(height=0).time_offset.values
+                    min_valid_height = np.where(~np.isnan(da.corrected_reflectivity.data))
+                    if np.any(min_valid_height):
+                        da["gate_time"] = da.base_time.values + da.isel(height=min_valid_height[0][0]).time_offset.values
+                    else:
+                        da["gate_time"] = da.base_time.values
                     column_list.append(da)
         
                 # Concatenate the extracted radar columns for this scan across all sites    
