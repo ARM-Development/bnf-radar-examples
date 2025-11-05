@@ -14,6 +14,7 @@ parts:
     - file: notebooks/bnf-radclss-eval.ipynb
     - file: notebooks/bnf-radclss-timeseries.ipynb
 - caption: Surface Quantitative Precipitation Estimates
+  chapters:
     - file: notebooks/squire-bnf.ipynb
     - file: notebooks/bnf-squire-vis.ipynb
     - file: notebooks/bnf-mrms-qpe-hourly.ipynb
