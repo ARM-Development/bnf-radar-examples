@@ -19,7 +19,7 @@ html:
   comments:
     hypothesis: true
 repository:
-  url: https://github.com/ARM-Development/amf3-radar-examples  # Online location of your book
+  url: https://github.com/ARM-Development/bnf-radar-examples  # Online location of your book
   path_to_book: notebooks  # Optional path to your book, relative to the repository root
   branch: main  # Which branch of the repository should be used when creating links (optional)
 launch_buttons:
