@@ -1,0 +1,49 @@
+# See docs at: https://mystmd.org/guide/frontmatter
+version: 1
+project:
+  title: ARM Bankhead National Forest (BNF) Radar Examples
+  description: Workflows for using ARM's Unique Data Records from BNF
+  # keywords: []
+  authors:
+    - name: Joe O'Brien
+      orcid: 0000-0003-4655-6912
+      github: jrobrien91
+    - name: Robert Jackson
+      github: rcjackson
+    - name: Bhupendra Raut
+      orcid: 0000-0001-5598-1393
+      github: RBhupi
+    - name: Zach Sherman
+      github: zssherman
+    - name: Max Grover
+      orcid: 0000-0002-0370-8974
+      github: mgrover1
+  github: https://github.com/ARM-Development/bnf-radar-examples
+  # To autogenerate a Table of Contents, run "myst init --write-toc"
+  toc:
+    - file: README.md
+    - title: Site Exploration
+      children:
+        - file: notebooks/armor-sample-plots.ipynb
+        - file: notebooks/bnf-insitu.ipynb
+        - file: notebooks/ldquants_analysis.ipynb
+    - title: Extracted Radar Columns and In-Situ Sensors
+      children:
+        - file: notebooks/bnf-radclss.ipynb
+        - file: notebooks/bnf-cmac-radclss.ipynb
+        - file: notebooks/bnf-radclss-tower.ipynb
+        - file: notebooks/bnf-radclss-eval.ipynb
+        - file: notebooks/bnf-radclss-timeseries.ipynb
+    - title: Surface Quantitative Precipitation Estimates
+      children:
+        - file: notebooks/squire-bnf.ipynb
+        - file: notebooks/bnf-squire-vis.ipynb
+        - file: notebooks/bnf-mrms-qpe-hourly.ipynb
+site:
+  options:
+    logo: images/arm_logo.png
+    footer_logos:
+        ARM: images/arm_logo.png
+  nav:
+    - title: ARM Home
+      url: https://www.arm.gov/
