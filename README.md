@@ -7,7 +7,7 @@ This repository is for collaborating on workflows and visualizations related to 
 
 ## Authors
 
-[Max Grover](@mgrover1)
+[Joe O'Brien](@jrobrien91), [Bobby Jackson](@rcjackson), [Bhupendra Raut](@RBhupi), [Zach Sherman](@zssherman), [Max Grover](@mgrover1)
 
 ### Contributors
 
@@ -20,25 +20,14 @@ This repository is for collaborating on workflows and visualizations related to 
 ### Site Exploration
 Initial data exploration, looking at sample cases and associated datasets such as the University of Alabama Huntsville operated ARMOR radar.
 
+### Extracted Radar Columns and In-SItu Sensors
+Exploration of the RadCLss Value Added Product design, implentation and initial case studies. 
+
+### Surface Quantitative Precipitation Estimates
+Exploration of the SQUIRE Value Added Product design, implentation, and initial case studies. 
+
 ## Running the Notebooks
-You can either run the notebook using [Binder](https://mybinder.org/) or on your local machine.
-
-### Running on Binder
-
-The simplest way to interact with a Jupyter Notebook is through
-[Binder](https://mybinder.org/), which enables the execution of a
-[Jupyter Book](https://jupyterbook.org) in the cloud. The details of how this works are not
-important for now. All you need to know is how to launch a Pythia
-Cookbooks chapter via Binder. Simply navigate your mouse to
-the top right corner of the book chapter you are viewing and click
-on the rocket ship icon, (see figure below), and be sure to select
-“launch Binder”. After a moment you should be presented with a
-notebook that you can interact with. I.e. you’ll be able to execute
-and even change the example programs. You’ll see that the code cells
-have no output at first, until you execute them by pressing
-{kbd}`Shift`\+{kbd}`Enter`. Complete details on how to interact with
-a live Jupyter notebook are described in [Getting Started with
-Jupyter](https://foundations.projectpythia.org/foundations/getting-started-jupyter.html).
+You can either run the notebook using [ARM Jupyter Hub](https://jupyterhub.arm.gov/) or on your local machine.
 
 ### Running on Your Own Machine
 If you are interested in running this material locally on your computer, you will need to follow this workflow:
@@ -48,14 +37,14 @@ If you are interested in running this material locally on your computer, you wil
    ```bash
     git clone https://github.com/ARM-Development/bnf-radar-examples.git
     ```  
-1. Move into the `cookbook-example` directory
+1. Move into the `bnf-radar-examples` directory
     ```bash
-    cd amf3-radar-examples
+    cd bnf-radar-examples
     ```  
 1. Create and activate your conda environment from the `environment.yml` file
     ```bash
     conda env create -f environment.yml
-    conda activate bnf-radar-examples-dev
+    conda activate amf3-radar-examples-dev
     ```  
 1.  Move into the `notebooks` directory and start up Jupyterlab
     ```bash

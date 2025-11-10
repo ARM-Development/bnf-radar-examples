@@ -9,12 +9,14 @@ project:
       orcid: 0000-0003-4655-6912
       github: jrobrien91
     - name: Robert Jackson
+      orcid: 0000-0003-2518-1234
       github: rcjackson
     - name: Bhupendra Raut
       orcid: 0000-0001-5598-1393
       github: RBhupi
     - name: Zach Sherman
       github: zssherman
+      orcid: 0000-0002-6455-8324
     - name: Max Grover
       orcid: 0000-0002-0370-8974
       github: mgrover1
@@ -41,9 +43,10 @@ project:
         - file: notebooks/bnf-mrms-qpe-hourly.ipynb
 site:
   options:
-    logo: images/arm_logo.png
+    logo: notebooks/images/arm_logo.png
     footer_logos:
-        ARM: images/arm_logo.png
+        ARM: notebooks/images/arm_logo.png
   nav:
     - title: ARM Home
       url: https://www.arm.gov/
+
