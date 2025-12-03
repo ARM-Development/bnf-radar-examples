@@ -190,7 +190,6 @@ def match_datasets_act(column,
                        ground, 
                        site, 
                        discard, 
-                       resample='sum', 
                        DataSet=False,
                        prefix=None):
     """
@@ -214,11 +213,6 @@ def match_datasets_act(column,
     discard : list
         List containing the desired input ground instrumentation variables to be 
         removed from the xarray DataSet. 
-    
-    resample : str
-        Mathematical operational for resampling ground instrumentation to the radar time.
-        Default is to sum the data across the resampling period. Checks for 'mean' or 
-        to 'skip' altogether. 
     
     DataSet : boolean
         Boolean flag to determine if ground input is an Xarray Dataset.
@@ -253,21 +247,62 @@ def match_datasets_act(column,
     # Check to see if height is a dimension within the ground instrumentation. 
     # If so, first interpolate heights to match radar, before interpolating time.
     if 'height' in grd_ds.dims:
-        grd_ds = grd_ds.interp(height=np.arange(3150, 10050, 50), method='linear')
-        
-    # Resample the ground data to 5 min and interpolate to the CSU X-Band time. 
-    # Keep data variable attributes to help distingish between instruments/locations
-    if resample.split('=')[-1] == 'mean':
-        matched = grd_ds.resample(time='5Min', 
-                                  closed='right').mean(keep_attrs=True).interp(time=column.time, 
-                                                                               method='linear')
-    elif resample.split('=')[-1] == 'skip':
-        matched = grd_ds.interp(time=column.time, method='linear')
-    else:
-        matched = grd_ds.resample(time='5Min', 
-                                  closed='right').sum(keep_attrs=True).interp(time=column.time, 
-                                                                              method='linear')
+        grd_ds = grd_ds.interp(height=np.arange(500, 8500, 250), method='linear')
+
+    # Create blank DataSet to store individual interpolation results
+    matched = xr.Dataset()
     
+    for var_name, da in grd_ds.data_vars.items():
+        if var_name == "tbrg_precip_total_corr":
+            interpol_da = da.resample(time='5Min', 
+                                      closed='right').sum(keep_attrs=True).interp(time=column.time, 
+                                                                                  method='linear')
+        elif var_name == "intensity_rt":
+            interpol_da = da.resample(time="5min",
+                                      closed='right').sum(keep_attrs=True).interp(time=column.time, 
+                                                                                  method='linear')
+        elif var_name == "accum_rtnrt":
+            interpol_da = da.resample(time="5min",
+                                      closed='right').sum(keep_attrs=True).interp(time=column.time, 
+                                                                                  method='linear')
+        elif var_name == "accum_nrt":
+            interpol_da = da.resample(time="5min",
+                                      closed='right').sum(keep_attrs=True).interp(time=column.time, 
+                                                                                  method='linear')
+        elif var_name == "intensity_rtnrt":
+            interpol_da = da.resample(time="5min",
+                                      closed='right').sum(keep_attrs=True).interp(time=column.time, 
+                                                                                  method='linear')
+        elif var_name == "wxt_cumul_precip":
+            interpol_da = da.resample(time="5min",
+                                      closed='right').sum(keep_attrs=True).interp(time=column.time, 
+                                                                                  method='linear')
+        elif var_name == "ldquants_rain_rate":
+            interpol_da = da.resample(time="5min",
+                                      closed='right').sum(keep_attrs=True).interp(time=column.time, 
+                                                                                  method='linear')
+        elif var_name == "ldquants_lwc":
+            interpol_da = da.resample(time="5min",
+                                      closed='right').sum(keep_attrs=True).interp(time=column.time, 
+                                                                                  method='linear')
+        elif var_name == "vdisquants_rain_rate":
+            interpol_da = da.resample(time="5min",
+                                      closed='right').sum(keep_attrs=True).interp(time=column.time, 
+                                                                                  method='linear')
+        elif var_name == "vdisquants_lwc":
+            interpol_da = da.resample(time="5min",
+                                      closed='right').sum(keep_attrs=True).interp(time=column.time, 
+                                                                                  method='linear')
+        else:
+            interpol_da = da.resample(time="5min",
+                                      closed='right').mean(keep_attrs=True).interp(time=column.time, 
+                                                                                   method='linear')
+        # Check for ancillary variables
+        if hasattr(interpol_da, "ancillary_variables"):
+            del interpol_da.attrs['ancillary_variables']
+        # assign to the matched dataset
+        matched[var_name] = interpol_da  
+
     # Add SAIL site location as a dimension for the Pluvio data
     matched = matched.assign_coords(coords=dict(station=site))
     matched = matched.expand_dims('station')
@@ -284,7 +319,7 @@ def match_datasets_act(column,
     # global attributes will be lost on merging into the matched dataset.
     # Need to keep as many references and descriptors as possible
     for var in matched.data_vars:
-        matched[var].attrs.update(source=matched.datastream)
+        matched[var].attrs.update(source=grd_ds.datastream)
         
     # Merge the two DataSets
     column = xr.merge([column, matched])
@@ -551,31 +586,31 @@ def radclss(volumes, serial=True, outdir=None, dod_file=None):
                                 'alt'
                     ],
                     'wxt' : ['base_time',
-                         'time_offset',
-                         'time_bounds',
-                         'qc_temp_mean',
-                         'temp_std',
-                         'rh_mean',
-                         'qc_rh_mean',
-                         'rh_std',
-                         'atmos_pressure',
-                         'qc_atmos_pressure',
-                         'wspd_arith_mean',
-                         'qc_wspd_arith_mean',
-                         'wspd_vec_mean',
-                         'qc_wspd_vec_mean',
-                         'wdir_vec_mean',
-                         'qc_wdir_vec_mean',
-                         'wdir_vec_std',
-                         'qc_wxt_precip_rate_mean',
-                         'qc_wxt_cumul_precip',
-                         'logger_volt',
-                         'qc_logger_volt',
-                         'logger_temp',
-                         'qc_logger_temp',
-                         'lat',
-                         'lon',
-                         'alt'
+                             'time_offset',
+                             'time_bounds',
+                             'qc_temp_mean',
+                             'temp_std',
+                             'rh_mean',
+                             'qc_rh_mean',
+                             'rh_std',
+                             'atmos_pressure',
+                             'qc_atmos_pressure',
+                             'wspd_arith_mean',
+                             'qc_wspd_arith_mean',
+                             'wspd_vec_mean',
+                             'qc_wspd_vec_mean',
+                             'wdir_vec_mean',
+                             'qc_wdir_vec_mean',
+                             'wdir_vec_std',
+                             'qc_wxt_precip_rate_mean',
+                             'qc_wxt_cumul_precip',
+                             'logger_volt',
+                             'qc_logger_volt',
+                             'logger_temp',
+                             'qc_logger_temp',
+                             'lat',
+                             'lon',
+                             'alt'
                     ]
     }
 
@@ -666,8 +701,7 @@ def radclss(volumes, serial=True, outdir=None, dod_file=None):
                                     grd_ds, 
                                     "M1",
                                     discard=discard_var['sonde'],
-                                    DataSet=True,
-                                    resample="mean")
+                                    DataSet=True)
             # clean up
             del grd_ds
         
@@ -685,7 +719,6 @@ def radclss(volumes, serial=True, outdir=None, dod_file=None):
                                     volumes['ld_m1'][0], 
                                     "M1", 
                                     discard=discard_var['ldquants'],
-                                    resample="mean",
                                     prefix="ldquants_")
 
         if volumes['ld_s30']:
@@ -694,7 +727,6 @@ def radclss(volumes, serial=True, outdir=None, dod_file=None):
                                     volumes['ld_s30'][0], 
                                     "S30", 
                                     discard=discard_var['ldquants'],
-                                    resample="mean",
                                     prefix="ldquants_")
             
         if volumes['vd_m1']:
@@ -703,7 +735,6 @@ def radclss(volumes, serial=True, outdir=None, dod_file=None):
                                     volumes['vd_m1'][0], 
                                     "M1", 
                                     discard=discard_var['vdisquants'],
-                                    resample="mean",
                                     prefix="vdisquants_")
         
         if volumes['wxt_s13']:
@@ -712,7 +743,7 @@ def radclss(volumes, serial=True, outdir=None, dod_file=None):
                                     volumes['wxt_s13'][0], 
                                     "S13", 
                                     discard=discard_var['wxt'],
-                                    resample="mean")
+                                    prefix="wxt_")
 
         # ---------------------------------------------------------------
         # Cumulus cannot access the DOD API, Requires locally stored file
