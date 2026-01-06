@@ -238,7 +238,8 @@ def match_datasets_act(column,
         grd_ds = grd_ds.compute()
         # check if a list containing new variable names exists. 
         if prefix:
-            grd_ds = grd_ds.rename_vars({v: f"{prefix}{v}" for v in grd_ds.data_vars})
+            skip_vars = {"wxt_precip_rate_mean", "wxt_cumul_precip"}
+            grd_ds = grd_ds.rename_vars({v: f"{prefix}{v}" for v in grd_ds.data_vars if v not in skip_vars})
         
     # Remove Base_Time before Resampling Data since you can't force 1 datapoint to 5 min sum
     if 'base_time' in grd_ds.data_vars:
@@ -660,28 +661,28 @@ def radclss(volumes, serial=True, outdir=None, dod_file=None):
         if volumes['met_m1']:
             # Surface Meteorological Station
             ds = match_datasets_act(ds, 
-                                    volumes['met_m1'][0], 
+                                    volumes['met_m1'], 
                                     "M1",
                                     discard=discard_var['met'])
         
         if volumes['met_s20']:
             # Surface Meteorological Station
             ds = match_datasets_act(ds, 
-                                    volumes['met_s20'][0], 
+                                    volumes['met_s20'], 
                                     "S20",
                                     discard=discard_var['met'])
 
         if volumes['met_s30']:
             # Surface Meteorological Station
             ds = match_datasets_act(ds, 
-                                    volumes['met_s30'][0], 
+                                    volumes['met_s30'], 
                                     "S30",
                                     discard=discard_var['met'])
 
         if volumes['met_s40']:
             # Surface Meteorological Station
             ds = match_datasets_act(ds, 
-                                    volumes['met_s40'][0], 
+                                    volumes['met_s40'], 
                                     "S40",
                                     discard=discard_var['met'])
             
@@ -709,14 +710,14 @@ def radclss(volumes, serial=True, outdir=None, dod_file=None):
         if volumes['pluvio']:
             # Weighing Bucket Rain Gauge
             ds = match_datasets_act(ds, 
-                                    volumes['pluvio'][0], 
+                                    volumes['pluvio'], 
                                     "M1", 
                                     discard=discard_var['pluvio'])
 
         if volumes['ld_m1']:
             # Laser Disdrometer - Main Site
             ds = match_datasets_act(ds, 
-                                    volumes['ld_m1'][0], 
+                                    volumes['ld_m1'], 
                                     "M1", 
                                     discard=discard_var['ldquants'],
                                     prefix="ldquants_")
@@ -724,7 +725,7 @@ def radclss(volumes, serial=True, outdir=None, dod_file=None):
         if volumes['ld_s30']:
             # Laser Disdrometer - Supplemental Site
             ds = match_datasets_act(ds, 
-                                    volumes['ld_s30'][0], 
+                                    volumes['ld_s30'], 
                                     "S30", 
                                     discard=discard_var['ldquants'],
                                     prefix="ldquants_")
@@ -732,7 +733,7 @@ def radclss(volumes, serial=True, outdir=None, dod_file=None):
         if volumes['vd_m1']:
             # Laser Disdrometer - Supplemental Site
             ds = match_datasets_act(ds, 
-                                    volumes['vd_m1'][0], 
+                                    volumes['vd_m1'], 
                                     "M1", 
                                     discard=discard_var['vdisquants'],
                                     prefix="vdisquants_")
@@ -740,7 +741,7 @@ def radclss(volumes, serial=True, outdir=None, dod_file=None):
         if volumes['wxt_s13']:
             # Laser Disdrometer - Supplemental Site
             ds = match_datasets_act(ds, 
-                                    volumes['wxt_s13'][0], 
+                                    volumes['wxt_s13'], 
                                     "S13", 
                                     discard=discard_var['wxt'],
                                     prefix="wxt_")
