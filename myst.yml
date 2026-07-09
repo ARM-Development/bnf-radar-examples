@@ -42,6 +42,7 @@ project:
         - file: notebooks/squire-bnf.ipynb
         - file: notebooks/bnf-squire-vis.ipynb
         - file: notebooks/bnf-mrms-qpe-hourly.ipynb
+        - file: notebooks/bnf-aiml-qpe-ldquants-radar-mlp.ipynb 
     - title: Scanning ARM Cloud Radar Investigations
       children:
         - file: notebooks/bnf-sacr-rhi.ipynb
